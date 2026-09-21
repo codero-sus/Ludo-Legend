@@ -1,0 +1,41 @@
+/* ═════════════════════════════════════════════════════════════
+   responsive.css — adaptive layout for tablet & mobile
+   ═════════════════════════════════════════════════════════════ */
+@media (max-width: 1080px) {
+  #layout {
+    grid-template-columns: minmax(0, var(--board-max));
+    justify-content: center;
+  }
+  #sidePanel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    width: var(--board-max);
+    margin: 0 auto;
+  }
+  .controls-block { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .controls-block .ghost-btn { flex: 1 1 150px; width: auto; }
+  #gameLog { max-height: 190px; }
+}
+
+@media (max-width: 640px) {
+  :root { --board-max: 96vw; }
+  #appHeader { padding: 8px 12px; }
+  .brand-text p { display: none; }
+  .brand-text h1 { font-size: 1.2rem; }
+  .brand-dice svg { width: 36px; height: 36px; }
+  .header-actions .ghost-btn { padding: 8px 10px; font-size: 0.8rem; }
+  #rulesBtn { font-size: 0; }
+  #rulesBtn::before { content: "📖"; font-size: 1.1rem; }
+  .gold-btn { padding: 9px 14px; font-size: 0.85rem; }
+  #layout { padding: 12px 8px 20px; gap: 14px; }
+  #sidePanel { grid-template-columns: 1fr; }
+  .turn-banner { font-size: 0.98rem; }
+  #diceScene { --die: 62px; }
+  .roll-btn { font-size: 1.05rem; padding: 10px 18px; }
+  #rollHint { font-size: 0.78rem; }
+  .last-roll { width: 48px; height: 48px; font-size: 1.3rem; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .dialog { padding: 16px; }
+  #toastBox { top: 64px; right: 10px; }
+}

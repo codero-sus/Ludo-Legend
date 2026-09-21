@@ -1,0 +1,79 @@
+/* ═════════════════════════════════════════════════════════════
+   dice.css — 3D dice cube + roll button
+   ═════════════════════════════════════════════════════════════ */
+#diceScene {
+  --die: 76px;
+  width: var(--die);
+  height: var(--die);
+  perspective: 400px;
+  flex: none;
+  cursor: pointer;
+}
+#diceScene.disabled { cursor: default; opacity: 0.75; }
+#diceCube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(24deg);
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.3, 1.05);
+}
+#diceScene.shake #diceCube { animation: diceShake 0.9s ease; }
+@keyframes diceShake {
+  0% { margin-top: 0; }
+  20% { margin-top: -26px; }
+  45% { margin-top: 4px; }
+  65% { margin-top: -12px; }
+  85% { margin-top: 2px; }
+  100% { margin-top: 0; }
+}
+.die-face {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #ffffff, #e9e2d2);
+  border: 2px solid #b9a888;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 14%;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.12);
+  backface-visibility: visible;
+}
+.die-face .pip {
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  place-self: center;
+  background: radial-gradient(circle at 35% 30%, #6d5bd0, #2c1650 70%);
+  box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.5);
+}
+.die-face .pip.red-pip { background: radial-gradient(circle at 35% 30%, #ff8fa3, var(--red) 70%); }
+.die-face .cell-empty { width: 100%; height: 100%; }
+
+.roll-btn {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  color: #fff;
+  padding: 12px 26px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #e63946, #b3152b);
+  box-shadow: 0 5px 0 #7a0d1d, var(--shadow-sm);
+  transition: transform 0.12s, box-shadow 0.12s, filter 0.2s;
+  align-self: flex-start;
+}
+.roll-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.08); }
+.roll-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #7a0d1d; }
+.roll-btn:disabled {
+  filter: grayscale(0.7) brightness(0.75);
+  cursor: not-allowed;
+}
+.roll-btn.ready {
+  animation: rollGlow 1s ease-in-out infinite alternate;
+}
+@keyframes rollGlow {
+  from { box-shadow: 0 5px 0 #7a0d1d, 0 0 0 0 rgba(255, 209, 102, 0.9); }
+  to { box-shadow: 0 5px 0 #7a0d1d, 0 0 22px 4px rgba(255, 209, 102, 0.9); }
+}

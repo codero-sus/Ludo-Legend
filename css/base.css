@@ -1,0 +1,139 @@
+/* ═════════════════════════════════════════════════════════════
+   base.css — reset (targeted), backdrop, header, layout, footer
+   ═════════════════════════════════════════════════════════════ */
+html, body, h1, h2, h3, p, ol, button, input {
+  margin: 0;
+  padding: 0;
+}
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  font-family: var(--font-body);
+  color: #fff;
+  background:
+    radial-gradient(1200px 600px at 15% -5%, #6d28d9 0%, transparent 55%),
+    radial-gradient(1000px 700px at 90% 10%, #c2185b 0%, transparent 55%),
+    radial-gradient(900px 900px at 50% 110%, #e36414 0%, transparent 55%),
+    linear-gradient(160deg, var(--bg-0), var(--bg-1) 45%, var(--bg-2));
+  min-height: 100vh;
+}
+
+/* Decorative rangoli-ish pattern overlay */
+.bg-festive {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 34px, var(--gold) 35px, transparent 36px),
+    radial-gradient(circle, var(--gold) 2px, transparent 2.5px);
+  background-size: 120px 120px, 30px 30px;
+  background-position: 0 0, 15px 15px;
+  mask-image: linear-gradient(to bottom, black, transparent 70%);
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input { font-family: inherit; }
+ol { list-style: none; }
+.hidden { display: none !important; }
+kbd {
+  font-family: inherit;
+  font-size: 0.72em;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin-left: 6px;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+#appHeader {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  background: rgba(21, 8, 38, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 209, 102, 0.25);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-dice svg { width: 46px; height: 46px; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,.4)); }
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+.brand-text h1 span {
+  background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-text p { font-size: 0.75rem; color: var(--gold); opacity: 0.9; }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+.icon-btn {
+  font-size: 1.25rem;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--card-glass);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  transition: transform 0.15s, background 0.15s;
+}
+.icon-btn:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.16); }
+
+.ghost-btn {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: #fff;
+  background: var(--card-glass);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s, background 0.15s;
+}
+.ghost-btn:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.16); }
+.ghost-btn.danger:hover { background: rgba(239, 35, 60, 0.35); }
+.ghost-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.gold-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: var(--gold-ink);
+  background: linear-gradient(180deg, #ffe29a, var(--gold) 45%, var(--gold-deep));
+  box-shadow: 0 4px 0 #9c6b00, var(--shadow-sm);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.gold-btn:hover { transform: translateY(-2px); }
+.gold-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #9c6b00; }
+.gold-btn.big { font-size: 1.15rem; padding: 13px 34px; }
+
+/* ── Layout ─────────────────────────────────────────────── */
+#layout {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(290px, 360px);
+  justify-content: center;
+  align-items: start;
+  gap: 22px;
+  padding: 22px 20px 30px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+#appFooter {
+  text-align: center;
+  padding: 14px 10px 26px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+}
+#appFooter strong { color: var(--gold); }

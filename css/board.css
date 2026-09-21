@@ -1,0 +1,155 @@
+/* ═════════════════════════════════════════════════════════════
+   board.css — board card, turn banner, SVG board, token layer
+   ═════════════════════════════════════════════════════════════ */
+#boardCard {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 14px 14px 16px;
+  border: 3px solid rgba(255, 209, 102, 0.7);
+  width: var(--board-max);
+}
+
+/* ── Turn banner ────────────────────────────────────────── */
+.turn-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  background: linear-gradient(180deg, #2c1650, #1c0b34);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  min-height: 52px;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 102, 0.35);
+}
+.turn-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px currentColor;
+  flex: none;
+}
+.turn-dot.red { background: var(--red); color: var(--red); }
+.turn-dot.green { background: var(--green); color: var(--green); }
+.turn-dot.yellow { background: var(--yellow); color: var(--yellow); }
+.turn-dot.blue { background: var(--blue); color: var(--blue); }
+
+/* ── Board ──────────────────────────────────────────────── */
+#boardWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: #f6efdc;
+  touch-action: manipulation;
+  user-select: none;
+}
+#boardSvg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#tokenLayer { position: absolute; inset: 0; }
+
+/* ── Tokens ─────────────────────────────────────────────── */
+.token {
+  --tsize: 5.6%;
+  --ox: 0%;
+  --oy: 0%;
+  position: absolute;
+  width: var(--tsize);
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%) translate(var(--ox), var(--oy));
+  transition: left 0.22s ease, top 0.22s ease, transform 0.18s ease, filter 0.2s;
+  border-radius: 50%;
+  z-index: 4;
+  padding: 0;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.35));
+}
+.token.stacked { --tsize: 4.4%; }
+.token.finished { --tsize: 3.4%; z-index: 3; }
+
+.token-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10px, 2.4vw, 20px);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: -2px;
+}
+.token.red .token-face { background: radial-gradient(circle at 35% 30%, #ff8fa3, var(--red) 55%, var(--red-dark)); }
+.token.green .token-face { background: radial-gradient(circle at 35% 30%, #95d5b2, var(--green) 55%, var(--green-dark)); }
+.token.yellow .token-face { background: radial-gradient(circle at 35% 30%, #ffe08a, var(--yellow) 60%, var(--yellow-dark)); }
+.token.blue .token-face { background: radial-gradient(circle at 35% 30%, #9bb1ff, var(--blue) 55%, var(--blue-dark)); }
+
+.token-hop { animation: tokenHop 0.22s ease; }
+@keyframes tokenHop {
+  0% { margin-top: 0; }
+  50% { margin-top: -2.2%; }
+  100% { margin-top: 0; }
+}
+
+/* Movable (playable) tokens */
+.token.movable {
+  z-index: 8;
+  cursor: pointer;
+  animation: movableBounce 0.7s ease-in-out infinite alternate;
+}
+.token.movable .token-face {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px var(--gold), 0 0 16px 4px rgba(255, 209, 102, 0.9);
+}
+@keyframes movableBounce {
+  from { margin-top: 0; }
+  to { margin-top: -1.6%; }
+}
+.token:not(.movable) { cursor: default; }
+.token.dim { filter: saturate(0.55) brightness(0.92) drop-shadow(0 2px 2px rgba(0,0,0,.3)); }
+
+.token.captured-flash .token-face {
+  animation: capturedFlash 0.6s ease 2;
+}
+@keyframes capturedFlash {
+  0%, 100% { filter: none; }
+  50% { filter: grayscale(1) brightness(2); }
+}
+
+/* ── Dice bar ───────────────────────────────────────────── */
+#diceBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  background: linear-gradient(180deg, #faf3e0, #f3e7c8);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.dice-controls { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+#rollHint { font-size: 0.86rem; color: var(--ink-soft); min-height: 1.3em; }
+.last-roll {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  width: 58px; height: 58px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px;
+  background: #2c1650;
+  color: var(--gold);
+  box-shadow: inset 0 0 0 2px rgba(255, 209, 102, 0.4);
+}
+.last-roll.pop { animation: rollPop 0.4s ease; }
+@keyframes rollPop {
+  0% { transform: scale(0.6) rotate(-12deg); }
+  60% { transform: scale(1.18) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}

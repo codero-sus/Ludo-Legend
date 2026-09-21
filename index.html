@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2a0a3a" />
+  <meta name="description" content="Ludo Legend — a fast, colourful, interactive Indian Ludo game. Play with friends or challenge the bots!" />
+  <title>Ludo Legend — Interactive Indian Ludo</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/board.css" />
+  <link rel="stylesheet" href="css/dice.css" />
+  <link rel="stylesheet" href="css/panels.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="bg-festive" aria-hidden="true"></div>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header id="appHeader">
+    <div class="brand">
+      <span class="brand-dice" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="14" fill="#ffd166"/><g fill="#2a0a3a"><circle cx="21" cy="21" r="5.5"/><circle cx="43" cy="21" r="5.5"/><circle cx="32" cy="32" r="5.5"/><circle cx="21" cy="43" r="5.5"/><circle cx="43" cy="43" r="5.5"/></g></svg>
+      </span>
+      <div class="brand-text">
+        <h1>Ludo <span>Legend</span></h1>
+        <p>लूडो लेजेंड · India's favourite race 🏁</p>
+      </div>
+    </div>
+    <nav class="header-actions">
+      <button id="soundBtn" class="icon-btn" title="Sound on/off (M)" aria-label="Toggle sound">🔊</button>
+      <button id="rulesBtn" class="ghost-btn" title="How to play (R)">📖 Rules</button>
+      <button id="newGameBtn" class="gold-btn" title="Start a new game (N)">✨ New Game</button>
+    </nav>
+  </header>
+
+  <!-- ══════════ MAIN LAYOUT ══════════ -->
+  <main id="layout">
+    <!-- Board column -->
+    <section id="boardCard" aria-label="Ludo board">
+      <div id="turnBanner" class="turn-banner">
+        <span class="turn-dot" id="turnDot"></span>
+        <span id="turnText">Welcome to Ludo Legend!</span>
+      </div>
+
+      <div id="boardWrap">
+        <svg id="boardSvg" viewBox="0 0 1500 1500" role="img" aria-label="Ludo board"></svg>
+        <div id="tokenLayer"></div>
+      </div>
+
+      <div id="diceBar">
+        <div id="diceScene" title="Dice">
+          <div id="diceCube">
+            <!-- faces injected by js/features/Dice.js -->
+          </div>
+        </div>
+        <div class="dice-controls">
+          <button id="rollBtn" class="roll-btn">🎲 ROLL <kbd>Space</kbd></button>
+          <p id="rollHint">Set up a game to begin…</p>
+        </div>
+        <div id="lastRollBadge" class="last-roll" title="Last roll">–</div>
+      </div>
+    </section>
+
+    <!-- Side panel -->
+    <aside id="sidePanel">
+      <section class="panel-block">
+        <h2 class="panel-title">🏆 Players</h2>
+        <div id="playerCards"></div>
+      </section>
+
+      <section class="panel-block log-block">
+        <h2 class="panel-title">📜 Game Log <button id="clearLogBtn" class="mini-btn" title="Clear log">clear</button></h2>
+        <ol id="gameLog" aria-live="polite"></ol>
+      </section>
+
+      <section class="panel-block controls-block">
+        <button id="resumeBtn" class="ghost-btn hidden">▶ Resume saved game</button>
+        <button id="restartBtn" class="ghost-btn">🔄 Restart match</button>
+        <button id="quitBtn" class="ghost-btn danger">🏠 Change players</button>
+      </section>
+    </aside>
+  </main>
+
+  <footer id="appFooter">
+    <p>Made with ❤️ in India · <strong>Ludo Legend</strong> · Roll a 6, capture all, race home!</p>
+  </footer>
+
+  <!-- ══════════ SETUP MODAL ══════════ -->
+  <div id="setupOverlay" class="overlay show" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+    <div class="dialog setup-dialog">
+      <div class="dialog-head festive">
+        <h2 id="setupTitle">🎲 Ludo Legend <span class="hindi">लूडो लेजेंड</span></h2>
+        <p>Choose your players, roll the dice, race all 4 tokens home!</p>
+      </div>
+
+      <div class="setup-section">
+        <h3>👥 How many players?</h3>
+        <div id="playerCountSeg" class="segmented" role="tablist" aria-label="Player count">
+          <button data-count="2">2 Players</button>
+          <button data-count="3">3 Players</button>
+          <button data-count="4" class="active">4 Players</button>
+        </div>
+        <div class="quick-row">
+          <button id="quickBots" class="chip-btn">⚡ Me vs 3 Bots</button>
+          <button id="quickHumans" class="chip-btn">🎉 4 Humans</button>
+          <button id="quickDemo" class="chip-btn">🤖 Bot Demo</button>
+        </div>
+      </div>
+
+      <div class="setup-section">
+        <h3>🎨 Players</h3>
+        <div id="setupRows"></div>
+      </div>
+
+      <div class="setup-section">
+        <h3>⚙️ House rules</h3>
+        <div id="rulesToggles" class="rules-grid"></div>
+      </div>
+
+      <div class="dialog-actions">
+        <button id="startGameBtn" class="gold-btn big">🚀 Start Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ RULES MODAL ══════════ -->
+  <div id="rulesOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="dialog">
+      <div class="dialog-head">
+        <h2 id="rulesTitle">📖 How to Play</h2>
+        <button class="icon-btn close-modal" data-close="rulesOverlay" aria-label="Close">✕</button>
+      </div>
+      <div class="rules-body">
+        <ol>
+          <li>🎲 <strong>Roll a 6</strong> to bring a token out of your base onto the board.</li>
+          <li>👆 After rolling, <strong>tap a glowing token</strong> to move it. Tokens move clockwise around the board.</li>
+          <li>⭐ <strong>Star squares are safe</strong> — tokens there can't be captured. All start squares are safe too.</li>
+          <li>⚔️ Land on an enemy token on a non-safe square to <strong>capture it</strong> — it goes back to base! You earn a <strong>bonus roll</strong>.</li>
+          <li>🎁 Rolling a <strong>6</strong> or bringing a token <strong>home</strong> grants an extra turn.</li>
+          <li>🚫 Roll three 6s in a row and your turn is <strong>skipped</strong> (no move on the third 6).</li>
+          <li>🏠 Enter the coloured <strong>home column</strong> and reach the centre with an <strong>exact roll</strong>.</li>
+          <li>🏆 First player to bring <strong>all 4 tokens home</strong> wins the game!</li>
+        </ol>
+        <div class="keys-row">
+          <span><kbd>Space</kbd> roll dice</span>
+          <span><kbd>R</kbd> rules</span>
+          <span><kbd>M</kbd> sound</span>
+          <span><kbd>N</kbd> new game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ WINNER MODAL ══════════ -->
+  <div id="winnerOverlay" class="overlay" role="dialog" aria-modal="true">
+    <div class="dialog winner-dialog">
+      <div class="trophy">🏆</div>
+      <h2 id="winnerTitle">Player wins!</h2>
+      <p id="winnerSub"></p>
+      <div id="standingsList"></div>
+      <div class="dialog-actions">
+        <button id="continueBtn" class="ghost-btn">▶ Continue for next place</button>
+        <button id="winnerNewBtn" class="gold-btn big">✨ New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toasts + confetti -->
+  <div id="toastBox" aria-live="polite"></div>
+  <canvas id="confettiCanvas"></canvas>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

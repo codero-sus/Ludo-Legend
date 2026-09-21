@@ -1,0 +1,51 @@
+/* ═════════════════════════════════════════════════════════════
+   variables.css — design tokens (Indian festive theme)
+   ═════════════════════════════════════════════════════════════ */
+:root {
+  /* Backdrop */
+  --bg-0: #150826;
+  --bg-1: #2a0a3a;
+  --bg-2: #4a1030;
+
+  /* Gold accents */
+  --gold: #ffd166;
+  --gold-deep: #f4a261;
+  --gold-ink: #5a3200;
+
+  /* Player colours */
+  --red: #ef233c;
+  --red-dark: #a31226;
+  --red-soft: #ffd9de;
+  --green: #2dc653;
+  --green-dark: #146c2e;
+  --green-soft: #d3f2dc;
+  --yellow: #ffb703;
+  --yellow-dark: #9c6b00;
+  --yellow-soft: #ffefc2;
+  --blue: #4361ee;
+  --blue-dark: #22307e;
+  --blue-soft: #dbe3ff;
+
+  /* Surfaces & text */
+  --card: rgba(255, 253, 247, 0.97);
+  --card-glass: rgba(255, 255, 255, 0.08);
+  --ink: #2b2140;
+  --ink-soft: #5b5175;
+  --muted: #8a80a3;
+  --line: #e8dfc9;
+  --cell-border: #cbb37f;
+
+  /* Shape & shadow */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.28);
+  --shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.18);
+
+  /* Type */
+  --font-display: "Baloo 2", "Poppins", system-ui, sans-serif;
+  --font-body: "Poppins", system-ui, -apple-system, sans-serif;
+
+  /* Board */
+  --board-max: min(92vw, 640px);
+}

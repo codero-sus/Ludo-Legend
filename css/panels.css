@@ -1,19 +1,22 @@
 /* ═════════════════════════════════════════════════════════════
    panels.css — side panel: player cards, game log, controls
+   + stagger, shine, progress sparkle
    ═════════════════════════════════════════════════════════════ */
 #sidePanel {
   display: flex;
   flex-direction: column;
   gap: 14px;
   min-width: 0;
+  contain: layout;
 }
 .panel-block {
   background: rgba(28, 11, 52, 0.78);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) saturate(1.1);
   border: 1px solid rgba(255, 209, 102, 0.22);
   border-radius: var(--radius);
   padding: 14px;
   box-shadow: var(--shadow-md);
+  contain: layout paint;
 }
 .panel-title {
   font-family: var(--font-display);
@@ -28,6 +31,7 @@
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.6);
   text-decoration: underline;
+  transition: color var(--dur-sm);
 }
 .mini-btn:hover { color: #fff; }
 
@@ -42,7 +46,9 @@
   border: 2px solid transparent;
   border-radius: var(--radius-sm);
   padding: 9px 11px;
-  transition: border-color 0.25s, background 0.25s, transform 0.2s;
+  transition: border-color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth), transform 0.2s var(--ease-spring), box-shadow 0.25s;
+  contain: layout paint;
+  will-change: transform, border-color, box-shadow;
 }
 .player-avatar {
   width: 46px; height: 46px;
@@ -51,6 +57,8 @@
   font-size: 1.5rem;
   background: rgba(255, 255, 255, 0.12);
   border: 3px solid #888;
+  transition: transform var(--dur-sm) var(--ease-spring), border-color var(--dur-sm), box-shadow var(--dur-sm);
+  will-change: transform;
 }
 .player-card.red .player-avatar { border-color: var(--red); }
 .player-card.green .player-avatar { border-color: var(--green); }
@@ -72,6 +80,7 @@
   padding: 2px 8px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.18);
+  transition: transform var(--dur-sm) var(--ease-spring);
 }
 .type-badge.bot { background: rgba(109, 40, 217, 0.65); }
 .type-badge.you { background: rgba(255, 209, 102, 0.85); color: #3a2400; }
@@ -83,14 +92,17 @@
   color: var(--gold-ink);
   border-radius: 10px;
   padding: 2px 10px;
+  will-change: transform;
 }
-.player-status { font-size: 0.76rem; color: rgba(255, 255, 255, 0.7); min-height: 1.1em; }
+.player-status { font-size: 0.76rem; color: rgba(255, 255, 255, 0.7); min-height: 1.1em; transition: opacity var(--dur-sm); }
 .token-dots { display: flex; gap: 5px; margin-top: 5px; }
 .token-dot {
   width: 15px; height: 15px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.16);
   border: 2px solid rgba(255, 255, 255, 0.25);
+  transition: transform var(--dur-sm) var(--ease-spring), background var(--dur-sm), box-shadow var(--dur-sm);
+  will-change: transform;
 }
 .player-card.red .token-dot.out { background: var(--red); border-color: #fff; }
 .player-card.green .token-dot.out { background: var(--green); border-color: #fff; }
@@ -99,8 +111,8 @@
 .token-dot.home { background: var(--gold) !important; border-color: #fff !important; box-shadow: 0 0 6px var(--gold); }
 .player-stats { text-align: right; font-size: 0.78rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5; }
 
-.progress-track { grid-column: 1 / -1; height: 6px; border-radius: 4px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
-.progress-fill { height: 100%; width: 0%; border-radius: 4px; transition: width 0.4s ease; }
+.progress-track { grid-column: 1 / -1; height: 6px; border-radius: 4px; background: rgba(255, 255, 255, 0.12); overflow: hidden; contain: strict; }
+.progress-fill { height: 100%; width: 0%; border-radius: 4px; transition: width 0.4s var(--ease-spring); will-change: width; }
 .player-card.red .progress-fill { background: var(--red); }
 .player-card.green .progress-fill { background: var(--green); }
 .player-card.yellow .progress-fill { background: var(--yellow); }
@@ -117,6 +129,8 @@
   font-size: 0.82rem;
   padding-right: 4px;
   scrollbar-width: thin;
+  contain: layout paint;
+  will-change: scroll-position;
 }
 #gameLog li {
   background: rgba(255, 255, 255, 0.06);
@@ -124,6 +138,7 @@
   padding: 6px 10px;
   border-left: 4px solid var(--gold);
   animation: logIn 0.3s ease;
+  contain: layout paint;
 }
 @keyframes logIn { from { opacity: 0; transform: translateX(10px); } }
 #gameLog li.red { border-color: var(--red); }

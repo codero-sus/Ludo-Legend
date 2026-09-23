@@ -1,5 +1,6 @@
 /* ═════════════════════════════════════════════════════════════
    core/utils.js — tiny shared helpers (no game logic here)
+   + re-exports from perf.js for convenience
    ═════════════════════════════════════════════════════════════ */
 
 /** Promise-based sleep. */
@@ -25,3 +26,6 @@ export function el(tag, className = "", html = "") {
 
 /** Clamp a number. */
 export const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+/** Debounce wrapper (re-export friendly) */
+export { debounce, throttle, rafBatch, memoize, Pool, prefersReducedMotion, onIdle } from "./perf.js";

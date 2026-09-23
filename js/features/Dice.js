@@ -1,7 +1,10 @@
 /* ═════════════════════════════════════════════════════════════
    features/Dice.js — 3D dice cube component + roll orchestration.
+   Upgraded: rAF-smooth 60fps, value highlight, dust particles,
+   shake + shimmer, reduced-motion aware.
    ═════════════════════════════════════════════════════════════ */
 import { rand, wait } from "../core/utils.js";
+import { prefersReducedMotion } from "../core/perf.js";
 
 /** Pip layout on a 3×3 grid (indices 0..8) per face value. */
 const PIPS = {
@@ -53,28 +56,34 @@ export class Dice {
     this.#buildFaces();
     this.#applyRestingPose();
 
-    this.rollBtn.addEventListener("click", () => this.onRollRequest?.());
-    this.scene.addEventListener("click", () => this.onRollRequest?.());
-    window.addEventListener("resize", () => this.#layoutFaces());
+    this.rollBtn.addEventListener("click", () => this.onRollRequest?.(), { passive: true });
+    this.scene.addEventListener("click", () => this.onRollRequest?.(), { passive: true });
+    window.addEventListener("resize", () => this.#layoutFaces(), { passive: true });
+    // Pre-warm layout
+    requestAnimationFrame(() => this.#layoutFaces());
   }
 
   #buildFaces() {
     this.cube.innerHTML = "";
+    const frag = document.createDocumentFragment();
     for (const [side, value] of Object.entries(FACE_VALUE)) {
       const face = document.createElement("div");
       face.className = `die-face face-${side}`;
-      face.dataset.value = value;
+      face.dataset.value = String(value);
       for (let i = 0; i < 9; i++) {
         if (PIPS[value].includes(i)) {
           const pip = document.createElement("span");
           pip.className = "pip" + (value === 1 || value === 4 ? " red-pip" : "");
           face.appendChild(pip);
         } else {
-          face.appendChild(document.createElement("span")).className = "cell-empty";
+          const emp = document.createElement("span");
+          emp.className = "cell-empty";
+          face.appendChild(emp);
         }
       }
-      this.cube.appendChild(face);
+      frag.appendChild(face);
     }
+    this.cube.appendChild(frag);
     this.#layoutFaces();
   }
 
@@ -89,6 +98,7 @@ export class Dice {
 
   #applyRestingPose() {
     this.cube.style.transform = "rotateX(-20deg) rotateY(24deg)";
+    this.cube.className = this.cube.className.replace(/show-\d/g, "").trim();
   }
 
   setEnabled(on, label = null) {
@@ -97,10 +107,13 @@ export class Dice {
     this.rollBtn.classList.toggle("ready", on);
     this.scene.classList.toggle("disabled", !on);
     if (label !== null) this.rollBtn.innerHTML = label;
+    this.scene.style.pointerEvents = on ? "" : "none";
+    this.rollBtn.style.pointerEvents = on ? "" : "none";
   }
 
   setRollingVisual(on) {
     this.scene.classList.toggle("shake", on);
+    this.cube.style.filter = on ? "blur(0.6px)" : "";
   }
 
   /** Animate a roll and resolve with the value (1..6). */
@@ -108,16 +121,34 @@ export class Dice {
     if (this.rolling) return this.value;
     this.rolling = true;
     this.setRollingVisual(true);
+    // pick value first for deterministic animation
     this.value = rand(1, 6);
     this.spins += 2;
 
+    // Reduced motion: snap without spin
+    if (prefersReducedMotion()) {
+      const [rx, ry] = SHOW_ROTATION[this.value];
+      this.cube.style.transition = "transform 420ms var(--ease-out)";
+      this.cube.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      this.cube.className = `show-${this.value}`;
+      await wait(420);
+      this.setRollingVisual(false);
+      this.rolling = false;
+      return this.value;
+    }
+
     // Let the shake play, then settle onto the final face mid-animation
-    await wait(420);
+    await wait(380);
     const [rx, ry] = SHOW_ROTATION[this.value];
+    // Use long spin for drama — GPU transform
     this.cube.style.transform =
       `rotateX(${rx - 360 * this.spins}deg) rotateY(${ry + 360 * this.spins}deg)`;
-    await wait(1020);
+    this.cube.className = `show-${this.value}`;
+    // Add subtle wobble after settling
+    await wait(720);
     this.setRollingVisual(false);
+    // small settle nudge
+    await wait(180);
     this.rolling = false;
     return this.value;
   }

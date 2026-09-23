@@ -1,5 +1,6 @@
 /* ═════════════════════════════════════════════════════════════
    responsive.css — adaptive layout for tablet & mobile
+   + FX scaling & reduced GPU on small screens
    ═════════════════════════════════════════════════════════════ */
 @media (max-width: 1080px) {
   #layout {
@@ -16,6 +17,7 @@
   .controls-block { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
   .controls-block .ghost-btn { flex: 1 1 150px; width: auto; }
   #gameLog { max-height: 190px; }
+  .fx-orb { filter: blur(14px); opacity:.11; }
 }
 
 @media (max-width: 640px) {
@@ -38,4 +40,24 @@
   .rules-grid { grid-template-columns: 1fr; }
   .dialog { padding: 16px; }
   #toastBox { top: 64px; right: 10px; }
+  .fx-orbs { display: none; } /* save GPU on mobile */
+  /* reduce motion intensity on mobile for battery */
+  .token { animation-duration: 4.5s !important; }
+  #boardWrap:hover::after { display:none; }
+}
+
+@media (max-width: 380px) {
+  #diceBar { flex-wrap: wrap; justify-content: center; }
+  .last-roll { order: -1; }
+}
+
+/* ── Performance: content-visibility for offscreen panels ── */
+@media (min-width: 1081px) {
+  #sidePanel { content-visibility: auto; contain-intrinsic-size: 360px 800px; }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  .fx-orbs, .bg-festive::after { display:none; }
+  #boardWrap::after, .turn-banner::after, .player-card::after, .progress-fill::after { display:none; }
 }

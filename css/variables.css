@@ -1,5 +1,6 @@
 /* ═════════════════════════════════════════════════════════════
    variables.css — design tokens (Indian festive theme)
+   + motion & performance tokens
    ═════════════════════════════════════════════════════════════ */
 :root {
   /* Backdrop */
@@ -16,15 +17,19 @@
   --red: #ef233c;
   --red-dark: #a31226;
   --red-soft: #ffd9de;
+  --red-glow: rgba(239,35,60,.55);
   --green: #2dc653;
   --green-dark: #146c2e;
   --green-soft: #d3f2dc;
+  --green-glow: rgba(45,198,83,.5);
   --yellow: #ffb703;
   --yellow-dark: #9c6b00;
   --yellow-soft: #ffefc2;
+  --yellow-glow: rgba(255,183,3,.55);
   --blue: #4361ee;
   --blue-dark: #22307e;
   --blue-soft: #dbe3ff;
+  --blue-glow: rgba(67,97,238,.55);
 
   /* Surfaces & text */
   --card: rgba(255, 253, 247, 0.97);
@@ -41,6 +46,7 @@
   --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
   --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.28);
   --shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.18);
+  --shadow-gold: 0 0 20px rgba(255,209,102,.45);
 
   /* Type */
   --font-display: "Baloo 2", "Poppins", system-ui, sans-serif;
@@ -48,4 +54,27 @@
 
   /* Board */
   --board-max: min(92vw, 640px);
+
+  /* Motion — unified timings & easings for 60fps feel */
+  --dur-xs: 120ms;
+  --dur-sm: 200ms;
+  --dur-md: 350ms;
+  --dur-lg: 600ms;
+  --dur-xl: 900ms;
+  --ease-smooth: cubic-bezier(.2,.7,.3,1);
+  --ease-spring: cubic-bezier(.175,.885,.32,1.275);
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-sharp: cubic-bezier(.4,0,.2,1);
+
+  /* FX */
+  --glow-gold: 0 0 14px rgba(255,209,102,.85), 0 0 30px rgba(255,209,102,.35);
+  --ring-gold: 0 0 0 3px var(--gold), 0 0 18px rgba(255,209,102,.9);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-xs: 1ms; --dur-sm: 1ms; --dur-md: 1ms; --dur-lg: 1ms; --dur-xl: 1ms;
+  }
 }

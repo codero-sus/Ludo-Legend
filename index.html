@@ -16,10 +16,14 @@
   <link rel="stylesheet" href="css/dice.css" />
   <link rel="stylesheet" href="css/panels.css" />
   <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/effects.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
   <div class="bg-festive" aria-hidden="true"></div>
+  <div class="fx-orbs" aria-hidden="true">
+    <div class="fx-orb"></div><div class="fx-orb"></div><div class="fx-orb"></div>
+  </div>
 
   <!-- ══════════ HEADER ══════════ -->
   <header id="appHeader">
@@ -171,9 +175,10 @@
     </div>
   </div>
 
-  <!-- Toasts + confetti -->
+  <!-- Toasts + confetti + fx -->
   <div id="toastBox" aria-live="polite"></div>
   <canvas id="confettiCanvas"></canvas>
+  <div id="fxDomLayer" aria-hidden="true"></div>
 
   <script type="module" src="js/main.js"></script>
 </body>

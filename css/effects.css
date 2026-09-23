@@ -1,0 +1,315 @@
+/* ═════════════════════════════════════════════════════════════
+   effects.css — TON of animations, particles, shines, shakes
+   Loaded after all other css. All effects are GPU-friendly
+   (transform / opacity only) and respect prefers-reduced-motion.
+   ═════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ──────────────────────────────────────────── */
+@keyframes auroraShift { 0%{transform:translate3d(-2%,-1%,0) scale(1)} 50%{transform:translate3d(2%,1%,0) scale(1.05)} 100%{transform:translate3d(-2%,-1%,0) scale(1)} }
+@keyframes rangoliSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes floatY { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-6px,0)} }
+@keyframes floatYSlow { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(0,-10px,0)} }
+@keyframes shimmerSweep { 0%{transform:translate3d(-120%,0,0)} 100%{transform:translate3d(120%,0,0)} }
+@keyframes shineSweep { 0%{transform:translateX(-140%) skewX(-12deg)} 60%{transform:translateX(140%) skewX(-12deg)} 100%{transform:translateX(140%) skewX(-12deg)} }
+@keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 0 rgba(255,209,102,.0)} 50%{box-shadow:0 0 22px 6px rgba(255,209,102,.55)} }
+@keyframes starTwinkle { 0%,100%{transform:scale(1) rotate(0deg); filter:brightness(1)} 50%{transform:scale(1.18) rotate(6deg); filter:brightness(1.35)} }
+@keyframes safeBreathe { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
+@keyframes homeShimmer { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+@keyframes boardEntrance { from{opacity:0; transform:translateY(18px) scale(.985)} to{opacity:1; transform:none} }
+@keyframes cardEntrance { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+@keyframes slideInRight { from{opacity:0; transform:translate3d(14px,0,0)} to{opacity:1; transform:none} }
+@keyframes slideInUp { from{opacity:0; transform:translate3d(0,10px,0)} to{opacity:1; transform:none} }
+@keyframes popIn { 0%{opacity:0; transform:scale(.85)} 60%{transform:scale(1.06)} 100%{opacity:1; transform:scale(1)} }
+@keyframes popOut { to{opacity:0; transform:scale(.92) translateY(6px)} }
+@keyframes tokenBreathing { 0%,100%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) scale(1)} 50%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) scale(1.03)} }
+@keyframes tokenHopEnhanced { 0%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) translateY(0) scale(1)} 35%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) translateY(-16%) scale(1.06)} 100%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) translateY(0) scale(1)} }
+@keyframes movableRing { 0%{box-shadow:0 0 0 3px var(--gold), 0 0 12px rgba(255,209,102,.8)} 100%{box-shadow:0 0 0 5px var(--gold), 0 0 24px 8px rgba(255,209,102,1)} }
+@keyframes movableBounceEnhanced { 0%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) translateY(0)} 100%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) translateY(-7%)} }
+@keyframes captureExplode { 0%{transform:translate(-50%,-50%) scale(.6); opacity:1} 100%{transform:translate(-50%,-50%) scale(2.2); opacity:0} }
+@keyframes captureShake { 0%,100%{transform:translate(-50%,-50%) translate(var(--ox),var(--oy))} 20%{transform:translate(calc(-50% - 6px), -50%) translate(var(--ox),var(--oy))} 40%{transform:translate(calc(-50% + 6px), -50%) translate(var(--ox),var(--oy))} 60%{transform:translate(calc(-50% - 4px), -50%) translate(var(--ox),var(--oy))} 80%{transform:translate(calc(-50% + 4px), -50%) translate(var(--ox),var(--oy))} }
+@keyframes trailFade { 0%{opacity:.85; transform:translate(-50%,-50%) scale(1)} 100%{opacity:0; transform:translate(-50%,-50%) scale(.35)} }
+@keyframes sparkleTwirl { 0%{transform:translate(-50%,-50%) scale(0) rotate(0deg); opacity:0} 20%{opacity:1} 100%{transform:translate(-50%,-90%) scale(1.2) rotate(180deg); opacity:0} }
+@keyframes diceWobble { 0%{transform:rotateX(-20deg) rotateY(24deg)} 25%{transform:rotateX(-28deg) rotateY(42deg)} 50%{transform:rotateX(-10deg) rotateY(12deg)} 75%{transform:rotateX(-26deg) rotateY(36deg)} 100%{transform:rotateX(-20deg) rotateY(24deg)} }
+@keyframes diceRollBlur { 0%{filter:blur(0)} 40%{filter:blur(1.2px)} 100%{filter:blur(0)} }
+@keyframes rollGlowEnhanced { 0%{box-shadow:0 5px 0 #7a0d1d, 0 0 0 0 rgba(255,209,102,.0)} 50%{box-shadow:0 5px 0 #7a0d1d, 0 0 28px 8px rgba(255,209,102,.95)} 100%{box-shadow:0 5px 0 #7a0d1d, 0 0 0 0 rgba(255,209,102,.0)} }
+@keyframes badgePop { 0%{transform:scale(.7)} 60%{transform:scale(1.15)} 100%{transform:scale(1)} }
+@keyframes progressShine { 0%{transform:translateX(-100%)} 100%{transform:translateX(220%)} }
+@keyframes bannerShine { 0%{transform:translateX(-60%)} 100%{transform:translateX(220%)} }
+@keyframes goldSweep { 0%{transform:translateX(-120%) skewX(-18deg)} 100%{transform:translateX(220%) skewX(-18deg)} }
+@keyframes toastProgress { from{transform:scaleX(1)} to{transform:scaleX(0)} }
+@keyframes trophySpin { 0%{transform:rotate(-6deg) scale(1)} 50%{transform:rotate(6deg) scale(1.08)} 100%{transform:rotate(-6deg) scale(1)} }
+@keyframes modalPop { 0%{opacity:0; transform:scale(.9) translateY(14px)} 100%{opacity:1; transform:none} }
+@keyframes overlayFade { from{opacity:0} to{opacity:1} }
+@keyframes headerShimmer { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+@keyframes dotsPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.35)} }
+@keyframes screenShake { 0%,100%{transform:translate3d(0,0,0)} 15%{transform:translate3d(-6px,2px,0)} 30%{transform:translate3d(5px,-2px,0)} 45%{transform:translate3d(-4px,1px,0)} 60%{transform:translate3d(4px,-1px,0)} 75%{transform:translate3d(-2px,2px,0)} }
+
+/* ── Global efficiency ────────────────────────────────── */
+#boardSvg, #tokenLayer, #diceCube, .token, .player-card, .dialog, #toastBox {
+  will-change: transform, opacity;
+  contain: layout style paint;
+}
+#boardWrap, #boardCard, .panel-block {
+  contain: layout paint;
+  content-visibility: auto;
+}
+
+/* ── Backdrop enhancements ─────────────────────────────── */
+.bg-festive {
+  animation: auroraShift 18s ease-in-out infinite;
+  will-change: transform;
+}
+.bg-festive::after {
+  content:"";
+  position:fixed; inset:-20%;
+  background:
+    radial-gradient(600px 400px at 20% 20%, rgba(255,209,102,.08), transparent 60%),
+    radial-gradient(700px 500px at 80% 30%, rgba(239,35,60,.06), transparent 60%),
+    radial-gradient(800px 600px at 50% 90%, rgba(67,97,238,.07), transparent 60%);
+  animation: auroraShift 22s ease-in-out infinite reverse;
+  pointer-events:none;
+}
+
+/* floating orbs */
+.fx-orbs {
+  position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+}
+.fx-orb {
+  position:absolute; border-radius:50%; opacity:.14; filter:blur(18px);
+  animation: floatYSlow 9s ease-in-out infinite;
+}
+.fx-orb:nth-child(1){ width:420px; height:420px; left:6%; top:8%; background:radial-gradient(circle, #ffd166, transparent 70%); animation-delay:-1s }
+.fx-orb:nth-child(2){ width:520px; height:520px; right:4%; top:12%; background:radial-gradient(circle, #7c3aed, transparent 70%); animation-delay:-3s }
+.fx-orb:nth-child(3){ width:380px; height:380px; left:30%; bottom:6%; background:radial-gradient(circle, #ef233c, transparent 70%); animation-delay:-5s }
+
+/* ── Header ───────────────────────────────────────────── */
+#appHeader {
+  position: sticky;
+  background: linear-gradient(90deg, rgba(21,8,38,.88), rgba(42,12,58,.88), rgba(21,8,38,.88));
+  background-size: 200% 100%;
+  animation: headerShimmer 12s linear infinite;
+  backdrop-filter: blur(14px) saturate(1.15);
+}
+.brand-dice { animation: floatY 3.2s ease-in-out infinite; }
+.brand-text h1 span {
+  background: linear-gradient(90deg, var(--gold), #ffe9a8, var(--gold-deep), var(--gold));
+  background-size: 200% 100%;
+  -webkit-background-clip:text; background-clip:text;
+  animation: headerShimmer 4s linear infinite;
+}
+
+/* ── Board card entrance + hover tilt ─────────────────── */
+#boardCard { animation: boardEntrance .6s var(--ease-out) both; }
+#boardCard:hover { box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,209,102,.35); }
+#boardWrap::after {
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius:14px;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.10) 48%, transparent 60%);
+  transform:translateX(-120%); opacity:0; transition: transform .9s var(--ease-smooth), opacity .3s;
+}
+#boardWrap:hover::after { transform:translateX(0); opacity:1; }
+
+/* ── Turn banner shine ────────────────────────────────── */
+.turn-banner { position:relative; overflow:hidden; }
+.turn-banner::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+  transform:translateX(-60%); animation: bannerShine 3.2s ease-in-out infinite;
+}
+.turn-dot { animation: pulseGlow 1.8s ease-in-out infinite; }
+.turn-dot.red{ box-shadow:0 0 14px var(--red-glow) }
+.turn-dot.green{ box-shadow:0 0 14px var(--green-glow) }
+.turn-dot.yellow{ box-shadow:0 0 14px var(--yellow-glow) }
+.turn-dot.blue{ box-shadow:0 0 14px var(--blue-glow) }
+
+/* ── SVG board extras ─────────────────────────────────── */
+.cell-star { animation: starTwinkle 2.6s ease-in-out infinite; transform-origin:center; }
+.cell-safe { animation: safeBreathe 3s ease-in-out infinite; }
+.home-cell { position:relative; overflow:hidden; }
+.home-cell::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+  background-size: 200% 100%; animation: shimmerSweep 2.4s linear infinite; opacity:.55;
+}
+
+/* ── Tokens — GPU + breathing + ultra polish ─────────── */
+.token {
+  will-change: left, top, transform, filter;
+  transform: translate3d(-50%,-50%,0) translate(var(--ox),var(--oy));
+  backface-visibility: hidden;
+  /* subtle breathing when idle */
+  animation: tokenBreathing 3.8s ease-in-out infinite;
+}
+.token:nth-child(3n){ animation-delay:-1.2s }
+.token:nth-child(4n){ animation-delay:-2s }
+.token:hover { filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)) brightness(1.06); transform: translate3d(-50%,-50%,0) translate(var(--ox),var(--oy)) scale(1.04); }
+.token.movable {
+  animation: movableBounceEnhanced .72s ease-in-out infinite alternate, tokenBreathing 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+.token.movable .token-face { animation: movableRing 1s ease-in-out infinite alternate; }
+.token-hop { animation: tokenHopEnhanced .24s var(--ease-spring) !important; }
+.token.trail { pointer-events:none; opacity:.45; filter: blur(.6px) brightness(1.15); animation: trailFade .42s var(--ease-out) forwards; }
+.token.captured { animation: captureShake .5s var(--ease-spring); }
+.token.sparkle::after {
+  content:"✦"; position:absolute; left:50%; top:18%; transform:translate(-50%,-50%);
+  font-size:14px; color:#fff; text-shadow:0 0 8px var(--gold);
+  animation: sparkleTwirl .9s var(--ease-out) forwards; pointer-events:none;
+}
+/* Stacked fan */
+.token.stacked { z-index:5; }
+.token.stacked:hover { z-index:10; }
+/* Finished orbit hint */
+.token.finished { animation: floatY 2.8s ease-in-out infinite; }
+.token.finished:hover { transform: translate3d(-50%,-50%,0) translate(var(--ox),var(--oy)) scale(1.12) rotate(6deg); }
+
+/* Capture explosion ring */
+.capture-ring {
+  position:absolute; width:var(--tsize); aspect-ratio:1; border-radius:50%;
+  border:3px solid var(--gold); pointer-events:none; z-index:9;
+  transform:translate(-50%,-50%); animation: captureExplode .55s var(--ease-out) forwards;
+  box-shadow: 0 0 16px var(--gold);
+}
+/* Trail dot */
+.trail-dot {
+  position:absolute; width:10px; height:10px; border-radius:50%; pointer-events:none; z-index:3;
+  background: radial-gradient(circle, #fff, var(--gold)); box-shadow:0 0 10px var(--gold);
+  transform:translate(-50%,-50%); animation: trailFade .45s var(--ease-out) forwards;
+}
+
+/* ── Dice — next-level ────────────────────────────────── */
+#diceScene { animation: floatY 3s ease-in-out infinite; }
+#diceCube { will-change: transform; }
+#diceScene.shake #diceCube { animation: diceWobble .22s linear infinite, diceRollBlur .9s ease; }
+.roll-btn {
+  position:relative; overflow:hidden; isolation:isolate;
+}
+.roll-btn::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  transform:translateX(-120%) skewX(-18deg); transition: transform .6s var(--ease-smooth);
+}
+.roll-btn:hover::after { transform:translateX(120%) skewX(-18deg); }
+.roll-btn.ready { animation: rollGlowEnhanced 1.1s ease-in-out infinite alternate; }
+.last-roll {
+  position:relative; overflow:hidden;
+  transition: transform .2s var(--ease-spring), box-shadow .2s;
+}
+.last-roll.pop { animation: popIn .42s var(--ease-spring); }
+.last-roll::after {
+  content:""; position:absolute; inset:0; border-radius:14px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+  transform:translateX(-120%); animation: shimmerSweep 1.6s linear infinite;
+}
+
+/* ── Player cards — stagger + shine ───────────────────── */
+.player-card {
+  position:relative; overflow:hidden;
+  animation: cardEntrance .45s var(--ease-out) both;
+  transition: transform .2s var(--ease-spring), border-color .25s, box-shadow .25s, background .25s;
+  will-change: transform;
+}
+.player-card:nth-child(1){ animation-delay:.05s } .player-card:nth-child(2){ animation-delay:.11s }
+.player-card:nth-child(3){ animation-delay:.17s } .player-card:nth-child(4){ animation-delay:.23s }
+.player-card::after {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.09) 50%, transparent 70%);
+  transform:translateX(-120%); transition: transform .7s var(--ease-smooth), opacity .2s;
+}
+.player-card:hover::after { transform:translateX(120%); opacity:1; }
+.player-card:hover { transform: translateY(-2px) scale(1.01); }
+.player-card.active { animation: cardEntrance .45s var(--ease-out) both, pulseGlow 1.6s ease-in-out infinite; }
+.player-avatar { animation: floatY 3.4s ease-in-out infinite; will-change: transform; }
+.player-card.active .player-avatar { filter: drop-shadow(0 0 8px currentColor); }
+.progress-track { position:relative; overflow:hidden; }
+.progress-fill { position:relative; overflow:hidden; transition: width .6s var(--ease-spring); }
+.progress-fill::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  transform:translateX(-100%); animation: progressShine 1.4s linear infinite;
+}
+.token-dot { transition: transform .25s var(--ease-spring), background .25s, box-shadow .25s; }
+.token-dot.out { animation: badgePop .35s var(--ease-spring); }
+.token-dot.home { box-shadow:0 0 10px var(--gold), 0 0 18px rgba(255,209,102,.6); animation: dotsPulse 1.2s ease-in-out infinite; }
+
+/* ── Game log ─────────────────────────────────────────── */
+#gameLog li { animation: slideInRight .32s var(--ease-out) both; position:relative; overflow:hidden; }
+#gameLog li::after {
+  content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: currentColor; opacity:.9;
+}
+#gameLog li:nth-child(1){ animation-delay:.02s } #gameLog li:nth-child(2){ animation-delay:.05s }
+
+/* ── Dice bar ─────────────────────────────────────────── */
+#diceBar { position:relative; overflow:hidden; }
+#diceBar::before {
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.06;
+  background: radial-gradient(400px 80px at 30% 50%, var(--gold), transparent 60%);
+}
+
+/* ── Toasts — progress bar + icon ─────────────────────── */
+.toast {
+  position:relative; overflow:hidden;
+  animation: slideInRight .34s var(--ease-spring);
+  will-change: transform, opacity;
+}
+.toast::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:3px;
+  background: currentColor; opacity:.75; transform-origin:left;
+  animation: toastProgress var(--toast-dur, 2600ms) linear forwards;
+}
+.toast.out { animation: popOut .3s var(--ease-sharp) forwards; }
+
+/* ── Dialogs ──────────────────────────────────────────── */
+.overlay { animation: overlayFade .22s var(--ease-out) both; }
+.overlay.show .dialog { animation: modalPop .42s var(--ease-spring) both; }
+.dialog { will-change: transform, opacity; }
+.gold-btn { position:relative; overflow:hidden; isolation:isolate; }
+.gold-btn::after {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  transform:translateX(-120%) skewX(-18deg); transition: transform .55s var(--ease-smooth);
+}
+.gold-btn:hover::after { transform:translateX(120%) skewX(-18deg); }
+.winner-dialog .trophy { animation: trophySpin 1.1s ease-in-out infinite alternate; filter: drop-shadow(0 8px 16px rgba(0,0,0,.25)); }
+.standing { animation: slideInUp .38s var(--ease-out) both; }
+.standing:nth-child(1){ animation-delay:.06s } .standing:nth-child(2){ animation-delay:.12s }
+.standing:nth-child(3){ animation-delay:.18s } .standing:nth-child(4){ animation-delay:.24s }
+
+/* ── Setup rows stagger ───────────────────────────────── */
+.setup-row { animation: slideInUp .36s var(--ease-out) both; }
+.setup-row:nth-child(1){ animation-delay:.04s } .setup-row:nth-child(2){ animation-delay:.09s }
+.setup-row:nth-child(3){ animation-delay:.14s } .setup-row:nth-child(4){ animation-delay:.19s }
+.segmented button { transition: all .2s var(--ease-spring); }
+.segmented button.active { transform: translateY(-1px); }
+.type-toggle button { transition: all .18s var(--ease-out); }
+
+/* ── Confetti canvas + extra layers ───────────────────── */
+#confettiCanvas { will-change: transform; }
+.fx-canvas {
+  position:fixed; inset:0; width:100vw; height:100vh; pointer-events:none; z-index:180;
+}
+.particle {
+  position:absolute; border-radius:2px; pointer-events:none; will-change: transform, opacity;
+}
+
+/* ── Screen shake utility ─────────────────────────────── */
+.shake-screen { animation: screenShake .5s var(--ease-out); }
+
+/* ── Bonus ring ───────────────────────────────────────── */
+.bonus-ring {
+  position:absolute; border:2px solid var(--gold); border-radius:50%; pointer-events:none;
+  transform:translate(-50%,-50%) scale(.4); opacity:.9;
+  animation: captureExplode .7s var(--ease-out) forwards;
+}
+
+/* ── Path preview dots ────────────────────────────────── */
+.path-preview {
+  position:absolute; width:8px; height:8px; border-radius:50%; pointer-events:none;
+  background: var(--gold); box-shadow:0 0 8px var(--gold);
+  opacity:0; transform:translate(-50%,-50%) scale(.6);
+  animation: dotsPulse 1s ease-in-out infinite alternate;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}

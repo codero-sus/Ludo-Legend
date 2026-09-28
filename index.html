@@ -11,18 +11,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/themes.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/board.css" />
   <link rel="stylesheet" href="css/dice.css" />
   <link rel="stylesheet" href="css/panels.css" />
   <link rel="stylesheet" href="css/modals.css" />
   <link rel="stylesheet" href="css/effects.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
   <div class="bg-festive" aria-hidden="true"></div>
   <div class="fx-orbs" aria-hidden="true">
     <div class="fx-orb"></div><div class="fx-orb"></div><div class="fx-orb"></div>
+  </div>
+  <div class="festive-lights" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="diyas" aria-hidden="true">
+    <span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span>
   </div>
 
   <!-- ══════════ HEADER ══════════ -->
@@ -37,6 +45,7 @@
       </div>
     </div>
     <nav class="header-actions">
+      <button id="themeBtn" class="icon-btn" title="Change theme (T)" aria-label="Change theme">🎨</button>
       <button id="soundBtn" class="icon-btn" title="Sound on/off (M)" aria-label="Toggle sound">🔊</button>
       <button id="rulesBtn" class="ghost-btn" title="How to play (R)">📖 Rules</button>
       <button id="newGameBtn" class="gold-btn" title="Start a new game (N)">✨ New Game</button>
@@ -59,16 +68,19 @@
 
       <div id="diceBar">
         <div id="diceScene" title="Dice">
-          <div id="diceCube">
-            <!-- faces injected by js/features/Dice.js -->
-          </div>
+          <div id="diceCube"></div>
         </div>
         <div class="dice-controls">
           <button id="rollBtn" class="roll-btn">🎲 ROLL <kbd>Space</kbd></button>
           <p id="rollHint">Set up a game to begin…</p>
+          <div id="actionBar">
+            <button id="hintBtn" class="mini-action hint" title="Hint (H)">💡 Hint <span class="kbd">H</span></button>
+            <button id="undoBtn" class="mini-action undo" title="Undo (Z)">↩️ Undo <span class="kbd">Z</span></button>
+          </div>
         </div>
         <div id="lastRollBadge" class="last-roll" title="Last roll">–</div>
       </div>
+      <div id="diceHistory" aria-label="Dice history"></div>
     </section>
 
     <!-- Side panel -->
@@ -76,6 +88,11 @@
       <section class="panel-block">
         <h2 class="panel-title">🏆 Players</h2>
         <div id="playerCards"></div>
+      </section>
+
+      <section class="panel-block">
+        <h2 class="panel-title">📊 Lifetime <span id="streakBadge" class="streak-badge" style="display:none">Streak 0</span></h2>
+        <div id="statsGrid" class="stats-grid"></div>
       </section>
 
       <section class="panel-block log-block">
@@ -92,7 +109,7 @@
   </main>
 
   <footer id="appFooter">
-    <p>Made with ❤️ in India · <strong>Ludo Legend</strong> · Roll a 6, capture all, race home!</p>
+    <p>Made with ❤️ in India · <strong>Ludo Legend</strong> · Roll a 6, capture all, race home! · <span id="footerStats"></span></p>
   </footer>
 
   <!-- ══════════ SETUP MODAL ══════════ -->
@@ -100,7 +117,7 @@
     <div class="dialog setup-dialog">
       <div class="dialog-head festive">
         <h2 id="setupTitle">🎲 Ludo Legend <span class="hindi">लूडो लेजेंड</span></h2>
-        <p>Choose your players, roll the dice, race all 4 tokens home!</p>
+        <p>Choose your players, pick difficulty, roll the dice, race home!</p>
       </div>
 
       <div class="setup-section">
@@ -118,7 +135,7 @@
       </div>
 
       <div class="setup-section">
-        <h3>🎨 Players</h3>
+        <h3>🎨 Players <span style="font-weight:400;font-size:.82rem;color:var(--ink-soft)">— set bot difficulty</span></h3>
         <div id="setupRows"></div>
       </div>
 
@@ -143,19 +160,22 @@
       <div class="rules-body">
         <ol>
           <li>🎲 <strong>Roll a 6</strong> to bring a token out of your base onto the board.</li>
-          <li>👆 After rolling, <strong>tap a glowing token</strong> to move it. Tokens move clockwise around the board.</li>
-          <li>⭐ <strong>Star squares are safe</strong> — tokens there can't be captured. All start squares are safe too.</li>
-          <li>⚔️ Land on an enemy token on a non-safe square to <strong>capture it</strong> — it goes back to base! You earn a <strong>bonus roll</strong>.</li>
+          <li>👆 After rolling, <strong>tap a glowing token</strong> to move it. Tokens move clockwise.</li>
+          <li>⭐ <strong>Star squares are safe</strong> — tokens there can't be captured.</li>
+          <li>⚔️ Land on an enemy on a non-safe square to <strong>capture</strong> — bonus roll!</li>
           <li>🎁 Rolling a <strong>6</strong> or bringing a token <strong>home</strong> grants an extra turn.</li>
-          <li>🚫 Roll three 6s in a row and your turn is <strong>skipped</strong> (no move on the third 6).</li>
-          <li>🏠 Enter the coloured <strong>home column</strong> and reach the centre with an <strong>exact roll</strong>.</li>
-          <li>🏆 First player to bring <strong>all 4 tokens home</strong> wins the game!</li>
+          <li>🚫 Three 6s in a row = <strong>turn skipped</strong>.</li>
+          <li>💡 Press <strong>H</strong> for hint, <strong>Z</strong> to undo, <strong>1-4</strong> to pick token.</li>
+          <li>🏠 Enter the home column with an <strong>exact roll</strong>.</li>
+          <li>🏆 First to bring <strong>all 4 tokens home</strong> wins!</li>
         </ol>
         <div class="keys-row">
-          <span><kbd>Space</kbd> roll dice</span>
+          <span><kbd>Space</kbd> roll</span>
+          <span><kbd>H</kbd> hint</span>
+          <span><kbd>Z</kbd> undo</span>
+          <span><kbd>1-4</kbd> token</span>
+          <span><kbd>T</kbd> theme</span>
           <span><kbd>R</kbd> rules</span>
-          <span><kbd>M</kbd> sound</span>
-          <span><kbd>N</kbd> new game</span>
         </div>
       </div>
     </div>

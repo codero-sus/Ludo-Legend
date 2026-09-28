@@ -1,0 +1,166 @@
+/* ═════════════════════════════════════════════════════════════
+   enhancements.css — dice history, hint, undo, stats, festival extras
+   ─────────────────────────────────────────────────────────────
+   Keeps modular concerns separate from base board/panel styles.
+   ═════════════════════════════════════════════════════════════ */
+
+/* ── Festival light string (top) ──────────────────────────── */
+.festive-lights {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 18px;
+  z-index: 60;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0 8px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+.festive-lights span {
+  width: 12px; height: 18px;
+  border-radius: 0 0 8px 8px;
+  background: currentColor;
+  position: relative;
+  animation: bulbGlow 1.8s ease-in-out infinite alternate;
+  box-shadow: 0 0 8px currentColor;
+}
+.festive-lights span:nth-child(3n) { color: #ffd166; animation-delay: -.2s; }
+.festive-lights span:nth-child(3n+1) { color: #ef233c; animation-delay: -.6s; }
+.festive-lights span:nth-child(3n+2) { color: #2dc653; animation-delay: -1s; }
+.festive-lights::before {
+  content:""; position:absolute; top:6px; left:0; right:0; height:2px;
+  background: rgba(255,255,255,.22);
+}
+@keyframes bulbGlow { 0%{ filter:brightness(1) } 100%{ filter:brightness(1.35) } }
+
+/* ── Floating diyas ─────────────────────────────────────── */
+.diyas {
+  position: fixed;
+  bottom: 10px; left: 0; right: 0;
+  display:flex; justify-content: space-around;
+  pointer-events:none; z-index: 1;
+  opacity:.55;
+}
+.diya {
+  font-size: 18px;
+  animation: diyaFlicker 2.2s ease-in-out infinite alternate, floatY 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(255,180,60,.8));
+}
+.diya:nth-child(2){ animation-delay:-.6s } .diya:nth-child(3){ animation-delay:-1.1s }
+.diya:nth-child(4){ animation-delay:-1.7s } .diya:nth-child(5){ animation-delay:-.3s }
+@keyframes diyaFlicker { 0%{ transform:scale(1)} 100%{ transform:scale(1.08) } }
+
+/* ── Dice history strip ─────────────────────────────────── */
+#diceHistory {
+  display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+  margin-top:8px;
+  min-height:28px;
+}
+.dice-chip {
+  width:28px; height:28px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:8px;
+  font-family: var(--font-display);
+  font-weight:800; font-size:.9rem;
+  background: rgba(255,255,255,.9);
+  border:1.5px solid var(--line);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  animation: diceChipIn .28s var(--ease-spring);
+}
+.dice-chip.is-6 { background: linear-gradient(180deg, #ffe29a, var(--gold)); border-color: var(--gold-deep); color: var(--gold-ink); box-shadow: 0 0 10px rgba(255,209,102,.6); }
+.dice-chip.red { border-left:3px solid var(--red); }
+.dice-chip.green { border-left:3px solid var(--green); }
+.dice-chip.yellow { border-left:3px solid var(--yellow); }
+.dice-chip.blue { border-left:3px solid var(--blue); }
+@keyframes diceChipIn { from{ transform:scale(.7) translateY(4px); opacity:0 } to{ transform:none; opacity:1 } }
+
+/* ── Hint / Undo bar ────────────────────────────────────── */
+#actionBar {
+  display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;
+}
+.mini-action {
+  flex:1 1 120px;
+  font-weight:700; font-size:.84rem;
+  padding:9px 12px; border-radius:12px;
+  background: rgba(255,255,255,.88);
+  border:1.5px solid var(--line);
+  color: var(--ink);
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  transition: transform .16s var(--ease-spring), box-shadow .16s, opacity .16s;
+  will-change: transform;
+}
+.mini-action:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.mini-action:active:not(:disabled) { transform: scale(.98); }
+.mini-action:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+.mini-action.hint { background: linear-gradient(180deg, #fff, #fff7d6); border-color: var(--gold); }
+.mini-action.undo { background: rgba(255,255,255,.92); }
+.mini-action .kbd { font-size:.68em; opacity:.7; border:1px solid rgba(0,0,0,.15); padding:1px 5px; border-radius:6px; margin-left:4px; }
+
+/* hint pulse ring on token */
+.token.hint-target {
+  z-index: 9 !important;
+  animation: hintPulse 1s ease-in-out infinite alternate !important;
+}
+.token.hint-target .token-face {
+  box-shadow: 0 0 0 4px #fff, 0 0 22px 6px rgba(255,209,102,1) !important;
+}
+@keyframes hintPulse {
+  from { transform: translate3d(-50%,-50%,0) translate(var(--ox),var(--oy)) scale(1); }
+  to   { transform: translate3d(-50%,-50%,0) translate(var(--ox),var(--oy)) scale(1.06); }
+}
+
+/* ── Turn timer ring ────────────────────────────────────── */
+.timer-ring {
+  position:absolute; inset: -4px;
+  border-radius: 50%;
+  border:3px solid transparent;
+  border-top-color: var(--gold);
+  transform: rotate(-90deg);
+  animation: timerSpin linear forwards;
+  pointer-events:none;
+  opacity:.9;
+}
+@keyframes timerSpin { from{ transform:rotate(-90deg)} to{ transform:rotate(270deg)} }
+
+/* ── Stats panel ────────────────────────────────────────── */
+.stats-grid {
+  display:grid; grid-template-columns: repeat(2,1fr); gap:8px;
+}
+.stat-card {
+  background: rgba(255,255,255,.07);
+  border:1px solid rgba(255,209,102,.18);
+  border-radius:12px; padding:10px;
+  text-align:center;
+}
+.stat-card .stat-num {
+  font-family: var(--font-display);
+  font-weight:800; font-size:1.25rem; color: var(--gold);
+}
+.stat-card .stat-label { font-size:.72rem; color: rgba(255,255,255,.75); }
+.streak-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background: linear-gradient(180deg, #ffe29a, var(--gold));
+  color: var(--gold-ink);
+  font-weight:800; font-size:.78rem;
+  padding:4px 10px; border-radius:20px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Toast streak ───────────────────────────────────────── */
+.toast.streak {
+  background: linear-gradient(135deg, rgba(28,11,52,.96), rgba(60,20,80,.96));
+  border-left-color: var(--gold);
+}
+
+/* ── Accessibility focus ────────────────────────────────── */
+.token:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Reduce motion for new FX ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .festive-lights, .diyas { display:none; }
+}

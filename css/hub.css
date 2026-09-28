@@ -1,0 +1,133 @@
+/* ═════════════════════════════════════════════════════════════
+   hub.css — Bharat Games hub: game selection, nav tabs, cards
+   Indian festival styling — modular, efficient
+   ═════════════════════════════════════════════════════════════ */
+
+/* ── Hub overlay (game selection) ─────────────────────────── */
+#hubOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 14px;
+  overflow-y: auto;
+  background: rgba(10,4,22,.72);
+  backdrop-filter: blur(8px);
+}
+#hubOverlay.show { display: flex; }
+.hub-dialog {
+  width: min(98vw, 900px);
+  background: linear-gradient(180deg, #fffdf6, #faf0da);
+  color: var(--ink);
+  border-radius: 22px;
+  border: 3px solid var(--gold);
+  box-shadow: var(--shadow-lg);
+  padding: 22px;
+  animation: hubPop .45s cubic-bezier(.2,1.4,.4,1);
+  margin: auto 0;
+}
+@keyframes hubPop { from{opacity:0;transform:scale(.92) translateY(18px)} }
+
+.hub-head {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.hub-head h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: #5a3200;
+}
+.hub-head h2 span { color: var(--gold-deep); }
+.hub-head p { color: var(--ink-soft); font-size: .92rem; margin-top: 4px; }
+.hub-head .hindi { font-size: 1.1rem; color: #b3540a; display:block; }
+
+/* Game cards grid */
+.hub-games {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.hub-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .18s var(--ease-spring), box-shadow .18s, border-color .18s;
+  overflow: hidden;
+  contain: layout paint;
+}
+.hub-card::before {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, transparent, rgba(255,209,102,.14));
+  opacity:0; transition: opacity .2s;
+}
+.hub-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-md); border-color: var(--gold); }
+.hub-card:hover::before { opacity:1; }
+.hub-card.active { border-color: var(--gold-deep); box-shadow: var(--shadow-gold); background: linear-gradient(180deg, #fff, #fff7d6); }
+.hub-card-icon { font-size: 2.6rem; display:block; margin-bottom:8px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.18)); }
+.hub-card h3 { font-family: var(--font-display); font-size: 1.08rem; color: var(--ink); }
+.hub-card p { font-size: .78rem; color: var(--ink-soft); margin-top:4px; min-height: 2.4em; }
+.hub-card-badge {
+  position:absolute; top:8px; right:8px;
+  font-size:.68rem; font-weight:800;
+  background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  color: var(--gold-ink);
+  padding:2px 8px; border-radius:20px;
+}
+
+/* Hub nav tabs */
+#hubNav {
+  display:flex; gap:8px; justify-content:center;
+  margin: 12px 0 0;
+  flex-wrap: wrap;
+}
+.hub-tab {
+  font-weight:700; font-size:.88rem;
+  padding:9px 16px; border-radius:12px;
+  background: var(--card-glass);
+  border:1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor:pointer;
+  transition: all .18s var(--ease-spring);
+  display:flex; align-items:center; gap:6px;
+}
+.hub-tab:hover { background: rgba(255,255,255,.16); transform: translateY(-1px); }
+.hub-tab.active {
+  background: linear-gradient(180deg, #ffe29a, var(--gold) 45%, var(--gold-deep));
+  color: var(--gold-ink);
+  border-color: var(--gold-deep);
+  box-shadow: 0 3px 0 #9c6b00, var(--shadow-sm);
+}
+
+/* Game sections */
+.game-section { display:none; animation: gameIn .35s var(--ease-out); }
+.game-section.active { display:block; }
+@keyframes gameIn { from{opacity:0; transform:translateY(8px)} }
+
+#gameContainer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 20px 30px;
+}
+
+/* Mini hub bar inside header */
+.hub-trigger {
+  font-weight:700; font-size:.9rem;
+  padding:9px 14px; border-radius:12px;
+  background: rgba(255,255,255,.08);
+  border:1px solid rgba(255,209,102,.35);
+  color: var(--gold);
+  cursor:pointer;
+  transition: all .18s;
+}
+.hub-trigger:hover { background: rgba(255,209,102,.18); transform: translateY(-1px); }
+
+/* Legacy Ludo layout still works inside #ludoGame */
+#ludoGame.active { display:block; }
+#ludoGame { display:none; }

@@ -1,5 +1,6 @@
 /* ═════════════════════════════════════════════════════════════
    config/constants.js — single source of truth for game config
+   + difficulty, themes, stats, hints
    ═════════════════════════════════════════════════════════════ */
 
 /** Canonical clockwise turn order (also the colour order). */
@@ -24,11 +25,11 @@ export const MAIN_TRACK_LEN = 52;
 
 /** Default house rules (toggleable in setup). */
 export const DEFAULT_RULES = {
-  needSixToLeave: true,   // need a 6 to leave the base
-  exactFinish: true,      // need exact roll to enter home
-  bonusOnCapture: true,   // capture grants an extra roll
-  bonusOnHome: true,      // bringing a token home grants an extra roll
-  threeSixesForfeit: true // 3 consecutive sixes = turn skipped
+  needSixToLeave: true,
+  exactFinish: true,
+  bonusOnCapture: true,
+  bonusOnHome: true,
+  threeSixesForfeit: true
 };
 
 export const RULE_DESCRIPTIONS = {
@@ -49,19 +50,40 @@ export const COLOR_SETS = {
 export const HUMAN_NAMES = ["You", "Rohan", "Priya", "Arjun", "Diya", "Kabir"];
 export const BOT_NAMES = ["Chintu Bot", "Bablu Bot", "Monty Bot", "Guddu Bot"];
 
+/** AI Difficulty */
+export const DIFFICULTY = {
+  easy:   { label: "Easy",   icon: "🌱", jitter: 28, captureBonus: 55,  threatAvoid: 12, desc: "Casual & forgiving" },
+  medium: { label: "Medium", icon: "⚖️", jitter: 10, captureBonus: 85,  threatAvoid: 28, desc: "Balanced" },
+  hard:   { label: "Hard",   icon: "🔥", jitter: 4,  captureBonus: 95,  threatAvoid: 38, desc: "Sharp tactics" },
+  expert: { label: "Expert", icon: "👑", jitter: 0,  captureBonus: 110, threatAvoid: 45, desc: "Ruthless" }
+};
+export const DEFAULT_DIFFICULTY = "medium";
+
+/** Themes */
+export const THEMES = {
+  festival: { label: "Festival", icon: "🪔", bg: "festival" },
+  midnight: { label: "Midnight", icon: "🌙", bg: "midnight" },
+  ocean:    { label: "Ocean",    icon: "🌊", bg: "ocean" },
+  sunset:   { label: "Sunset",   icon: "🌅", bg: "sunset" }
+};
+export const DEFAULT_THEME = "festival";
+
 /** Timing knobs (ms). */
 export const DELAYS = {
-  step: 200,          // per-cell hop while moving
-  botRoll: 950,       // bot "thinking" before rolling
-  botMove: 750,       // bot "thinking" before moving
-  noMovePass: 1100,   // pause when no moves possible
-  turnSwap: 500,      // pause between turns
-  capturePause: 550,  // beat after a capture lands
+  step: 200,
+  botRoll: 950,
+  botMove: 750,
+  noMovePass: 1100,
+  turnSwap: 500,
+  capturePause: 550,
   winPause: 600
 };
 
 export const STORAGE_KEYS = {
   save: "ludo-legend-save-v1",
   sound: "ludo-legend-sound",
-  config: "ludo-legend-config"
+  config: "ludo-legend-config",
+  theme: "ludo-legend-theme-v1",
+  stats: "ludo-legend-stats-v1",
+  diceHistory: "ludo-legend-dicehist-v1"
 };

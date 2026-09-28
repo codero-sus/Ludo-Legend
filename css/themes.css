@@ -1,0 +1,52 @@
+/* ═════════════════════════════════════════════════════════════
+   themes.css — Festival / Midnight / Ocean / Sunset themes
+   Switch via body[data-theme]. Only overrides variables.
+   ═════════════════════════════════════════════════════════════ */
+
+/* Default is festival (variables.css) — no override needed */
+body[data-theme="festival"] { /* inherits */ }
+
+/* Midnight — deep space, neon gold */
+body[data-theme="midnight"] {
+  --bg-0: #060914;
+  --bg-1: #0a1230;
+  --bg-2: #141a3a;
+  --card: rgba(248,250,255,.98);
+  --card-glass: rgba(255,255,255,.06);
+  --gold: #ffe27a;
+  --gold-deep: #ffb84d;
+}
+body[data-theme="midnight"] .bg-festive { opacity:.12; }
+body[data-theme="midnight"] #appHeader { background: rgba(6,9,20,.88); }
+
+/* Ocean — teal & coral */
+body[data-theme="ocean"] {
+  --bg-0: #061a24;
+  --bg-1: #0a2f3a;
+  --bg-2: #0a3a4a;
+  --gold: #7ee0ff;
+  --gold-deep: #3aa7ff;
+  --gold-ink: #062e44;
+}
+body[data-theme="ocean"] .bg-festive {
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 34px, var(--gold) 35px, transparent 36px),
+    radial-gradient(circle, var(--gold) 1.8px, transparent 2.3px);
+  opacity:.14;
+}
+body[data-theme="ocean"] #appHeader { border-bottom-color: rgba(126,224,255,.25); }
+
+/* Sunset — warm amber, magenta */
+body[data-theme="sunset"] {
+  --bg-0: #1a0a14;
+  --bg-1: #3a1028;
+  --bg-2: #5a1a1a;
+  --gold: #ffb37a;
+  --gold-deep: #ff6b6b;
+  --gold-ink: #4a1400;
+}
+
+/* Smooth transition when switching */
+body, #appHeader, #boardCard, .panel-block, .dialog {
+  transition: background-color .4s var(--ease-smooth), border-color .4s var(--ease-smooth), color .3s;
+}

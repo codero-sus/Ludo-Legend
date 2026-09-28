@@ -1,0 +1,50 @@
+/* ═════════════════════════════════════════════════════════════
+   carrom.css — Indian Carrom — wooden board, powder, striker
+   ═════════════════════════════════════════════════════════════ */
+#carromGame { contain: layout; }
+.carrom-layout{
+  display:grid; grid-template-columns: minmax(0, 620px) 360px;
+  gap:18px; justify-content:center; align-items:start;
+}
+@media (max-width:960px){ .carrom-layout{grid-template-columns: minmax(0,620px);} }
+
+.carrom-card{
+  background: var(--card); border-radius:var(--radius);
+  border:3px solid rgba(255,209,102,.7); box-shadow:var(--shadow-lg);
+  padding:14px; contain:layout paint;
+}
+.carrom-banner{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--font-display); font-weight:700;
+  background: linear-gradient(180deg, #5a3a1a, #3a2410);
+  color:#fff; border-radius:12px; padding:10px; margin-bottom:12px;
+}
+.carrom-wrap{
+  position:relative; width:100%; aspect-ratio:1/1;
+  background:#e8c99a; border-radius:14px; overflow:hidden;
+  box-shadow: var(--shadow-md), inset 0 0 0 12px #8d5a2b, inset 0 0 0 14px #f6efdc;
+  contain: strict;
+  touch-action:none;
+  user-select:none;
+}
+#carromCanvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.carrom-aim{
+  position:absolute; height:2px; background:rgba(255,255,255,.9);
+  transform-origin:left center; pointer-events:none; display:none;
+  box-shadow: 0 0 6px rgba(255,255,255,.8);
+}
+.carrom-aim::after{
+  content:""; position:absolute; right:-6px; top:50%; width:10px; height:10px;
+  background: var(--gold); border-radius:50%; transform:translateY(-50%);
+  box-shadow: 0 0 8px var(--gold);
+}
+.carrom-controls{
+  display:flex; gap:10px; align-items:center; margin-top:12px;
+  background: linear-gradient(180deg, #faf3e0, #f3e7c8);
+  border:1px solid var(--line); border-radius:12px; padding:10px 14px;
+}
+.carrom-power{
+  flex:1; height:10px; background:rgba(0,0,0,.12); border-radius:6px; overflow:hidden;
+}
+.carrom-power-fill{ height:100%; width:0%; background: linear-gradient(90deg, #2dc653, #ffb703, #ef233c); transition: width .08s linear; }
+.carrom-panel .stat-card{ background: rgba(255,255,255,.06); }

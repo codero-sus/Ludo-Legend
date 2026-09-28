@@ -1,0 +1,75 @@
+/* ═════════════════════════════════════════════════════════════
+   snake.css — Moksha Patam / Snake & Ladder — Indian styled
+   10x10 board, Nagas, bamboo ladders, diya & peacock motifs
+   ═════════════════════════════════════════════════════════════ */
+#snakeGame { contain: layout; }
+.snake-layout {
+  display:grid;
+  grid-template-columns: minmax(0, 620px) 360px;
+  gap: 18px;
+  justify-content:center;
+  align-items:start;
+}
+@media (max-width: 960px){
+  .snake-layout{ grid-template-columns: minmax(0, 620px); }
+}
+.snake-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border:3px solid rgba(255,209,102,.7);
+  box-shadow: var(--shadow-lg);
+  padding:14px;
+  contain: layout paint;
+}
+.snake-banner {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--font-display); font-weight:700;
+  background: linear-gradient(180deg, #1a4d2e, #0f2e1a);
+  color:#fff; border-radius:12px;
+  padding:10px; margin-bottom:12px;
+  box-shadow: inset 0 0 0 1px rgba(255,209,102,.35);
+}
+.snake-board-wrap{
+  position:relative; width:100%; aspect-ratio:1/1;
+  background:#f6efdc; border-radius:14px; overflow:hidden;
+  box-shadow: var(--shadow-md);
+  contain: strict;
+}
+#snakeSvg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+#snakeTokenLayer{ position:absolute; inset:0; pointer-events:none; }
+.snake-cell{
+  stroke:#cbb37f; stroke-width:2;
+  rx:6;
+}
+.snake-token{
+  --tsize:4.8%;
+  position:absolute; width:var(--tsize); aspect-ratio:1;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+  border:3px solid #fff; outline:2px solid rgba(0,0,0,.25);
+  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  transform:translate(-50%,-50%);
+  transition: left .3s var(--ease-smooth), top .3s var(--ease-smooth), transform .2s;
+  will-change: left, top;
+  z-index:4;
+}
+.snake-token.movable{ cursor:pointer; box-shadow: 0 0 0 3px var(--gold), 0 0 16px rgba(255,209,102,.9); animation: snakeBounce .7s ease-in-out infinite alternate; }
+@keyframes snakeBounce{ from{ transform:translate(-50%,-50%) translateY(0)} to{ transform:translate(-50%,-50%) translateY(-6%)} }
+.snake-token.active{ z-index:5; transform:translate(-50%,-50%) scale(1.12); }
+
+.snake-ladder{
+  stroke-width:10; stroke-linecap:round; opacity:.92;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+.snake-path{
+  fill:none; stroke-width:8; stroke-linecap:round; stroke-linejoin:round;
+  opacity:.9; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
+}
+.snake-dicebar{
+  display:flex; gap:12px; align-items:center;
+  margin-top:12px; background: linear-gradient(180deg, #faf3e0, #f3e7c8);
+  border:1px solid var(--line); border-radius:12px; padding:10px 14px;
+}
+.snake-dice{ width:68px; height:68px; border-radius:14px; background:#1a2e1a; color:var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:1.6rem; box-shadow: inset 0 0 0 2px rgba(255,209,102,.4); }
+.snake-controls{ flex:1; }
+.snake-panel .token-dot.out{ border-color:#fff; }

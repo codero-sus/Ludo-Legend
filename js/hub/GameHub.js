@@ -1,6 +1,7 @@
 /* ═════════════════════════════════════════════════════════════
    hub/GameHub.js — switches between Bharat Games (modular)
    Ludo | Snake & Ladder (Moksha Patam) | Carrom | Chess (Chaturanga)
+   | Aadu Puli Attam (Tiger & Goat) | Pallanguzhi | Tambola | Chowka Bhara
    Keeps each game lazy-loaded, preserves Ludo module as-is.
    ═════════════════════════════════════════════════════════════ */
 export class GameHub {
@@ -68,6 +69,22 @@ export class GameHub {
           const m = await import("../games/chess/ChessGame.js");
           this._modules.chess = new m.ChessGame(document.getElementById("chessGame"));
           this._modules.chess.init();
+        } else if(name==="tiger"){
+          const m = await import("../games/tiger/TigerGame.js");
+          this._modules.tiger = new m.TigerGame(document.getElementById("tigerGame"));
+          this._modules.tiger.init();
+        } else if(name==="mancala"){
+          const m = await import("../games/mancala/MancalaGame.js");
+          this._modules.mancala = new m.MancalaGame(document.getElementById("mancalaGame"));
+          this._modules.mancala.init();
+        } else if(name==="tambola"){
+          const m = await import("../games/tambola/TambolaGame.js");
+          this._modules.tambola = new m.TambolaGame(document.getElementById("tambolaGame"));
+          this._modules.tambola.init();
+        } else if(name==="chowka"){
+          const m = await import("../games/chowka/ChowkaGame.js");
+          this._modules.chowka = new m.ChowkaGame(document.getElementById("chowkaGame"));
+          this._modules.chowka.init();
         }
       }catch(e){ console.error("Game load failed", name, e); }
     } else {
@@ -80,7 +97,7 @@ export class GameHub {
     });
 
     if(withToast){
-      const names={ludo:"Ludo Legend", snake:"Moksha Patam", carrom:"Carrom • कैरम", chess:"Bharat Chess"};
+      const names={ludo:"Ludo Legend", snake:"Moksha Patam", carrom:"Carrom • कैरम", chess:"Bharat Chess", tiger:"Aadu Puli Attam", mancala:"Pallanguzhi", tambola:"Tambola", chowka:"Chowka Bhara"};
       // toast if available
       const box=document.getElementById("toastBox");
       if(box){

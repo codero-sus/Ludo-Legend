@@ -1,0 +1,22 @@
+/* ═════════════════════════════════════════════════════════════
+   tiger.css — Aadu Puli Attam / Tiger & Goat — Indian forest
+   23-point board, tigers 🐯 vs goats 🐐, capture jumps
+   ═════════════════════════════════════════════════════════════ */
+#tigerGame{contain:layout}
+.tiger-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center;align-items:start}
+@media(max-width:960px){.tiger-layout{grid-template-columns:minmax(0,620px)}}
+.tiger-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px;contain:layout paint}
+.tiger-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#2a1810,#1a0f0a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px;border:1px solid rgba(255,209,102,.25)}
+.tiger-board-wrap{position:relative;width:100%;aspect-ratio:1/1;background:#f6efdc;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md);contain:strict;border:6px solid #8d5a2b}
+#tigerSvg{position:absolute;inset:0;width:100%;height:100%;display:block}
+#tigerLayer{position:absolute;inset:0}
+.tiger-point{fill:#fff;stroke:#8d5a2b;stroke-width:3;cursor:pointer;transition:fill .12s,stroke .12s,transform .12s;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.tiger-point:hover{fill:#fff7d6;stroke:var(--gold)}
+.tiger-point.selected{fill:#f6e58d;stroke:var(--gold);stroke-width:4}
+.tiger-point.legal{fill:#d3f2dc;stroke:var(--green);stroke-width:4}
+.tiger-point.capture{fill:#ffd9de;stroke:var(--red);stroke-width:4}
+.tiger-piece{position:absolute;width:7.2%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.35rem;border:3px solid #fff;outline:2px solid rgba(0,0,0,.22);box-shadow:0 3px 8px rgba(0,0,0,.3);transform:translate(-50%,-50%);transition:left .22s var(--ease-smooth),top .22s var(--ease-smooth),transform .16s;cursor:pointer;will-change:left,top}
+.tiger-piece.tiger{background:radial-gradient(circle at 30% 30%,#ffd166,#ffb703 60%,#9c6b00);color:#5a3200}
+.tiger-piece.goat{background:radial-gradient(circle at 30% 30%,#fff,#f0d9b5 60%,#c9b48a);color:#5a3a1a}
+.tiger-piece.selected{box-shadow:0 0 0 4px var(--gold),0 0 16px rgba(255,209,102,.85);transform:translate(-50%,-50%) scale(1.12);z-index:5}
+.tiger-controls{display:flex;gap:8px;align-items:center;margin-top:12px;background:linear-gradient(180deg,#faf3e0,#f3e7c8);border:1px solid var(--line);border-radius:12px;padding:10px 14px}

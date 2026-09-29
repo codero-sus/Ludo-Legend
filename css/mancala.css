@@ -1,0 +1,21 @@
+/* ═════════════════════════════════════════════════════════════
+   mancala.css — Pallanguzhi / Mancala — South Indian pits
+   7+7 pits + 2 stores, tamarind seeds, wooden board
+   ═════════════════════════════════════════════════════════════ */
+#mancalaGame{contain:layout}
+.mancala-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center;align-items:start}
+@media(max-width:960px){.mancala-layout{grid-template-columns:minmax(0,620px)}}
+.mancala-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px;contain:layout paint}
+.mancala-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#3a2a1a,#2a1810);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.mancala-board{position:relative;width:100%;aspect-ratio:2/1;background:linear-gradient(180deg,#8d5a2b,#6d3a1a);border-radius:18px;padding:14px;box-shadow:var(--shadow-md),inset 0 0 0 4px #3a2410;contain:strict;display:grid;grid-template-columns:80px 1fr 80px;gap:12px;align-items:center}
+.mancala-store{height:100%;background:#f6efdc;border-radius:40px;border:3px solid #3a2410;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:inset 0 0 12px rgba(0,0,0,.18)}
+.mancala-store .count{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:#5a3200}
+.mancala-pits{display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(2,1fr);gap:8px;height:100%}
+.mancala-pit{position:relative;background:#f6efdc;border:2px solid #c9b48a;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .14s var(--ease-spring),box-shadow .14s,background .14s;box-shadow:inset 0 -4px 8px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.18);min-height:64px}
+.mancala-pit:hover{transform:translateY(-2px) scale(1.02);box-shadow:inset 0 -4px 8px rgba(0,0,0,.12),0 6px 12px rgba(0,0,0,.2)}
+.mancala-pit.active{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold),0 0 16px rgba(255,209,102,.6);background:#fff7d6}
+.mancala-pit.empty{opacity:.6;cursor:default;transform:none;box-shadow:inset 0 -4px 8px rgba(0,0,0,.08)}
+.mancala-pit .pit-count{font-weight:800;font-size:1.05rem;color:#5a3200}
+.mancala-pit .pit-seeds{position:absolute;inset:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px;padding:8px;pointer-events:none}
+.mancala-seed{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#8d5a2b,#3a2410);box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.mancala-controls{display:flex;gap:10px;align-items:center;margin-top:12px;background:linear-gradient(180deg,#faf3e0,#f3e7c8);border:1px solid var(--line);border-radius:12px;padding:10px 14px}

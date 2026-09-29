@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2a0a3a" />
-  <meta name="description" content="Bharat Games — Ludo, Snake & Ladder (Moksha Patam), Carrom & Chess — Indian festival arcade. Play with friends or bots!" />
-  <title>Bharat Games — Ludo • Moksha Patam • Carrom • Chess</title>
+  <meta name="description" content="Bharat Games — Ludo, Snake & Ladder (Moksha Patam), Carrom, Chess, Aadu Puli Attam, Pallanguzhi, Tambola & Chowka Bhara — Indian festival arcade. Play with friends or bots!" />
+  <title>Bharat Games — 8 Indian Classics</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +23,10 @@
   <link rel="stylesheet" href="css/snake.css" />
   <link rel="stylesheet" href="css/carrom.css" />
   <link rel="stylesheet" href="css/chess.css" />
+  <link rel="stylesheet" href="css/tiger.css" />
+  <link rel="stylesheet" href="css/mancala.css" />
+  <link rel="stylesheet" href="css/tambola.css" />
+  <link rel="stylesheet" href="css/chowka.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
@@ -37,7 +41,7 @@
       <span class="brand-dice" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="14" fill="#ffd166"/><g fill="#2a0a3a"><circle cx="21" cy="21" r="5.5"/><circle cx="43" cy="21" r="5.5"/><circle cx="32" cy="32" r="5.5"/><circle cx="21" cy="43" r="5.5"/><circle cx="43" cy="43" r="5.5"/></g></svg></span>
       <div class="brand-text">
         <h1>Bharat <span>Games</span></h1>
-        <p>भारत खेल • Ludo • Moksha Patam • Carrom • Chess 🏁</p>
+        <p>भारत खेल • 8 Classics • Ludo • Moksha • Carrom • Chess • Tiger • Pallanguzhi • Tambola • Chowka 🏁</p>
       </div>
     </div>
     <nav class="header-actions">
@@ -51,10 +55,14 @@
 
   <!-- HUB NAV TABS -->
   <nav id="hubNav" aria-label="Game selection">
-    <button data-game="ludo" class="hub-tab active">🎲 Ludo Legend</button>
-    <button data-game="snake" class="hub-tab">🐍 Moksha Patam</button>
+    <button data-game="ludo" class="hub-tab active">🎲 Ludo</button>
+    <button data-game="snake" class="hub-tab">🐍 Moksha</button>
     <button data-game="carrom" class="hub-tab">🏹 Carrom</button>
-    <button data-game="chess" class="hub-tab">♔ Bharat Chess</button>
+    <button data-game="chess" class="hub-tab">♔ Chess</button>
+    <button data-game="tiger" class="hub-tab">🐯 Tiger</button>
+    <button data-game="mancala" class="hub-tab">🫘 Pallanguzhi</button>
+    <button data-game="tambola" class="hub-tab">🎱 Tambola</button>
+    <button data-game="chowka" class="hub-tab">🎲 Chowka</button>
   </nav>
 
   <!-- HUB OVERLAY (initial) -->
@@ -62,8 +70,8 @@
     <div class="hub-dialog">
       <div class="hub-head">
         <h2>🎮 Bharat Games <span>भारत खेल</span></h2>
-        <span class="hindi">Festival arcade — four classics, Indian soul 🪔</span>
-        <p>Pick a game to start — Ludo, Snakes &amp; Ladders (Moksha Patam), Carrom &amp; Chess (Chaturanga)</p>
+        <span class="hindi">Festival arcade — eight classics, Indian soul 🪔</span>
+        <p>Pick a game — Ludo • Moksha Patam • Carrom • Chess • Aadu Puli • Pallanguzhi • Tambola • Chowka Bhara</p>
       </div>
       <div class="hub-games">
         <div class="hub-card active" data-jump="ludo">
@@ -71,7 +79,7 @@
           <span class="hub-card-icon">🎲</span><h3>Ludo Legend</h3><p>लूडो — 2-4 players, capture &amp; race home</p>
         </div>
         <div class="hub-card" data-jump="snake">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2dc653);color:#0f2e1a">New</span>
+          <span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2dc653);color:#0f2e1a">Moksha</span>
           <span class="hub-card-icon">🐍</span><h3>Moksha Patam</h3><p>Snakes &amp; Ladders — climb bamboo, dodge Nagas</p>
         </div>
         <div class="hub-card" data-jump="carrom">
@@ -82,8 +90,24 @@
           <span class="hub-card-badge" style="background:linear-gradient(180deg,#f0d9b5,#b58863);color:#3a2410">Royal</span>
           <span class="hub-card-icon">♔</span><h3>Bharat Chess</h3><p>Chaturanga — Raja, Mantri, Hathi, Ghoda</p>
         </div>
+        <div class="hub-card" data-jump="tiger">
+          <span class="hub-card-badge" style="background:linear-gradient(180deg,#ffd9de,#ef233c);color:#fff">Forest</span>
+          <span class="hub-card-icon">🐯</span><h3>Aadu Puli Attam</h3><p>Tiger & Goat — 23-point forest hunt</p>
+        </div>
+        <div class="hub-card" data-jump="mancala">
+          <span class="hub-card-badge" style="background:linear-gradient(180deg,#ffe8c2,#8d5a2b);color:#fff">Ancient</span>
+          <span class="hub-card-icon">🫘</span><h3>Pallanguzhi</h3><p>Tamil Mancala — 14 pits, sowing & capture</p>
+        </div>
+        <div class="hub-card" data-jump="tambola">
+          <span class="hub-card-badge" style="background:linear-gradient(180deg,#e0d4ff,#7209b7);color:#fff">Party</span>
+          <span class="hub-card-icon">🎱</span><h3>Tambola • Housie</h3><p>1-90 Bingo — Early 5, lines, Full House</p>
+        </div>
+        <div class="hub-card" data-jump="chowka">
+          <span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2a9d8f);color:#fff">Cross</span>
+          <span class="hub-card-icon">🎲</span><h3>Chowka Bhara</h3><p>Ashta Chamma — 5×5 cowries race</p>
+        </div>
       </div>
-      <div style="text-align:center;margin-top:16px;color:var(--ink-soft);font-size:.84rem">All games Indian styled — rangoli, teak, ivory, festival lights ✨</div>
+      <div style="text-align:center;margin-top:16px;color:var(--ink-soft);font-size:.84rem">Eight games — rangoli, teak, ivory, festival lights ✨ Press G to open hub</div>
       <div class="dialog-actions" style="margin-top:14px"><button class="gold-btn big" onclick="document.getElementById('hubOverlay').classList.remove('show')">▶ Play Ludo First</button></div>
     </div>
   </div>
@@ -120,9 +144,17 @@
     <div id="carromGame" class="game-section"></div>
     <!-- CHESS -->
     <div id="chessGame" class="game-section"></div>
+    <!-- TIGER & GOAT -->
+    <div id="tigerGame" class="game-section"></div>
+    <!-- PALLANGUZHI -->
+    <div id="mancalaGame" class="game-section"></div>
+    <!-- TAMBOLA -->
+    <div id="tambolaGame" class="game-section"></div>
+    <!-- CHOWKA BHARA -->
+    <div id="chowkaGame" class="game-section"></div>
   </div>
 
-  <footer id="appFooter"><p>Made with ❤️ in India · <strong>Bharat Games</strong> · Ludo • Moksha Patam • Carrom • Chess · <span id="footerStats"></span></p></footer>
+  <footer id="appFooter"><p>Made with ❤️ in India · <strong>Bharat Games</strong> · 8 Games · Ludo • Moksha • Carrom • Chess • Tiger • Pallanguzhi • Tambola • Chowka · <span id="footerStats"></span></p></footer>
 
   <!-- SETUP MODAL (Ludo) -->
   <div id="setupOverlay" class="overlay show" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
@@ -150,6 +182,18 @@
       </div>
       <div class="rules-body" id="rulesBodyChess" style="display:none">
         <ol><li>♔ <b>Bharat Chess (Chaturanga):</b> 8×8, Raja/Mantri/Hathi/Oont/Ghoda/Pyada.</li><li>♘ Ghoda (Knight) jumps, Oont (Bishop) diagonals, Hathi (Rook) lines.</li><li>♔ Raja 1 step, Mantri like queen. Pyada forward, capture diagonal.</li><li>♔ Check → must protect Raja. Checkmate wins. Stalemate draw.</li><li>🤖 Human vs Bot / Bot vs Bot; pick White/Black.</li></ol>
+      </div>
+      <div class="rules-body" id="rulesBodyTiger" style="display:none">
+        <ol><li>🐯 <b>Aadu Puli Attam:</b> 23-point board, 3 Tigers vs 15 Goats.</li><li>🐐 Place 15 goats on empty points, alternating with Tiger moves.</li><li>🐯 Tigers move 1 step or jump over 🐐 to capture (needs empty beyond).</li><li>🐐 Move 1 step only. Tigers win at 5 captures. Goats win by blocking all Tigers.</li><li>🤖 You are Goats vs Tiger Bot (toggle for 2P).</li></ol>
+      </div>
+      <div class="rules-body" id="rulesBodyMancala" style="display:none">
+        <ol><li>🫘 <b>Pallanguzhi:</b> 7 pits + store per player, 6 seeds each.</li><li>Pick own pit — sow clockwise one per pit.</li><li>🏦 Land in own store → extra turn. Land in empty own pit → capture opposite.</li><li>🏁 Ends when one side empty — more in store wins.</li></ol>
+      </div>
+      <div class="rules-body" id="rulesBodyTambola" style="display:none">
+        <ol><li>🎱 <b>Tambola Housie:</b> 1-90 random calls. You + 3 bots.</li><li>🎟 Ticket 3×9, 5 numbers/row. Auto-marks on call.</li><li>🏆 Prizes: Early 5, Top/Middle/Bottom line, Corners, Full House (15).</li><li>📢 First Full House wins. Use Auto for continuous calls.</li></ol>
+      </div>
+      <div class="rules-body" id="rulesBodyChowka" style="display:none">
+        <ol><li>🎲 <b>Chowka Bhara (Ashta Chamma):</b> 5×5 cross, 4 tokens each.</li><li>🐚 Throw 4 cowries: 1/2/3/4 or 8 (0 up). Need 1/8 to enter.</li><li>⭐ Safe stars — no capture. Capture sends opponent home.</li><li>🎯 Exact to centre home. All 4 home wins. 4/8 & capture = extra throw.</li></ol>
       </div>
     </div>
   </div>

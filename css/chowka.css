@@ -1,0 +1,19 @@
+/* ═════════════════════════════════════════════════════════════
+   chowka.css — Chowka Bhara / Ashta Chamma — 5x5 Indian Pachisi
+   Cross board, 4 cowries, safe stars, Indian teak & ivory
+   ═════════════════════════════════════════════════════════════ */
+#chowkaGame{contain:layout}
+.chowka-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center;align-items:start}
+@media(max-width:960px){.chowka-layout{grid-template-columns:minmax(0,620px)}}
+.chowka-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px;contain:layout paint}
+.chowka-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#1a2e1a,#0f2e1a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.chowka-board-wrap{position:relative;width:100%;aspect-ratio:1/1;background:#f6efdc;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md);contain:strict;border:6px solid #8d5a2b}
+#chowkaSvg{position:absolute;inset:0;width:100%;height:100%;display:block}
+#chowkaLayer{position:absolute;inset:0}
+.chowka-token{--tsize:5.2%;position:absolute;width:var(--tsize);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:3px solid #fff;outline:2px solid rgba(0,0,0,.22);box-shadow:0 3px 8px rgba(0,0,0,.3);transform:translate(-50%,-50%);transition:left .22s var(--ease-smooth),top .22s var(--ease-smooth);will-change:left,top;cursor:default}
+.chowka-token.movable{cursor:pointer;box-shadow:0 0 0 3px var(--gold),0 0 16px rgba(255,209,102,.9);animation:chowkaBounce .7s ease-in-out infinite alternate}
+@keyframes chowkaBounce{from{transform:translate(-50%,-50%)}to{transform:translate(-50%,-52%)}}
+.chowka-cowries{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px}
+.chowka-shell{width:32px;height:42px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;background:radial-gradient(ellipse at 30% 20%,#fff,#fff7d6 60%,#c9b48a);border:2px solid #8d5a2b;box-shadow:0 2px 6px rgba(0,0,0,.18);position:relative;transition:transform .3s var(--ease-spring)}
+.chowka-shell.up{background:radial-gradient(ellipse at 30% 20%,#fff,#5a3a1a 70%,#2a1810);border-color:#3a2410;transform:rotate(180deg)}
+.chowka-controls{display:flex;gap:8px;align-items:center;margin-top:12px;background:linear-gradient(180deg,#faf3e0,#f3e7c8);border:1px solid var(--line);border-radius:12px;padding:10px 14px}

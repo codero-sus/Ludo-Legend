@@ -75,9 +75,9 @@ function bootLudo({ audio, dice, tokens, hud, toasts, effects, modals }) {
     // show correct rules per hub
     const hub = window._hub;
     const cur = hub?.current || "ludo";
-    document.getElementById("rulesGameName").textContent =
-      cur==="snake" ? "Moksha Patam" : cur==="carrom" ? "Carrom" : cur==="chess" ? "Bharat Chess" : "Ludo";
-    ["Ludo","Snake","Carrom","Chess"].forEach(name=>{
+    const names={ludo:"Ludo", snake:"Moksha Patam", carrom:"Carrom", chess:"Bharat Chess", tiger:"Aadu Puli Attam", mancala:"Pallanguzhi", tambola:"Tambola", chowka:"Chowka Bhara"};
+    document.getElementById("rulesGameName").textContent = names[cur] || "Ludo";
+    ["Ludo","Snake","Carrom","Chess","Tiger","Mancala","Tambola","Chowka"].forEach(name=>{
       const el=document.getElementById(`rulesBody${name}`);
       if(el) el.style.display = name.toLowerCase()===cur ? "block" : "none";
     });
@@ -217,7 +217,11 @@ function boot(){
       ludo: $("#ludoGame"),
       snake: $("#snakeGame"),
       carrom: $("#carromGame"),
-      chess: $("#chessGame")
+      chess: $("#chessGame"),
+      tiger: $("#tigerGame"),
+      mancala: $("#mancalaGame"),
+      tambola: $("#tambolaGame"),
+      chowka: $("#chowkaGame")
     },
     triggerBtn: $("#hubBtn")
   });

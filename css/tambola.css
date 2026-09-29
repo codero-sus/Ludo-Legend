@@ -1,0 +1,29 @@
+/* ═════════════════════════════════════════════════════════════
+   tambola.css — Tambola / Housie — Indian Bingo
+   3x9 ticket, 1-90 caller, early five / lines / full house
+   ═════════════════════════════════════════════════════════════ */
+#tambolaGame{contain:layout}
+.tambola-layout{display:grid;grid-template-columns:minmax(0,640px) 360px;gap:18px;justify-content:center;align-items:start}
+@media(max-width:960px){.tambola-layout{grid-template-columns:minmax(0,640px)}}
+.tambola-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px;contain:layout paint}
+.tambola-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#2a0a3a,#1a0f2e);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.tambola-caller{display:flex;align-items:center;gap:14px;justify-content:center;background:linear-gradient(180deg,#faf3e0,#f3e7c8);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.tambola-ball{width:86px;height:86px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#ffe29a 60%,#ffb703);border:4px solid #fff;outline:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:2.2rem;color:#5a3200;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .2s}
+.tambola-ball.pulse{animation:tambolaPulse .45s var(--ease-spring)}
+@keyframes tambolaPulse{0%{transform:scale(.85)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.tambola-board{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:12px}
+.tambola-num{aspect-ratio:1;border-radius:8px;background:#fff;border:2px solid #c9b48a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#5a3200;transition:all .18s}
+.tambola-num.called{background:linear-gradient(180deg,#2dc653,#146c2e);color:#fff;border-color:#146c2e;transform:scale(1.04);box-shadow:0 0 10px rgba(45,198,83,.5)}
+.tambola-num.recent{box-shadow:0 0 0 3px var(--gold),0 0 14px rgba(255,209,102,.8);transform:scale(1.08);z-index:1}
+.tambola-ticket{background:#fff;border:2px solid #c9b48a;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.tambola-row{display:grid;grid-template-columns:repeat(9,1fr);border-bottom:1px solid #e8dfc9}
+.tambola-row:last-child{border-bottom:none}
+.tambola-cell{aspect-ratio:1.2;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;color:var(--ink);border-right:1px solid #e8dfc9;position:relative;background:#fffdf4}
+.tambola-cell:last-child{border-right:none}
+.tambola-cell.empty{background:#f6efdc;opacity:.55}
+.tambola-cell.marked{background:linear-gradient(180deg,#ffe29a,var(--gold));color:var(--gold-ink);box-shadow:inset 0 0 0 2px var(--gold-deep)}
+.tambola-cell.marked::after{content:"✓";position:absolute;top:2px;right:4px;font-size:.7rem;color:#146c2e;font-weight:900}
+.tambola-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tambola-status{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tambola-badge{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,209,102,.25);color:rgba(255,255,255,.85)}
+.tambola-badge.done{background:var(--green);color:#fff;border-color:var(--green)}

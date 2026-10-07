@@ -1,0 +1,17 @@
+/* backgammon.css — Western Backgammon — 24 points, bar, dice */
+#backgammonGame{contain:layout}
+.backgammon-layout{display:grid;grid-template-columns:minmax(0,680px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.backgammon-layout{grid-template-columns:minmax(0,680px)}}
+.backgammon-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.backgammon-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#8d5a2b,#5a3200);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.backgammon-board{width:100%;aspect-ratio:1.6/1;background:#1a7a3a;border-radius:12px;border:6px solid #5a3200;display:grid;grid-template-columns:1fr 40px 1fr;gap:0;overflow:hidden;position:relative}
+.bg-half{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+.bg-point{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:8px;min-height:100%;border-right:1px solid rgba(0,0,0,.08)}
+.bg-point::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:88%;height:42%;clip-path:polygon(50% 100%,0 0,100% 0);opacity:.92}
+.bg-point.light::before{background:#f6efdc}
+.bg-point.dark::before{background:#b22222}
+.bg-point.bottom::before{top:auto;bottom:0;clip-path:polygon(50% 0,0 100%,100% 100%)}
+.bg-checker{width:84%;aspect-ratio:1;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;margin:1px 0}
+.bg-checker.white{background:radial-gradient(circle at 30% 30%,#fff,#d0d0d0);color:#1a1a1a}
+.bg-checker.black{background:radial-gradient(circle at 30% 30%,#444,#111);color:#fff}
+.bg-bar{width:40px;background:#5a3200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-left:2px solid #3a2410;border-right:2px solid #3a2410}

@@ -1,0 +1,11 @@
+/* minesweeper.css — Western Minesweeper — 9x9 classic grey */
+#minesweeperGame{contain:layout}
+.minesweeper-layout{display:grid;grid-template-columns:minmax(0,520px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.minesweeper-layout{grid-template-columns:minmax(0,520px)}}
+.minesweeper-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.minesweeper-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#6c757d,#343a40);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.minesweeper-board{width:100%;aspect-ratio:1/1;display:grid;grid-template-columns:repeat(9,1fr);gap:3px;background:#c9c9c9;border-radius:12px;padding:8px;border:4px solid #8d5a2b}
+.minesweeper-cell{aspect-ratio:1;background:#e8e8e8;border:2px outset #fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;cursor:pointer;font-size:.95rem}
+.minesweeper-cell.revealed{background:#d6d6d6;border:2px solid #c9c9c9}
+.minesweeper-cell.flag::after{content:"🚩"}
+.minesweeper-cell.mine{background:#ef233c;color:#fff}

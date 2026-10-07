@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2a0a3a" />
-  <meta name="description" content="Bharat Games — Ludo, Snake & Ladder (Moksha Patam), Carrom, Chess, Aadu Puli Attam, Pallanguzhi, Tambola & Chowka Bhara — Indian festival arcade. Play with friends or bots!" />
-  <title>Bharat Games — 8 Indian Classics</title>
+  <meta name="description" content="Global & Bharat Games — 30 classics: Ludo, Moksha Patam, Carrom, Chess, Aadu Puli, Pallanguzhi, Tambola, Chowka + Checkers, Reversi, TicTacToe, Connect4, Sudoku, Minesweeper, Memory, 2048, Word Match 7x5, Backgammon, Battleship, Blackjack, Poker, Solitaire, Hangman, Wordle, Bingo75, Monopoly, Scrabble, Go, Yahtzee, Tetris — Indian + global festival arcade." />
+  <title>Global & Bharat Games — 30 Classics</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +27,28 @@
   <link rel="stylesheet" href="css/mancala.css" />
   <link rel="stylesheet" href="css/tambola.css" />
   <link rel="stylesheet" href="css/chowka.css" />
+  <link rel="stylesheet" href="css/checkers.css" />
+  <link rel="stylesheet" href="css/reversi.css" />
+  <link rel="stylesheet" href="css/tictactoe.css" />
+  <link rel="stylesheet" href="css/connect4.css" />
+  <link rel="stylesheet" href="css/sudoku.css" />
+  <link rel="stylesheet" href="css/minesweeper.css" />
+  <link rel="stylesheet" href="css/memory.css" />
+  <link rel="stylesheet" href="css/puzzle2048.css" />
+  <link rel="stylesheet" href="css/wordmatch.css" />
+  <link rel="stylesheet" href="css/backgammon.css" />
+  <link rel="stylesheet" href="css/battleship.css" />
+  <link rel="stylesheet" href="css/blackjack.css" />
+  <link rel="stylesheet" href="css/poker.css" />
+  <link rel="stylesheet" href="css/solitaire.css" />
+  <link rel="stylesheet" href="css/hangman.css" />
+  <link rel="stylesheet" href="css/wordle.css" />
+  <link rel="stylesheet" href="css/bingo75.css" />
+  <link rel="stylesheet" href="css/monopoly.css" />
+  <link rel="stylesheet" href="css/scrabble.css" />
+  <link rel="stylesheet" href="css/go.css" />
+  <link rel="stylesheet" href="css/yahtzee.css" />
+  <link rel="stylesheet" href="css/tetris.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
@@ -35,17 +57,16 @@
   <div class="festive-lights" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="diyas" aria-hidden="true"><span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span><span class="diya">🪔</span></div>
 
-  <!-- HEADER -->
   <header id="appHeader">
     <div class="brand">
       <span class="brand-dice" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="14" fill="#ffd166"/><g fill="#2a0a3a"><circle cx="21" cy="21" r="5.5"/><circle cx="43" cy="21" r="5.5"/><circle cx="32" cy="32" r="5.5"/><circle cx="21" cy="43" r="5.5"/><circle cx="43" cy="43" r="5.5"/></g></svg></span>
       <div class="brand-text">
-        <h1>Bharat <span>Games</span></h1>
-        <p>भारत खेल • 8 Classics • Ludo • Moksha • Carrom • Chess • Tiger • Pallanguzhi • Tambola • Chowka 🏁</p>
+        <h1>Global <span>& Bharat Games</span></h1>
+        <p>🌍 30 Classics • भारत • Ludo • Chess • Carrom • Word Match 7×5 • Wordle • Tetris 🏁</p>
       </div>
     </div>
     <nav class="header-actions">
-      <button id="hubBtn" class="hub-trigger" title="Choose game">🎮 Games</button>
+      <button id="hubBtn" class="hub-trigger" title="Choose game">🎮 30 Games</button>
       <button id="themeBtn" class="icon-btn" title="Change theme (T)">🎨</button>
       <button id="soundBtn" class="icon-btn" title="Sound (M)">🔊</button>
       <button id="rulesBtn" class="ghost-btn" title="How to play (R)">📖 Rules</button>
@@ -53,7 +74,6 @@
     </nav>
   </header>
 
-  <!-- HUB NAV TABS -->
   <nav id="hubNav" aria-label="Game selection">
     <button data-game="ludo" class="hub-tab active">🎲 Ludo</button>
     <button data-game="snake" class="hub-tab">🐍 Moksha</button>
@@ -63,58 +83,76 @@
     <button data-game="mancala" class="hub-tab">🫘 Pallanguzhi</button>
     <button data-game="tambola" class="hub-tab">🎱 Tambola</button>
     <button data-game="chowka" class="hub-tab">🎲 Chowka</button>
+    <button data-game="checkers" class="hub-tab">♟ Checkers</button>
+    <button data-game="reversi" class="hub-tab">⚫ Reversi</button>
+    <button data-game="tictactoe" class="hub-tab">❌ TicTac</button>
+    <button data-game="connect4" class="hub-tab">🔴 Connect4</button>
+    <button data-game="sudoku" class="hub-tab">🔢 Sudoku</button>
+    <button data-game="minesweeper" class="hub-tab">💣 Mines</button>
+    <button data-game="memory" class="hub-tab">🃏 Memory</button>
+    <button data-game="puzzle2048" class="hub-tab">🔢 2048</button>
+    <button data-game="wordmatch" class="hub-tab">🔤 Word 7×5</button>
+    <button data-game="backgammon" class="hub-tab">🎲 Backgammon</button>
+    <button data-game="battleship" class="hub-tab">🚢 Battleship</button>
+    <button data-game="blackjack" class="hub-tab">🃏 Blackjack</button>
+    <button data-game="poker" class="hub-tab">♠ Poker</button>
+    <button data-game="solitaire" class="hub-tab">♠ Solitaire</button>
+    <button data-game="hangman" class="hub-tab">🔤 Hangman</button>
+    <button data-game="wordle" class="hub-tab">🔤 Wordle</button>
+    <button data-game="bingo75" class="hub-tab">🎱 Bingo75</button>
+    <button data-game="monopoly" class="hub-tab">🏦 Monopoly</button>
+    <button data-game="scrabble" class="hub-tab">🔤 Scrabble</button>
+    <button data-game="go" class="hub-tab">⚫ Go</button>
+    <button data-game="yahtzee" class="hub-tab">🎲 Yahtzee</button>
+    <button data-game="tetris" class="hub-tab">🧱 Tetris</button>
   </nav>
 
-  <!-- HUB OVERLAY (initial) -->
   <div id="hubOverlay" class="show" role="dialog" aria-modal="true" aria-labelledby="hubTitle">
-    <div class="hub-dialog">
+    <div class="hub-dialog" style="width:min(98vw,1050px)">
       <div class="hub-head">
-        <h2>🎮 Bharat Games <span>भारत खेल</span></h2>
-        <span class="hindi">Festival arcade — eight classics, Indian soul 🪔</span>
-        <p>Pick a game — Ludo • Moksha Patam • Carrom • Chess • Aadu Puli • Pallanguzhi • Tambola • Chowka Bhara</p>
+        <h2>🎮 30 Games <span>Global & Bharat</span></h2>
+        <span class="hindi">Festival arcade — Indian soul + global classics 🌍🪔</span>
+        <p>8 Bharat + 22 Global — Famous in India & worldwide — pick any to play!</p>
       </div>
-      <div class="hub-games">
-        <div class="hub-card active" data-jump="ludo">
-          <span class="hub-card-badge">Classic</span>
-          <span class="hub-card-icon">🎲</span><h3>Ludo Legend</h3><p>लूडो — 2-4 players, capture &amp; race home</p>
-        </div>
-        <div class="hub-card" data-jump="snake">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2dc653);color:#0f2e1a">Moksha</span>
-          <span class="hub-card-icon">🐍</span><h3>Moksha Patam</h3><p>Snakes &amp; Ladders — climb bamboo, dodge Nagas</p>
-        </div>
-        <div class="hub-card" data-jump="carrom">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#ffefc2,#ffb703);color:#5a3200">Physics</span>
-          <span class="hub-card-icon">🏹</span><h3>Carrom • कैरम</h3><p>Flick striker, pocket queen — wooden board</p>
-        </div>
-        <div class="hub-card" data-jump="chess">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#f0d9b5,#b58863);color:#3a2410">Royal</span>
-          <span class="hub-card-icon">♔</span><h3>Bharat Chess</h3><p>Chaturanga — Raja, Mantri, Hathi, Ghoda</p>
-        </div>
-        <div class="hub-card" data-jump="tiger">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#ffd9de,#ef233c);color:#fff">Forest</span>
-          <span class="hub-card-icon">🐯</span><h3>Aadu Puli Attam</h3><p>Tiger & Goat — 23-point forest hunt</p>
-        </div>
-        <div class="hub-card" data-jump="mancala">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#ffe8c2,#8d5a2b);color:#fff">Ancient</span>
-          <span class="hub-card-icon">🫘</span><h3>Pallanguzhi</h3><p>Tamil Mancala — 14 pits, sowing & capture</p>
-        </div>
-        <div class="hub-card" data-jump="tambola">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#e0d4ff,#7209b7);color:#fff">Party</span>
-          <span class="hub-card-icon">🎱</span><h3>Tambola • Housie</h3><p>1-90 Bingo — Early 5, lines, Full House</p>
-        </div>
-        <div class="hub-card" data-jump="chowka">
-          <span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2a9d8f);color:#fff">Cross</span>
-          <span class="hub-card-icon">🎲</span><h3>Chowka Bhara</h3><p>Ashta Chamma — 5×5 cowries race</p>
-        </div>
+      <div class="hub-games" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <div class="hub-card active" data-jump="ludo"><span class="hub-card-badge">Classic</span><span class="hub-card-icon">🎲</span><h3>Ludo Legend</h3><p>लूडो — 2-4 players</p></div>
+        <div class="hub-card" data-jump="snake"><span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2dc653);color:#0f2e1a">Moksha</span><span class="hub-card-icon">🐍</span><h3>Moksha Patam</h3><p>Snake & Ladder</p></div>
+        <div class="hub-card" data-jump="carrom"><span class="hub-card-badge" style="background:linear-gradient(180deg,#ffefc2,#ffb703);color:#5a3200">Physics</span><span class="hub-card-icon">🏹</span><h3>Carrom • कैरम</h3><p>Flick striker — India famous</p></div>
+        <div class="hub-card" data-jump="chess"><span class="hub-card-badge" style="background:linear-gradient(180deg,#f0d9b5,#b58863);color:#3a2410">Royal</span><span class="hub-card-icon">♔</span><h3>Bharat Chess</h3><p>Chaturanga</p></div>
+        <div class="hub-card" data-jump="tiger"><span class="hub-card-badge" style="background:linear-gradient(180deg,#ffd9de,#ef233c);color:#fff">Forest</span><span class="hub-card-icon">🐯</span><h3>Aadu Puli Attam</h3><p>Tiger & Goat 23-pt</p></div>
+        <div class="hub-card" data-jump="mancala"><span class="hub-card-badge" style="background:linear-gradient(180deg,#ffe8c2,#8d5a2b);color:#fff">Ancient</span><span class="hub-card-icon">🫘</span><h3>Pallanguzhi</h3><p>Tamil Mancala</p></div>
+        <div class="hub-card" data-jump="tambola"><span class="hub-card-badge" style="background:linear-gradient(180deg,#e0d4ff,#7209b7);color:#fff">Party</span><span class="hub-card-icon">🎱</span><h3>Tambola • Housie</h3><p>1-90 Bingo</p></div>
+        <div class="hub-card" data-jump="chowka"><span class="hub-card-badge" style="background:linear-gradient(180deg,#d3f2dc,#2a9d8f);color:#fff">Cross</span><span class="hub-card-icon">🎲</span><h3>Chowka Bhara</h3><p>5×5 cowries</p></div>
+
+        <div class="hub-card" data-jump="checkers"><span class="hub-card-badge" style="background:linear-gradient(180deg,#ff6b6b,#b22222);color:#fff">Global</span><span class="hub-card-icon">♟</span><h3>Checkers</h3><p>8×8 Draughts</p></div>
+        <div class="hub-card" data-jump="reversi"><span class="hub-card-badge" style="background:linear-gradient(180deg,#1a7a3a,#0a4d2a);color:#fff">Global</span><span class="hub-card-icon">⚫</span><h3>Reversi</h3><p>Othello 8×8</p></div>
+        <div class="hub-card" data-jump="tictactoe"><span class="hub-card-badge" style="background:linear-gradient(180deg,#7209b7,#2a0a3a);color:#fff">Classic</span><span class="hub-card-icon">❌</span><h3>Tic Tac Toe</h3><p>3×3 — first line</p></div>
+        <div class="hub-card" data-jump="connect4"><span class="hub-card-badge" style="background:linear-gradient(180deg,#4361ee,#1a2e9a);color:#fff">Global</span><span class="hub-card-icon">🔴</span><h3>Connect Four</h3><p>7×6 drop</p></div>
+        <div class="hub-card" data-jump="sudoku"><span class="hub-card-badge" style="background:linear-gradient(180deg,#2a0a3a,#1a0f2e);color:#fff">Puzzle</span><span class="hub-card-icon">🔢</span><h3>Sudoku</h3><p>9×9 famous in India</p></div>
+        <div class="hub-card" data-jump="minesweeper"><span class="hub-card-badge" style="background:linear-gradient(180deg,#6c757d,#343a40);color:#fff">Retro</span><span class="hub-card-icon">💣</span><h3>Minesweeper</h3><p>9×9 classic</p></div>
+        <div class="hub-card" data-jump="memory"><span class="hub-card-badge" style="background:linear-gradient(180deg,#ff006e,#7a0a3a);color:#fff">Kids</span><span class="hub-card-icon">🃏</span><h3>Memory Match</h3><p>4×4 flip pairs</p></div>
+        <div class="hub-card" data-jump="puzzle2048"><span class="hub-card-badge" style="background:linear-gradient(180deg,#edc9af,#8d5a2b);color:#fff">Puzzle</span><span class="hub-card-icon">🔢</span><h3>2048</h3><p>Slide merge</p></div>
+        <div class="hub-card" data-jump="wordmatch"><span class="hub-card-badge" style="background:linear-gradient(180deg,#4361ee,#7209b7);color:#fff">Word 7×5</span><span class="hub-card-icon">🔤</span><h3>Word Match</h3><p>7×5 rectangle Boggle</p></div>
+        <div class="hub-card" data-jump="backgammon"><span class="hub-card-badge" style="background:linear-gradient(180deg,#8d5a2b,#5a3200);color:#fff">Board</span><span class="hub-card-icon">🎲</span><h3>Backgammon</h3><p>24 points</p></div>
+        <div class="hub-card" data-jump="battleship"><span class="hub-card-badge" style="background:linear-gradient(180deg,#1a3a5a,#0f1e33);color:#fff">Navy</span><span class="hub-card-icon">🚢</span><h3>Battleship</h3><p>10×10 fleet</p></div>
+        <div class="hub-card" data-jump="blackjack"><span class="hub-card-badge" style="background:linear-gradient(180deg,#0a4d2a,#062e1a);color:#fff">Vegas</span><span class="hub-card-icon">🃏</span><h3>Blackjack 21</h3><p>Beat dealer</p></div>
+        <div class="hub-card" data-jump="poker"><span class="hub-card-badge" style="background:linear-gradient(180deg,#1a1a2a,#0f0f1a);color:#fff">Vegas</span><span class="hub-card-icon">♠</span><h3>Texas Hold'em</h3><p>Poker showdown</p></div>
+        <div class="hub-card" data-jump="solitaire"><span class="hub-card-badge" style="background:linear-gradient(180deg,#0a4d2a,#062e1a);color:#fff">Classic</span><span class="hub-card-icon">♠</span><h3>Solitaire</h3><p>Klondike</p></div>
+        <div class="hub-card" data-jump="hangman"><span class="hub-card-badge" style="background:linear-gradient(180deg,#2a1810,#1a0f0a);color:#fff">Word</span><span class="hub-card-icon">🔤</span><h3>Hangman</h3><p>Guess the word</p></div>
+        <div class="hub-card" data-jump="wordle"><span class="hub-card-badge" style="background:linear-gradient(180deg,#2a2a2a,#111);color:#fff">Web Hit</span><span class="hub-card-icon">🔤</span><h3>Wordle</h3><p>Find the word — 5×6</p></div>
+        <div class="hub-card" data-jump="bingo75"><span class="hub-card-badge" style="background:linear-gradient(180deg,#b22222,#7a0a0a);color:#fff">Bingo</span><span class="hub-card-icon">🎱</span><h3>Bingo 75</h3><p>B-I-N-G-O</p></div>
+        <div class="hub-card" data-jump="monopoly"><span class="hub-card-badge" style="background:linear-gradient(180deg,#b22222,#7a0a0a);color:#fff">Deal</span><span class="hub-card-icon">🏦</span><h3>Monopoly</h3><p>40 spaces — India famous</p></div>
+        <div class="hub-card" data-jump="scrabble"><span class="hub-card-badge" style="background:linear-gradient(180deg,#8d5a2b,#5a3200);color:#fff">Word</span><span class="hub-card-icon">🔤</span><h3>Scrabble Mini</h3><p>7×7 crossword</p></div>
+        <div class="hub-card" data-jump="go"><span class="hub-card-badge" style="background:linear-gradient(180deg,#d4a373,#8d5a2b);color:#3a2410">East</span><span class="hub-card-icon">⚫</span><h3>Go 9×9</h3><p>Surround capture</p></div>
+        <div class="hub-card" data-jump="yahtzee"><span class="hub-card-badge" style="background:linear-gradient(180deg,#4361ee,#1a2e9a);color:#fff">Dice</span><span class="hub-card-icon">🎲</span><h3>Yahtzee</h3><p>5 dice poker</p></div>
+        <div class="hub-card" data-jump="tetris"><span class="hub-card-badge" style="background:linear-gradient(180deg,#7209b7,#1a0a3a);color:#fff">Arcade</span><span class="hub-card-icon">🧱</span><h3>Tetris</h3><p>10×20 blocks</p></div>
       </div>
-      <div style="text-align:center;margin-top:16px;color:var(--ink-soft);font-size:.84rem">Eight games — rangoli, teak, ivory, festival lights ✨ Press G to open hub</div>
+      <div style="text-align:center;margin-top:16px;color:var(--ink-soft);font-size:.84rem">30 games — 8 Bharat + 22 Global — rangoli + Vegas ✨ Press G to open hub</div>
       <div class="dialog-actions" style="margin-top:14px"><button class="gold-btn big" onclick="document.getElementById('hubOverlay').classList.remove('show')">▶ Play Ludo First</button></div>
     </div>
   </div>
 
-  <!-- GAME CONTAINER -->
   <div id="gameContainer">
-    <!-- LUDO — preserved as modular section -->
     <div id="ludoGame" class="game-section active">
       <main id="layout">
         <section id="boardCard" aria-label="Ludo board">
@@ -138,25 +176,39 @@
       </main>
     </div>
 
-    <!-- SNAKE & LADDER -->
     <div id="snakeGame" class="game-section"></div>
-    <!-- CARROM -->
     <div id="carromGame" class="game-section"></div>
-    <!-- CHESS -->
     <div id="chessGame" class="game-section"></div>
-    <!-- TIGER & GOAT -->
     <div id="tigerGame" class="game-section"></div>
-    <!-- PALLANGUZHI -->
     <div id="mancalaGame" class="game-section"></div>
-    <!-- TAMBOLA -->
     <div id="tambolaGame" class="game-section"></div>
-    <!-- CHOWKA BHARA -->
     <div id="chowkaGame" class="game-section"></div>
+    <div id="checkersGame" class="game-section"></div>
+    <div id="reversiGame" class="game-section"></div>
+    <div id="tictactoeGame" class="game-section"></div>
+    <div id="connect4Game" class="game-section"></div>
+    <div id="sudokuGame" class="game-section"></div>
+    <div id="minesweeperGame" class="game-section"></div>
+    <div id="memoryGame" class="game-section"></div>
+    <div id="puzzle2048Game" class="game-section"></div>
+    <div id="wordmatchGame" class="game-section"></div>
+    <div id="backgammonGame" class="game-section"></div>
+    <div id="battleshipGame" class="game-section"></div>
+    <div id="blackjackGame" class="game-section"></div>
+    <div id="pokerGame" class="game-section"></div>
+    <div id="solitaireGame" class="game-section"></div>
+    <div id="hangmanGame" class="game-section"></div>
+    <div id="wordleGame" class="game-section"></div>
+    <div id="bingo75Game" class="game-section"></div>
+    <div id="monopolyGame" class="game-section"></div>
+    <div id="scrabbleGame" class="game-section"></div>
+    <div id="goGame" class="game-section"></div>
+    <div id="yahtzeeGame" class="game-section"></div>
+    <div id="tetrisGame" class="game-section"></div>
   </div>
 
-  <footer id="appFooter"><p>Made with ❤️ in India · <strong>Bharat Games</strong> · 8 Games · Ludo • Moksha • Carrom • Chess • Tiger • Pallanguzhi • Tambola • Chowka · <span id="footerStats"></span></p></footer>
+  <footer id="appFooter"><p>Made with ❤️ in India · <strong>30 Games</strong> · Global & Bharat · Word Match 7×5 · Wordle · Hangman · Tetris · <span id="footerStats"></span></p></footer>
 
-  <!-- SETUP MODAL (Ludo) -->
   <div id="setupOverlay" class="overlay show" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
     <div class="dialog setup-dialog">
       <div class="dialog-head festive"><h2 id="setupTitle">🎲 Ludo Legend <span class="hindi">लूडो लेजेंड</span></h2><p>Choose your players, pick difficulty, roll the dice, race home!</p></div>
@@ -167,38 +219,44 @@
     </div>
   </div>
 
-  <!-- RULES MODAL -->
   <div id="rulesOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
     <div class="dialog"><div class="dialog-head"><h2 id="rulesTitle">📖 How to Play — <span id="rulesGameName">Ludo</span></h2><button class="icon-btn close-modal" data-close="rulesOverlay" aria-label="Close">✕</button></div>
       <div class="rules-body" id="rulesBodyLudo">
         <ol><li>🎲 <strong>Roll a 6</strong> to bring a token out.</li><li>👆 Tap a glowing token to move clockwise.</li><li>⭐ Stars are safe — can't be captured.</li><li>⚔️ Land on enemy to capture — bonus roll!</li><li>🎁 6 or home grants extra turn. 3 sixes skipped.</li><li>💡 H for hint, Z to undo, 1-4 to pick.</li><li>🏠 Exact roll to home. First 4 home wins.</li></ol>
         <div class="keys-row"><span><kbd>Space</kbd> roll</span><span><kbd>H</kbd> hint</span><span><kbd>Z</kbd> undo</span><span><kbd>T</kbd> theme</span></div>
       </div>
-      <div class="rules-body" id="rulesBodySnake" style="display:none">
-        <ol><li>🐍 <b>Moksha Patam:</b> 1→100 boustrophedon board.</li><li>🎲 Roll, move exact; need exact 100 to win (Moksha).</li><li>🪜 Land on bamboo base (1,4,9,21…) climb to top.</li><li>🐍 Land on Naga head (16,47,93…) slide to tail.</li><li>🎉 Six grants extra turn; peacock cells safe.</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyCarrom" style="display:none">
-        <ol><li>🏹 <b>Carrom:</b> Flick striker from baseline.</li><li>🎯 Drag from striker to aim (line + power).</li><li>⚪ Pocket white (P1) / ⚫ black (P2) — queen 3pts.</li><li>🕳️ Pocket striker = foul. 9 coins to win.</li><li>✨ Friction + elastic collisions — aim well!</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyChess" style="display:none">
-        <ol><li>♔ <b>Bharat Chess (Chaturanga):</b> 8×8, Raja/Mantri/Hathi/Oont/Ghoda/Pyada.</li><li>♘ Ghoda (Knight) jumps, Oont (Bishop) diagonals, Hathi (Rook) lines.</li><li>♔ Raja 1 step, Mantri like queen. Pyada forward, capture diagonal.</li><li>♔ Check → must protect Raja. Checkmate wins. Stalemate draw.</li><li>🤖 Human vs Bot / Bot vs Bot; pick White/Black.</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyTiger" style="display:none">
-        <ol><li>🐯 <b>Aadu Puli Attam:</b> 23-point board, 3 Tigers vs 15 Goats.</li><li>🐐 Place 15 goats on empty points, alternating with Tiger moves.</li><li>🐯 Tigers move 1 step or jump over 🐐 to capture (needs empty beyond).</li><li>🐐 Move 1 step only. Tigers win at 5 captures. Goats win by blocking all Tigers.</li><li>🤖 You are Goats vs Tiger Bot (toggle for 2P).</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyMancala" style="display:none">
-        <ol><li>🫘 <b>Pallanguzhi:</b> 7 pits + store per player, 6 seeds each.</li><li>Pick own pit — sow clockwise one per pit.</li><li>🏦 Land in own store → extra turn. Land in empty own pit → capture opposite.</li><li>🏁 Ends when one side empty — more in store wins.</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyTambola" style="display:none">
-        <ol><li>🎱 <b>Tambola Housie:</b> 1-90 random calls. You + 3 bots.</li><li>🎟 Ticket 3×9, 5 numbers/row. Auto-marks on call.</li><li>🏆 Prizes: Early 5, Top/Middle/Bottom line, Corners, Full House (15).</li><li>📢 First Full House wins. Use Auto for continuous calls.</li></ol>
-      </div>
-      <div class="rules-body" id="rulesBodyChowka" style="display:none">
-        <ol><li>🎲 <b>Chowka Bhara (Ashta Chamma):</b> 5×5 cross, 4 tokens each.</li><li>🐚 Throw 4 cowries: 1/2/3/4 or 8 (0 up). Need 1/8 to enter.</li><li>⭐ Safe stars — no capture. Capture sends opponent home.</li><li>🎯 Exact to centre home. All 4 home wins. 4/8 & capture = extra throw.</li></ol>
-      </div>
+      <div class="rules-body" id="rulesBodySnake" style="display:none"><ol><li>🐍 <b>Moksha Patam:</b> 1→100 boustrophedon.</li><li>🎲 Exact 100 to win (Moksha).</li><li>🪜 Ladder base → top.</li><li>🐍 Naga head → tail slide.</li><li>🎉 Six extra turn.</li></ol></div>
+      <div class="rules-body" id="rulesBodyCarrom" style="display:none"><ol><li>🏹 <b>Carrom:</b> Flick striker from baseline.</li><li>🎯 Drag to aim + power.</li><li>⚪ White / ⚫ Black — queen 3pts.</li><li>🕳️ Pocket striker = foul.</li></ol></div>
+      <div class="rules-body" id="rulesBodyChess" style="display:none"><ol><li>♔ <b>Bharat Chess:</b> 8×8, Raja/Mantri/Hathi/Oont/Ghoda/Pyada.</li><li>♘ Knight jumps, Bishop diagonals.</li><li>♔ Check → must protect Raja.</li><li>🤖 Human/Bot modes.</li></ol></div>
+      <div class="rules-body" id="rulesBodyTiger" style="display:none"><ol><li>🐯 <b>Aadu Puli:</b> 23-pt, 3 Tigers vs 15 Goats.</li><li>🐐 Place 15 goats, Tigers jump-capture.</li><li>🐯 5 captures win. 🐐 Block win.</li></ol></div>
+      <div class="rules-body" id="rulesBodyMancala" style="display:none"><ol><li>🫘 <b>Pallanguzhi:</b> 7 pits + store, 6 seeds.</li><li>Sow clockwise, store = extra, empty own = capture.</li></ol></div>
+      <div class="rules-body" id="rulesBodyTambola" style="display:none"><ol><li>🎱 <b>Tambola:</b> 1-90, 3×9 ticket.</li><li>🏆 Early 5, lines, Full House.</li></ol></div>
+      <div class="rules-body" id="rulesBodyChowka" style="display:none"><ol><li>🎲 <b>Chowka Bhara:</b> 5×5 cross, 4 cowries.</li><li>🐚 1/8 to enter, ⭐ safe, exact home.</li></ol></div>
+      <div class="rules-body" id="rulesBodyCheckers" style="display:none"><ol><li>♟ <b>Checkers:</b> 8×8, move diagonally 1.</li><li>✨ Must capture if possible, jump over.</li><li>👑 Crown King at last row — both ways.</li></ol></div>
+      <div class="rules-body" id="rulesBodyReversi" style="display:none"><ol><li>⚫ <b>Reversi:</b> 8×8, outflank to flip.</li><li>↔️ Flips all bracketed lines.</li><li>🎯 Most discs wins.</li></ol></div>
+      <div class="rules-body" id="rulesBodyTictactoe" style="display:none"><ol><li>❌ <b>Tic Tac Toe:</b> 3×3, 3 in row wins.</li><li>🤖 Vs Bot (win/block/center).</li></ol></div>
+      <div class="rules-body" id="rulesBodyConnect4" style="display:none"><ol><li>🔴 <b>Connect Four:</b> 7×6, drop to connect 4.</li><li>Horizontal, vertical, diagonal.</li></ol></div>
+      <div class="rules-body" id="rulesBodySudoku" style="display:none"><ol><li>🔢 <b>Sudoku:</b> 9×9, 1-9 each row/col/box.</li><li>Click cell → number.</li></ol></div>
+      <div class="rules-body" id="rulesBodyMinesweeper" style="display:none"><ol><li>💣 <b>Minesweeper:</b> 9×9, 10 mines.</li><li>Number = adjacent mines. Flag 🚩.</li></ol></div>
+      <div class="rules-body" id="rulesBodyMemory" style="display:none"><ol><li>🃏 <b>Memory:</b> 4×4, flip 2, match pairs.</li><li>Match all 8 to win.</li></ol></div>
+      <div class="rules-body" id="rulesBodyPuzzle2048" style="display:none"><ol><li>🔢 <b>2048:</b> 4×4, merge same numbers.</li><li>⬆⬇⬅➡ to slide. Reach 2048!</li></ol></div>
+      <div class="rules-body" id="rulesBodyWordmatch" style="display:none"><ol><li>🔤 <b>Word Match 7×5:</b> 7 columns ×5 rows rectangle (always rectangle!).</li><li>Tap adjacent (8-dir) letters — no reuse — make word 3+.</li><li>Submit if in dictionary. Score = length². ⏱ 90s per grid.</li><li>🌍 No country — pure word puzzle, bigger than Tic Tac Toe!</li></ol></div>
+      <div class="rules-body" id="rulesBodyBackgammon" style="display:none"><ol><li>🎲 <b>Backgammon:</b> 24 points, 2 dice.</li><li>Hit blot → bar. Bear off when home.</li></ol></div>
+      <div class="rules-body" id="rulesBodyBattleship" style="display:none"><ol><li>🚢 <b>Battleship:</b> 10×10, 5 ships.</li><li>Click enemy waters to fire. Sink all to win.</li></ol></div>
+      <div class="rules-body" id="rulesBodyBlackjack" style="display:none"><ol><li>🃏 <b>Blackjack 21:</b> Beat dealer to 21.</li><li>A=1/11, J/Q/K=10. Dealer hits &lt;17.</li></ol></div>
+      <div class="rules-body" id="rulesBodyPoker" style="display:none"><ol><li>♠ <b>Texas Hold'em:</b> 2 hole +5 community = best 5.</li><li>Pair &lt; Two Pair &lt; Trips &lt; Straight &lt; Flush...</li></ol></div>
+      <div class="rules-body" id="rulesBodySolitaire" style="display:none"><ol><li>♠ <b>Solitaire Klondike:</b> Build down alternating, up by suit.</li><li>Stock → Waste → Tableau/Foundation.</li></ol></div>
+      <div class="rules-body" id="rulesBodyHangman" style="display:none"><ol><li>🔤 <b>Hangman — Guess the word:</b> Guess letters, 6 lives.</li><li>🌍 No country — globally famous word game.</li><li>Hint reveals a letter.</li></ol></div>
+      <div class="rules-body" id="rulesBodyWordle" style="display:none"><ol><li>🔤 <b>Wordle — Find the word:</b> Guess 5-letter word in 6 tries.</li><li>🟩 Correct place, 🟨 Wrong place, ⬜ Absent.</li><li>🌍 Global web hit — no country! Type & Enter.</li></ol></div>
+      <div class="rules-body" id="rulesBodyBingo75" style="display:none"><ol><li>🎱 <b>Bingo 75:</b> B 1-15, I 16-30, N 31-45, G 46-60, O 61-75.</li><li>Mark if on card. Line = Bingo!</li></ol></div>
+      <div class="rules-body" id="rulesBodyMonopoly" style="display:none"><ol><li>🏦 <b>Monopoly:</b> 40 spaces, roll 2 dice.</li><li>Buy unowned, pay rent, pass GO +$200.</li><li>Bankrupt opponent to win. India famous!</li></ol></div>
+      <div class="rules-body" id="rulesBodyScrabble" style="display:none"><ol><li>🔤 <b>Scrabble Mini 7×7:</b> Place rack letters → board.</li><li>Must form single row/col word, contiguous, ★ start.</li><li>Bonuses TW/DW/TL/DL.</li></ol></div>
+      <div class="rules-body" id="rulesBodyGo" style="display:none"><ol><li>⚫ <b>Go 9×9:</b> Place stones, surround to capture.</li><li>Suicide illegal. Pass twice = end.</li></ol></div>
+      <div class="rules-body" id="rulesBodyYahtzee" style="display:none"><ol><li>🎲 <b>Yahtzee:</b> 5 dice, 3 rolls, hold.</li><li>Choose category. Upper bonus 35 if ≥63.</li></ol></div>
+      <div class="rules-body" id="rulesBodyTetris" style="display:none"><ol><li>🧱 <b>Tetris:</b> 10×20, 7 tetrominoes.</li><li>⬅➡ Move, ↻ Rotate, ⬇ Drop. Clear lines!</li></ol></div>
     </div>
   </div>
 
-  <!-- WINNER MODAL (Ludo) -->
   <div id="winnerOverlay" class="overlay" role="dialog" aria-modal="true"><div class="dialog winner-dialog"><div class="trophy">🏆</div><h2 id="winnerTitle">Player wins!</h2><p id="winnerSub"></p><div id="standingsList"></div><div class="dialog-actions"><button id="continueBtn" class="ghost-btn">▶ Continue</button><button id="winnerNewBtn" class="gold-btn big">✨ New Game</button></div></div></div>
 
   <div id="toastBox" aria-live="polite"></div><canvas id="confettiCanvas"></canvas><div id="fxDomLayer" aria-hidden="true"></div>

@@ -1,0 +1,13 @@
+/* blackjack.css — Western Blackjack 21 — Vegas green felt, cards */
+#blackjackGame{contain:layout}
+.blackjack-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.blackjack-layout{grid-template-columns:minmax(0,620px)}}
+.blackjack-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.blackjack-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#0a4d2a,#062e1a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.blackjack-felt{background:radial-gradient(ellipse at center,#1a7a3a,#0f4d2a);border-radius:14px;padding:16px;border:4px solid #c9a86a;min-height:260px}
+.blackjack-hand{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;min-height:86px;margin:8px 0}
+.bj-card{width:62px;height:84px;background:#fff;border-radius:8px;border:2px solid #c9b48a;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;box-shadow:0 3px 8px rgba(0,0,0,.25);animation:bjPop .22s var(--ease-spring)}
+@keyframes bjPop{from{transform:scale(.7) rotate(-6deg)}to{transform:scale(1) rotate(0)}}
+.bj-card.red{color:#b22222}.bj-card.black{color:#111}
+.bj-card.hidden{background:linear-gradient(135deg,#4361ee,#2a0a3a);color:transparent;border-color:#fff}
+.blackjack-controls{display:flex;gap:8px;justify-content:center;margin-top:12px}

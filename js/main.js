@@ -72,12 +72,12 @@ function bootLudo({ audio, dice, tokens, hud, toasts, effects, modals }) {
 
   $("#rulesBtn").addEventListener("click",()=>{
     audio.click();
-    // show correct rules per hub
     const hub = window._hub;
     const cur = hub?.current || "ludo";
-    const names={ludo:"Ludo", snake:"Moksha Patam", carrom:"Carrom", chess:"Bharat Chess", tiger:"Aadu Puli Attam", mancala:"Pallanguzhi", tambola:"Tambola", chowka:"Chowka Bhara"};
+    const names={ludo:"Ludo", snake:"Moksha Patam", carrom:"Carrom • कैरम", chess:"Bharat Chess", tiger:"Aadu Puli Attam", mancala:"Pallanguzhi", tambola:"Tambola", chowka:"Chowka Bhara",
+      checkers:"Checkers", reversi:"Reversi", tictactoe:"Tic Tac Toe", connect4:"Connect Four", sudoku:"Sudoku", minesweeper:"Minesweeper", memory:"Memory Match", puzzle2048:"2048", wordmatch:"Word Match 7×5", backgammon:"Backgammon", battleship:"Battleship", blackjack:"Blackjack 21", poker:"Texas Hold'em", solitaire:"Solitaire", hangman:"Hangman", wordle:"Wordle", bingo75:"Bingo 75", monopoly:"Monopoly", scrabble:"Scrabble Mini", go:"Go 9×9", yahtzee:"Yahtzee", tetris:"Tetris"};
     document.getElementById("rulesGameName").textContent = names[cur] || "Ludo";
-    ["Ludo","Snake","Carrom","Chess","Tiger","Mancala","Tambola","Chowka"].forEach(name=>{
+    ["Ludo","Snake","Carrom","Chess","Tiger","Mancala","Tambola","Chowka","Checkers","Reversi","Tictactoe","Connect4","Sudoku","Minesweeper","Memory","Puzzle2048","Wordmatch","Backgammon","Battleship","Blackjack","Poker","Solitaire","Hangman","Wordle","Bingo75","Monopoly","Scrabble","Go","Yahtzee","Tetris"].forEach(name=>{
       const el=document.getElementById(`rulesBody${name}`);
       if(el) el.style.display = name.toLowerCase()===cur ? "block" : "none";
     });
@@ -209,7 +209,7 @@ function boot(){
 
   const ludo = bootLudo({ audio, dice, tokens, hud, toasts, effects, modals });
 
-  // Hub — after Ludo is ready
+  // Hub — after Ludo is ready (30 games)
   const hub = new GameHub({
     hubOverlay: $("#hubOverlay"),
     hubNav: $("#hubNav"),
@@ -221,7 +221,29 @@ function boot(){
       tiger: $("#tigerGame"),
       mancala: $("#mancalaGame"),
       tambola: $("#tambolaGame"),
-      chowka: $("#chowkaGame")
+      chowka: $("#chowkaGame"),
+      checkers: $("#checkersGame"),
+      reversi: $("#reversiGame"),
+      tictactoe: $("#tictactoeGame"),
+      connect4: $("#connect4Game"),
+      sudoku: $("#sudokuGame"),
+      minesweeper: $("#minesweeperGame"),
+      memory: $("#memoryGame"),
+      puzzle2048: $("#puzzle2048Game"),
+      wordmatch: $("#wordmatchGame"),
+      backgammon: $("#backgammonGame"),
+      battleship: $("#battleshipGame"),
+      blackjack: $("#blackjackGame"),
+      poker: $("#pokerGame"),
+      solitaire: $("#solitaireGame"),
+      hangman: $("#hangmanGame"),
+      wordle: $("#wordleGame"),
+      bingo75: $("#bingo75Game"),
+      monopoly: $("#monopolyGame"),
+      scrabble: $("#scrabbleGame"),
+      go: $("#goGame"),
+      yahtzee: $("#yahtzeeGame"),
+      tetris: $("#tetrisGame")
     },
     triggerBtn: $("#hubBtn")
   });

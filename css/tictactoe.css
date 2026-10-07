@@ -1,0 +1,12 @@
+/* tictactoe.css — Western Tic Tac Toe — neon 3x3 */
+#tictactoeGame{contain:layout}
+.tictactoe-layout{display:grid;grid-template-columns:minmax(0,480px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.tictactoe-layout{grid-template-columns:minmax(0,480px)}}
+.tictactoe-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.tictactoe-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#7209b7,#2a0a3a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.tictactoe-board{width:100%;aspect-ratio:1/1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f6efdc;border-radius:12px;padding:10px;border:6px solid #8d5a2b}
+.tictactoe-cell{background:#fff;border:2px solid #c9b48a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;cursor:pointer;transition:all .14s;min-height:80px}
+.tictactoe-cell:hover{transform:scale(1.02);border-color:var(--gold);box-shadow:0 0 10px rgba(255,209,102,.3)}
+.tictactoe-cell.x{color:#b22222;background:#ffd9de}
+.tictactoe-cell.o{color:#4361ee;background:#dce6ff}
+.tictactoe-cell.win{background:var(--gold);color:#5a3200;box-shadow:0 0 14px var(--gold)}

@@ -1,0 +1,17 @@
+/* checkers.css — Western Draughts — 8x8 red/black, king crowns */
+#checkersGame{contain:layout}
+.checkers-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.checkers-layout{grid-template-columns:minmax(0,620px)}}
+.checkers-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.checkers-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#b22222,#7a0a0a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.checkers-board{position:relative;width:100%;aspect-ratio:1/1;background:#f6efdc;border-radius:12px;overflow:hidden;border:6px solid #8d5a2b;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);box-shadow:var(--shadow-md)}
+.checkers-sq{display:flex;align-items:center;justify-content:center;font-size:.7rem;position:relative}
+.checkers-sq.dark{background:#8d5a2b}
+.checkers-sq.light{background:#f6efdc}
+.checkers-piece{width:78%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:pointer;transition:transform .14s}
+.checkers-piece.red{background:radial-gradient(circle at 30% 30%,#ff6b6b,#b22222);color:#fff}
+.checkers-piece.black{background:radial-gradient(circle at 30% 30%,#666,#111);color:#fff}
+.checkers-piece.selected{box-shadow:0 0 0 3px var(--gold),0 0 12px var(--gold);transform:scale(1.08)}
+.checkers-piece.king::after{content:"♔";position:absolute;top:2px;right:4px;font-size:.6rem}
+.checkers-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.checkers-dot{width:22%;aspect-ratio:1;border-radius:50%;background:rgba(45,198,83,.9);box-shadow:0 0 8px rgba(45,198,83,.8)}

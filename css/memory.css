@@ -1,0 +1,11 @@
+/* memory.css — Western Memory Match — 4x4 flip cards, Vegas */
+#memoryGame{contain:layout}
+.memory-layout{display:grid;grid-template-columns:minmax(0,520px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.memory-layout{grid-template-columns:minmax(0,520px)}}
+.memory-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.memory-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#ff006e,#7a0a3a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.memory-board{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.memory-tile{aspect-ratio:1;border-radius:12px;background:linear-gradient(180deg,#4361ee,#1a2e9a);border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transform:rotateY(0);transition:transform .32s, background .2s;box-shadow:0 3px 8px rgba(0,0,0,.18);position:relative}
+.memory-tile.flipped{background:#fff;transform:rotateY(180deg);border-color:var(--gold)}
+.memory-tile.matched{background:#d3f2dc;border-color:#2dc653;transform:rotateY(180deg) scale(1.04);box-shadow:0 0 12px rgba(45,198,83,.5)}
+.memory-tile .back{font-size:1.6rem}

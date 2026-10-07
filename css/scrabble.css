@@ -1,0 +1,16 @@
+/* scrabble.css — Western Scrabble Mini — 7x7, DW/TW/DL/TL */
+#scrabbleGame{contain:layout}
+.scrabble-layout{display:grid;grid-template-columns:minmax(0,520px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.scrabble-layout{grid-template-columns:minmax(0,520px)}}
+.scrabble-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.scrabble-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#8d5a2b,#5a3200);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.scrabble-board{width:100%;aspect-ratio:1/1;display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:#5a3200;border-radius:10px;padding:6px;border:4px solid #8d5a2b}
+.scrabble-sq{aspect-ratio:1;border-radius:6px;background:#f6efdc;display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;cursor:pointer;border:2px solid transparent}
+.scrabble-sq.TW{background:#ef233c;color:#fff}
+.scrabble-sq.DW{background:#ff8fa3;color:#fff}
+.scrabble-sq.TL{background:#4361ee;color:#fff}
+.scrabble-sq.DL{background:#90e0ef;color:#1a1a1a}
+.scrabble-sq.center{background:var(--gold);color:#5a3200}
+.scrabble-rack{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.scrabble-tile{width:48px;height:48px;background:#fff;border:2px solid #c9b48a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.scrabble-tile.selected{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold);transform:translateY(-4px)}

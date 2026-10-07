@@ -1,0 +1,14 @@
+/* hangman.css — Western Hangman — chalk, gallows */
+#hangmanGame{contain:layout}
+.hangman-layout{display:grid;grid-template-columns:minmax(0,560px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.hangman-layout{grid-template-columns:minmax(0,560px)}}
+.hangman-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.hangman-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#2a1810,#1a0f0a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.hangman-gallows{width:100%;aspect-ratio:1.2/1;background:#f6efdc;border-radius:12px;border:4px solid #8d5a2b;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hangman-word{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.hangman-letter{width:38px;height:42px;border-bottom:4px solid #5a3200;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;color:#1a0f0a}
+.hangman-keys{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.hangman-keys button{padding:8px;border-radius:8px;border:2px solid #c9b48a;background:#fff;font-weight:700;cursor:pointer}
+.hangman-keys button:disabled{opacity:.35}
+.hangman-keys button.correct{background:#d3f2dc;border-color:#2dc653}
+.hangman-keys button.wrong{background:#ffd9de;border-color:#ef233c}

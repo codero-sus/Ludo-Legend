@@ -1,0 +1,13 @@
+/* wordmatch.css — Word Match 7x5 — Boggle-like rectangle */
+#wordmatchGame{contain:layout}
+.wordmatch-layout{display:grid;grid-template-columns:minmax(0,560px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.wordmatch-layout{grid-template-columns:minmax(0,560px)}}
+.wordmatch-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.wordmatch-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#4361ee,#1a2e9a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.wordmatch-board{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;background:#f6efdc;border-radius:12px;padding:10px;border:4px solid #8d5a2b}
+.wordmatch-cell{aspect-ratio:1;background:#fff;border:2px solid #c9b48a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;cursor:pointer;user-select:none;transition:all .12s}
+.wordmatch-cell.selected{background:var(--gold);color:#5a3200;border-color:var(--gold-deep);transform:scale(1.06);box-shadow:0 0 8px var(--gold)}
+.wordmatch-cell.used{opacity:.45;pointer-events:none}
+.wordmatch-current{margin-top:10px;background:linear-gradient(180deg,#fff,#fff7d6);border:2px solid var(--gold);border-radius:10px;padding:10px;text-align:center;min-height:44px;font-weight:700;letter-spacing:.08em}
+.wordmatch-words{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.wordmatch-word{background:#d3f2dc;border:1px solid #2dc653;border-radius:20px;padding:4px 10px;font-size:.78rem;font-weight:700}

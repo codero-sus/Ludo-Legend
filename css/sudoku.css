@@ -1,0 +1,16 @@
+/* sudoku.css — Western Sudoku — 9x9, thick 3x3 boxes */
+#sudokuGame{contain:layout}
+.sudoku-layout{display:grid;grid-template-columns:minmax(0,520px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.sudoku-layout{grid-template-columns:minmax(0,520px)}}
+.sudoku-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.sudoku-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#2a0a3a,#1a0f2e);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.sudoku-board{width:100%;aspect-ratio:1/1;display:grid;grid-template-columns:repeat(9,1fr);border:4px solid #5a3200;border-radius:12px;overflow:hidden;background:#5a3200;gap:1px;padding:2px}
+.sudoku-cell{background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;cursor:pointer;position:relative}
+.sudoku-cell.given{background:#f3e7c8;color:#5a3200;font-weight:800}
+.sudoku-cell.selected{background:#ffe29a;box-shadow:inset 0 0 0 3px var(--gold)}
+.sudoku-cell.error{background:#ffd9de;color:#b22222}
+.sudoku-cell:nth-child(3n){border-right:3px solid #5a3200}
+.sudoku-cell:nth-child(n+19):nth-child(-n+27), .sudoku-cell:nth-child(n+46):nth-child(-n+54){border-bottom:3px solid #5a3200}
+.sudoku-numpad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.sudoku-numpad button{padding:10px;border-radius:8px;border:2px solid #c9b48a;background:#fff;font-weight:700;cursor:pointer}
+.sudoku-numpad button:hover{border-color:var(--gold);background:#fff7d6}

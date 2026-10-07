@@ -1,0 +1,11 @@
+/* puzzle2048.css — Western 2048 — 4x4 pastel tiles */
+#puzzle2048Game{contain:layout}
+.p2048-layout{display:grid;grid-template-columns:minmax(0,480px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.p2048-layout{grid-template-columns:minmax(0,480px)}}
+.p2048-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.p2048-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#edc9af,#8d5a2b);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.p2048-board{width:100%;aspect-ratio:1/1;background:#bbada0;border-radius:12px;padding:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.p2048-cell{background:#cdc1b4;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.6rem;color:#776e65}
+.p2048-tile{width:100%;height:100%;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;animation:p2048pop .18s var(--ease-spring)}
+@keyframes p2048pop{from{transform:scale(.8)}to{transform:scale(1)}}
+.p2048-tile.v2{background:#eee4da;color:#776e65}.p2048-tile.v4{background:#ede0c8;color:#776e65}.p2048-tile.v8{background:#f2b179;color:#fff}.p2048-tile.v16{background:#f59563;color:#fff}.p2048-tile.v32{background:#f67c5f;color:#fff}.p2048-tile.v64{background:#f65e3b;color:#fff}.p2048-tile.v128{background:#edcf72;color:#fff;font-size:1.2rem}.p2048-tile.v256{background:#edcc61;color:#fff;font-size:1.2rem}.p2048-tile.v512{background:#edc850;color:#fff;font-size:1.2rem}.p2048-tile.v1024{background:#edc53f;color:#fff;font-size:1rem}.p2048-tile.v2048{background:#edc22e;color:#fff;font-size:1rem;box-shadow:0 0 12px var(--gold)}

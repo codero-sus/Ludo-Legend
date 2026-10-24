@@ -25,6 +25,20 @@ export class SetupScreen {
     this.e.quickDemo.addEventListener("click", () =>
       this.applyPreset(["bot", "bot", "bot", "bot"], BOT_NAMES.slice(0, 4)), { passive: true });
     this.e.startBtn.addEventListener("click", () => this.#start(), { passive: true });
+    // BOT TOGGLE for Ludo — Play with Bot: ON / Play Solo
+    this.vsBot = true;
+    if(this.e.ludoBotToggle){
+      this.e.ludoBotToggle.addEventListener("click", () => {
+        this.vsBot = !this.vsBot;
+        this.e.ludoBotToggle.textContent = this.vsBot ? "🤖 Play with Bot: ON" : "👤 Play Solo";
+        this.e.ludoBotToggle.classList.toggle("active", this.vsBot);
+        if(this.vsBot){
+          this.applyPreset(["human","bot","bot","bot"], ["You", ...BOT_NAMES.slice(0,3)]);
+        } else {
+          this.applyPreset(["human","human","human","human"], HUMAN_NAMES.slice(0,4));
+        }
+      }, { passive: true });
+    }
   }
 
   show() {
@@ -46,6 +60,12 @@ export class SetupScreen {
     this.#syncCountSeg();
     this.#renderRows();
     this.#renderRules();
+    if(this.e.ludoBotToggle){
+      const hasBot = this.rowState.some(r=> r.type==="bot");
+      this.vsBot = hasBot;
+      this.e.ludoBotToggle.textContent = this.vsBot ? "🤖 Play with Bot: ON" : "👤 Play Solo";
+      this.e.ludoBotToggle.classList.toggle("active", this.vsBot);
+    }
     this.e.overlay.classList.add("show");
     const dlg = this.e.overlay.querySelector(".dialog");
     if (dlg) {

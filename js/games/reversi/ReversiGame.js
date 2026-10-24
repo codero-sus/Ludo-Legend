@@ -3,6 +3,54 @@ export class ReversiGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="reversi-layout"><div class="reversi-card"><div class="reversi-banner">⚫ Reversi — Othello <span style="opacity:.8;font-weight:400">· 8×8 · Flip to win</span></div><div class="reversi-board" id="revBoard"></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:center;align-items:center"><button id="revNew" class="ghost-btn" style="color:#0a4d2a;background:#fff;border-color:#c9a86a">🔄 New</button><span id="revScore" style="font-weight:800;color:#5a3200"></span><span id="revTurn" style="font-family:var(--font-display);font-weight:700;color:#0a4d2a"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>⚫ You = Black vs ⚪ Bot. Place to outflank.</div><div>↔️ Flips all bracketed lines (8 dirs).</div><div>🎯 Most discs at end wins. Pass if no move.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="revLog" style="max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#reversiBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='reversiBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.reversi-controls')||this.root.querySelector('.reversi-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'reversiBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#revBoard');this.logEl=this.root.querySelector('#revLog');this.scoreEl=this.root.querySelector('#revScore');this.turnEl=this.root.querySelector('#revTurn');
   this.root.querySelector('#revNew').addEventListener('click',()=>this.start());
   this.start();

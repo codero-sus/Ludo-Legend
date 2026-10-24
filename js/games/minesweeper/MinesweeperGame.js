@@ -3,6 +3,54 @@ export class MinesweeperGame{
  constructor(root){this.root=root;this.w=9;this.h=9;this.mines=10}
  init(){
   this.root.innerHTML=`<div class="minesweeper-layout"><div class="minesweeper-card"><div class="minesweeper-banner">💣 Minesweeper <span style="opacity:.8;font-weight:400">· 9×9 · 10 mines</span></div><div style="display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:8px"><span id="mineCount" style="font-weight:800;color:#b22222"></span><button id="mineNew" class="gold-btn" style="padding:8px 14px">🔄 New</button><span id="mineStatus" style="font-weight:700;color:#5a3200"></span></div><div class="minesweeper-board" id="mineBoard"></div><div style="font-size:.78rem;color:#6d4a2a;margin-top:8px;text-align:center">Left click reveal · Right click / long press 🚩 flag</div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>💣 10 mines hidden. Numbers = adjacent mines.</div><div>🚩 Flag suspected mines. Reveal all safe to win.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="mineLog" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#minesweeperBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='minesweeperBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.minesweeper-controls')||this.root.querySelector('.minesweeper-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'minesweeperBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#mineBoard');this.countEl=this.root.querySelector('#mineCount');this.statusEl=this.root.querySelector('#mineStatus');this.logEl=this.root.querySelector('#mineLog');
   this.root.querySelector('#mineNew').addEventListener('click',()=>this.start());
   this.start();

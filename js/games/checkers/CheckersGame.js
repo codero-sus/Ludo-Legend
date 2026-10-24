@@ -7,6 +7,24 @@ export class CheckersGame{
     this.root.querySelector('#chkNew').addEventListener('click',()=>this.start());
     this.modeBtn=this.root.querySelector('#chkMode');this.vsBot=true;this.modeBtn.addEventListener('click',()=>{this.vsBot=!this.vsBot;this.modeBtn.textContent=this.vsBot?'🤖 Vs Bot':'👥 2P';this.modeBtn.classList.toggle('active',this.vsBot)});
     this.start();
+  // BOT OPTION ENSURED — Play with Bot toggle (auto-injected)
+  setTimeout(()=>{
+    if(this.root.querySelector('#checkersBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='checkersBotToggle'; btn.textContent=this.vsBot!==false?'🤖 Play with Bot: ON':'👤 Play Solo';
+    btn.className='chip-btn'+(this.vsBot!==false?' active':'');
+    btn.style.margin='6px'; btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot && typeof this.botMove==='function') setTimeout(()=>this.botMove(),600);
+    });
+    const container=this.root.querySelector('.checkers-controls')||this.root.querySelector('.checkers-card')||this.root;
+    container.appendChild(btn);
+  },100);
+
   }
   onShow(){} onHide(){}
   log(m,c){const li=document.createElement('li');li.textContent=m;li.style.cssText='background:rgba(255,255,255,.06);border-radius:8px;padding:6px 10px;border-left:4px solid var(--gold)';if(c)li.style.borderLeftColor=c;this.logEl.prepend(li);while(this.logEl.children.length>12)this.logEl.lastChild.remove()}

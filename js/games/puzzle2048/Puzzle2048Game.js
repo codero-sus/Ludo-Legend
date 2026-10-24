@@ -3,6 +3,54 @@ export class Puzzle2048Game{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="p2048-layout"><div class="p2048-card"><div class="p2048-banner">🔢 2048 <span style="opacity:.8;font-weight:400">· 4×4 · Reach 2048</span></div><div style="display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:8px"><span id="p2048Score" style="font-weight:800;color:#5a3200;background:#fff;border-radius:8px;padding:6px 12px;border:2px solid #c9a86a"></span><button id="p2048New" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New</button></div><div class="p2048-board" id="p2048Board"></div><div style="display:flex;gap:6px;margin-top:10px;justify-content:center"><button data-dir="up" class="chip-btn p2048-btn">⬆</button><button data-dir="left" class="chip-btn p2048-btn">⬅</button><button data-dir="down" class="chip-btn p2048-btn">⬇</button><button data-dir="right" class="chip-btn p2048-btn">➡</button></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">🎮 Controls</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>⬆⬇⬅➡ or WASD or swipe.</div><div>Merge same numbers. Reach 2048!</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="p2048Log" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#puzzle2048BotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='puzzle2048BotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.puzzle2048-controls')||this.root.querySelector('.puzzle2048-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'puzzle2048BotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#p2048Board');this.scoreEl=this.root.querySelector('#p2048Score');this.logEl=this.root.querySelector('#p2048Log');
   this.root.querySelector('#p2048New').addEventListener('click',()=>this.start());
   this.root.querySelectorAll('.p2048-btn').forEach(b=>b.addEventListener('click',()=>this.move(b.dataset.dir)));

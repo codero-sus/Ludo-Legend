@@ -4,6 +4,54 @@ export class HangmanGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="hangman-layout"><div class="hangman-card"><div class="hangman-banner">🔤 Hangman — Guess the Word <span style="opacity:.8;font-weight:400">· No country, just letters</span></div><div class="hangman-gallows" id="hmDraw"></div><div class="hangman-word" id="hmWord"></div><div style="text-align:center;font-weight:700;color:#b22222" id="hmLives"></div><div class="hangman-keys" id="hmKeys"></div><div style="display:flex;gap:8px;justify-content:center;margin-top:10px"><button id="hmNew" class="gold-btn" style="padding:8px 14px">🔄 New Word</button><button id="hmHint" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">💡 Hint</button><span id="hmStatus" style="font-weight:700;color:#5a3200"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>Guess letters. 6 wrong = hanged.</div><div>Guess the word — famous global word game.</div><div>No country — just brain!</div></div></div><div class="panel-block"><h3 class="panel-title">🏆 Stats</h3><div id="hmStats" style="color:var(--gold);font-weight:700"></div></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#hangmanBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='hangmanBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.hangman-controls')||this.root.querySelector('.hangman-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'hangmanBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.drawEl=this.root.querySelector('#hmDraw');this.wordEl=this.root.querySelector('#hmWord');this.livesEl=this.root.querySelector('#hmLives');this.keysEl=this.root.querySelector('#hmKeys');this.statusEl=this.root.querySelector('#hmStatus');this.statsEl=this.root.querySelector('#hmStats');
   this.root.querySelector('#hmNew').addEventListener('click',()=>this.newWord());
   this.root.querySelector('#hmHint').addEventListener('click',()=>this.hint());

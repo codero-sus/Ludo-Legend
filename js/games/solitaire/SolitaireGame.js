@@ -3,6 +3,54 @@ export class SolitaireGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="solitaire-layout"><div class="solitaire-card"><div class="solitaire-banner">♠ Solitaire — Klondike <span style="opacity:.8;font-weight:400">· Classic 52</span></div><div class="solitaire-table" id="solTable"></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:center"><button id="solNew" class="ghost-btn" style="background:#fff;color:#0a4d2a;border-color:#c9a86a">🔄 New Deal</button><button id="solAuto" class="gold-btn">✨ Auto Play</button><span id="solStatus" style="font-weight:700;color:#5a3200"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>Build tableau down alternating colors, foundation up by suit A→K.</div><div>Click stock → waste, waste → tableau/foundation.</div><div>Simplified: Auto Play does moves.</div></div></div><div class="panel-block"><h3 class="panel-title">🏆 Info</h3><div style="font-size:.82rem;color:rgba(255,255,255,.9)">Very famous Windows game in India! Click Auto for demo.</div></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#solitaireBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='solitaireBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.solitaire-controls')||this.root.querySelector('.solitaire-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'solitaireBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.tableEl=this.root.querySelector('#solTable');this.statusEl=this.root.querySelector('#solStatus');
   this.root.querySelector('#solNew').addEventListener('click',()=>this.start());
   this.root.querySelector('#solAuto').addEventListener('click',()=>this.auto());

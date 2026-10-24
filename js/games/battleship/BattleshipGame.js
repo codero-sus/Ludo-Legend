@@ -3,6 +3,54 @@ export class BattleshipGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="battleship-layout"><div class="battleship-card"><div class="battleship-banner">🚢 Battleship <span style="opacity:.8;font-weight:400">· 10×10 · Sink fleet</span></div><div class="battleship-boards"><div><div style="font-weight:700;color:#1a3a5a;text-align:center;margin-bottom:6px">Your Fleet (auto)</div><div class="battleship-grid" id="bsOwn"></div></div><div><div style="font-weight:700;color:#b22222;text-align:center;margin-bottom:6px">Enemy Waters — Click to fire</div><div class="battleship-grid" id="bsEnemy"></div></div></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:center"><button id="bsNew" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New Battle</button><span id="bsStatus" style="font-weight:700;color:#1a3a5a"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>5 ships: 5,4,3,3,2 cells. You vs Bot.</div><div>🔴 Hit — ⚪ Miss. Sink all 5 to win.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="bsLog" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#battleshipBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='battleshipBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.battleship-controls')||this.root.querySelector('.battleship-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'battleshipBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.ownEl=this.root.querySelector('#bsOwn');this.enemyEl=this.root.querySelector('#bsEnemy');this.statusEl=this.root.querySelector('#bsStatus');this.logEl=this.root.querySelector('#bsLog');
   this.root.querySelector('#bsNew').addEventListener('click',()=>this.start());
   this.start();

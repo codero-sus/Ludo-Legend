@@ -14,6 +14,54 @@ export class Bingo75Game{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="bingo75-layout"><div class="bingo75-card"><div class="bingo75-banner">🎱 Bingo 75 <span style="opacity:.8;font-weight:400">· B I N G O · Western</span></div><div class="bingo75-caller"><div class="bingo75-ball" id="b75Ball">—</div><div style="flex:1"><div id="b75Turn" style="font-family:var(--font-display);font-weight:700;color:#7a0a0a">Press Call</div><div style="font-size:.82rem;color:#5b5175">You vs Bot — first line Bingo wins</div><div style="display:flex;gap:8px;margin-top:8px"><button id="b75Call" class="gold-btn" style="padding:8px 14px">📢 Call</button><button id="b75Auto" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#7a0a0a">▶ Auto</button><button id="b75New" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#7a0a0a">🔄 New Card</button></div></div></div><div class="bingo75-board" id="b75Board"></div><div style="font-weight:700;color:#7a0a0a;margin-bottom:6px;letter-spacing:.3em;text-align:center">B &nbsp; I &nbsp; N &nbsp; G &nbsp; O</div><div class="bingo75-card-grid" id="b75Card"></div><div id="b75Status" style="text-align:center;font-weight:700;color:#7a0a0a;margin-top:8px"></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>B 1-15, I 16-30, N 31-45, G 46-60, O 61-75.</div><div>Mark if on card. Line (5 in row/col/diag) = Bingo!</div><div>Very famous in Indian clubs & global.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Calls</h3><ol id="b75Log" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#bingo75BotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='bingo75BotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.bingo75-controls')||this.root.querySelector('.bingo75-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'bingo75BotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.ball=this.root.querySelector('#b75Ball');this.boardEl=this.root.querySelector('#b75Board');this.cardEl=this.root.querySelector('#b75Card');this.statusEl=this.root.querySelector('#b75Status');this.logEl=this.root.querySelector('#b75Log');
   this.root.querySelector('#b75Call').addEventListener('click',()=>this.call());
   this.root.querySelector('#b75Auto').addEventListener('click',e=>this.toggleAuto(e.currentTarget));

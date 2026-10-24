@@ -37,7 +37,8 @@ function bootLudo({ audio, dice, tokens, hud, toasts, effects, modals }) {
     startBtn: $("#startGameBtn"),
     quickBots: $("#quickBots"),
     quickHumans: $("#quickHumans"),
-    quickDemo: $("#quickDemo")
+    quickDemo: $("#quickDemo"),
+    ludoBotToggle: $("#ludoBotToggle")
   });
   setup.onStart = (config) => {
     audio.ensure(); audio.click();
@@ -210,7 +211,7 @@ function boot(){
 
   const ludo = bootLudo({ audio, dice, tokens, hud, toasts, effects, modals });
 
-  // Hub — after Ludo is ready (30 games)
+  // Hub — after Ludo is ready (70 games)
   const hub = new GameHub({
     hubOverlay: $("#hubOverlay"),
     hubNav: $("#hubNav"),

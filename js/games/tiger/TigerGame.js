@@ -119,6 +119,24 @@ export class TigerGame{
     });
     this.renderBoard();
     this.start();
+  // BOT OPTION ENSURED — Play with Bot toggle (auto-injected)
+  setTimeout(()=>{
+    if(this.root.querySelector('#tigerBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='tigerBotToggle'; btn.textContent=this.vsBot!==false?'🤖 Play with Bot: ON':'👤 Play Solo';
+    btn.className='chip-btn'+(this.vsBot!==false?' active':'');
+    btn.style.margin='6px'; btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot && typeof this.botMove==='function') setTimeout(()=>this.botMove(),600);
+    });
+    const container=this.root.querySelector('.tiger-controls')||this.root.querySelector('.tiger-card')||this.root;
+    container.appendChild(btn);
+  },100);
+
   }
   onShow(){ this.renderPieces(); }
   onHide(){}

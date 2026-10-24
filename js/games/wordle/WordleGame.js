@@ -6,6 +6,54 @@ export class WordleGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="wordle-layout"><div class="wordle-card"><div class="wordle-banner">🔤 Wordle — Find the Word <span style="opacity:.8;font-weight:400">· 5 letters · 6 tries</span></div><div class="wordle-board" id="wdBoard"></div><div style="display:flex;gap:6px;margin-top:8px;justify-content:center"><input id="wdInput" maxlength="5" placeholder="TYPE 5 LETTERS" style="text-transform:uppercase;text-align:center;font-weight:800;letter-spacing:.15em;padding:10px;border-radius:8px;border:2px solid #c9b48a;flex:1;max-width:200px"><button id="wdEnter" class="gold-btn">Enter</button><button id="wdNew" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New</button></div><div class="wordle-keys" id="wdKeys"></div><div id="wdStatus" style="text-align:center;font-weight:700;color:#5a3200;margin-top:8px"></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>Guess 5-letter word in 6 tries. </div><div>🟩 Correct place, 🟨 Wrong place, ⬜ Absent.</div><div>Famous global web game — no country!</div></div></div><div class="panel-block"><h3 class="panel-title">🏆 Info</h3><div style="font-size:.82rem;color:rgba(255,255,255,.9)">Type & Enter. Keyboard also works.</div><div id="wdInfo" style="margin-top:8px;font-size:.8rem;color:var(--gold)"></div></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#wordleBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='wordleBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.wordle-controls')||this.root.querySelector('.wordle-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'wordleBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#wdBoard');this.inputEl=this.root.querySelector('#wdInput');this.keysEl=this.root.querySelector('#wdKeys');this.statusEl=this.root.querySelector('#wdStatus');this.infoEl=this.root.querySelector('#wdInfo');
   this.root.querySelector('#wdEnter').addEventListener('click',()=>this.enter());
   this.root.querySelector('#wdNew').addEventListener('click',()=>this.newGame());

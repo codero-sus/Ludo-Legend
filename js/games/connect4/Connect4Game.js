@@ -3,6 +3,54 @@ export class Connect4Game{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="connect4-layout"><div class="connect4-card"><div class="connect4-banner">🔴 Connect Four <span style="opacity:.9;font-weight:400">· 7×6 · Drop to connect</span></div><div class="connect4-board" id="c4Board"></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:center;align-items:center"><button id="c4New" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New</button><span id="c4Turn" style="font-weight:700;color:#1a2e9a"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>🔴 You vs 🟡 Bot. Click column to drop.</div><div>🎯 4 in row (h/v/d) wins.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="c4Log" style="max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#connect4BotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='connect4BotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.connect4-controls')||this.root.querySelector('.connect4-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'connect4BotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#c4Board');this.turnEl=this.root.querySelector('#c4Turn');this.logEl=this.root.querySelector('#c4Log');
   this.root.querySelector('#c4New').addEventListener('click',()=>this.start());
   this.start();

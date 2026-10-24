@@ -3,6 +3,54 @@ export class SequenceGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="sequence-layout"><div class="sequence-card"><div class="sequence-banner">🔢 Sequence <span style="opacity:.85;font-weight:400">· Famous in India</span></div><div class="sequence-board" id="sequenceBoard"></div><div class="sequence-controls"><button id="sequenceNew" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New</button>${`<button id="sequenceDeal" class="gold-btn" style="padding:8px 14px">🃏 Deal</button>`}<span id="sequenceStatus" style="font-weight:700;color:#5a3200"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 About</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>🔢 <b>Sequence</b> — too much famous in India, played in streets, homes & festivals!</div><div>Simple, fun, for all ages — pure desi + global charm.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="sequenceLog" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#sequenceBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='sequenceBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.sequence-controls')||this.root.querySelector('.sequence-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'sequenceBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#sequenceBoard');this.statusEl=this.root.querySelector('#sequenceStatus');this.logEl=this.root.querySelector('#sequenceLog');this.scoreEl=this.root.querySelector('#sequenceScore')||{textContent:''};
   this.root.querySelector('#sequenceNew').addEventListener('click',()=>this.start());
   this.root.querySelector('#sequenceDeal')?.addEventListener('click',()=>this.deal());

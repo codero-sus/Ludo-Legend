@@ -13,6 +13,54 @@ export class TetrisGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="tetris-layout"><div class="tetris-card"><div class="tetris-banner">🧱 Tetris <span style="opacity:.8;font-weight:400">· 10×20 · Stack & clear</span></div><div style="display:flex;gap:12px;justify-content:center;align-items:flex-start"><div class="tetris-well" id="tetWell"></div><div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="font-weight:700;color:#5a3200">Next</div><div class="tetris-preview" id="tetNext"></div><div id="tetScore" style="font-weight:800;color:#7209b7;background:#fff;border-radius:8px;padding:6px 10px;border:2px solid #c9a86a"></div><div id="tetLines" style="font-weight:700;color:#5a3200"></div><button id="tetNew" class="gold-btn" style="padding:8px 14px">🔄 New</button><button id="tetPause" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">⏸ Pause</button></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px"><button data-act="left" class="chip-btn tet-btn">⬅</button><button data-act="rotate" class="chip-btn tet-btn">↻</button><button data-act="right" class="chip-btn tet-btn">➡</button><button data-act="down" class="chip-btn tet-btn">⬇</button><button data-act="drop" class="chip-btn tet-btn">⬇⬇</button><button data-act="pause" class="chip-btn tet-btn">⏸</button></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">🎮 Controls</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>⬅➡ Move, ⬇ Soft, Space/Hard Drop, ↻ Rotate.</div><div>Clear lines to score. Very famous global arcade!</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="tetLog" style="max-height:160px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#tetrisBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='tetrisBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.tetris-controls')||this.root.querySelector('.tetris-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'tetrisBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.wellEl=this.root.querySelector('#tetWell');this.nextEl=this.root.querySelector('#tetNext');this.scoreEl=this.root.querySelector('#tetScore');this.linesEl=this.root.querySelector('#tetLines');this.logEl=this.root.querySelector('#tetLog');
   this.root.querySelector('#tetNew').addEventListener('click',()=>this.start());
   this.root.querySelector('#tetPause').addEventListener('click',()=>this.toggle());

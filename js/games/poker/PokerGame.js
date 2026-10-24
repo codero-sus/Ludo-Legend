@@ -26,6 +26,54 @@ export class PokerGame{
  constructor(root){this.root=root}
  init(){
   this.root.innerHTML=`<div class="poker-layout"><div class="poker-card"><div class="poker-banner">♠ Texas Hold'em <span style="opacity:.8;font-weight:400">· Simplified showdown</span></div><div class="poker-table"><div style="text-align:center;color:var(--gold);font-weight:700">Community</div><div class="poker-community" id="pokerCommunity"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;color:#fff;font-weight:700"><div>🧑 You<div id="pokerYou" style="display:flex;gap:6px;justify-content:center;margin-top:6px"></div><div id="pokerYouRank" style="font-size:.75rem;color:var(--gold)"></div></div><div>🤖 Bot 1<div id="pokerB1" style="display:flex;gap:6px;justify-content:center;margin-top:6px"></div><div id="pokerB1Rank" style="font-size:.75rem;color:var(--gold)"></div></div><div>🤖 Bot 2<div id="pokerB2" style="display:flex;gap:6px;justify-content:center;margin-top:6px"></div><div id="pokerB2Rank" style="font-size:.75rem;color:var(--gold)"></div></div></div><div id="pokerStatus" style="text-align:center;color:#fff;font-weight:700;margin-top:12px"></div><div style="display:flex;gap:8px;justify-content:center;margin-top:10px"><button id="pokerDeal" class="gold-btn">🔄 Deal & Showdown</button><button id="pokerReveal" class="ghost-btn" style="background:#fff;color:#1a1a2a">👁 Reveal</button></div></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>2 hole + 5 community = best 5-card hand.</div><div>Hand ranks: Pair < Two Pair < Trips < Straight < Flush < Full House < Quads < Straight Flush</div><div>Very famous in India — Diwali poker!</div></div></div><div class="panel-block"><h3 class="panel-title">🏆 Result</h3><div id="pokerResult" style="color:var(--gold);font-weight:800"></div></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#pokerBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='pokerBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.poker-controls')||this.root.querySelector('.poker-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'pokerBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.commEl=this.root.querySelector('#pokerCommunity');this.youEl=this.root.querySelector('#pokerYou');this.b1El=this.root.querySelector('#pokerB1');this.b2El=this.root.querySelector('#pokerB2');this.statusEl=this.root.querySelector('#pokerStatus');this.resultEl=this.root.querySelector('#pokerResult');
   this.root.querySelector('#pokerDeal').addEventListener('click',()=>this.deal());
   this.root.querySelector('#pokerReveal').addEventListener('click',()=>this.reveal());

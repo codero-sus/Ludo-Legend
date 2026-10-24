@@ -9,6 +9,54 @@ export class SudokuGame{
  constructor(root){this.root=root;this.difficulty=40}
  init(){
   this.root.innerHTML=`<div class="sudoku-layout"><div class="sudoku-card"><div class="sudoku-banner">🔢 Sudoku <span style="opacity:.8;font-weight:400">· 9×9 · Fill 1-9</span></div><div class="sudoku-board" id="sudoBoard"></div><div class="sudoku-numpad" id="sudoPad"></div><div style="display:flex;gap:8px;margin-top:10px;justify-content:center"><button id="sudoNew" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">🔄 New Puzzle</button><button id="sudoCheck" class="gold-btn" style="padding:8px 14px">✓ Check</button><button id="sudoSolve" class="ghost-btn" style="background:#fff;border-color:#c9a86a;color:#5a3200">💡 Solve</button><span id="sudoStatus" style="font-weight:700;color:#5a3200;margin-left:6px"></span></div></div><aside style="display:flex;flex-direction:column;gap:14px"><div class="panel-block"><h3 class="panel-title">📜 Rules</h3><div style="font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.9)"><div>Fill 1-9 so each row/col/3×3 has 1-9.</div><div>Click cell then number. Given = beige.</div></div></div><div class="panel-block"><h3 class="panel-title">📜 Log</h3><ol id="sudoLog" style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:.82rem"></ol></div></aside></div>`;
+
+  // BOT OPTION — Play with Bot (auto-injected for every game)
+  this.vsBot = true;
+  this._botTimer = null;
+  const _createBotToggle = () => {
+    if(this.root.querySelector('#sudokuBotToggle')) return;
+    const btn=document.createElement('button');
+    btn.id='sudokuBotToggle';
+    btn.textContent='🤖 Play with Bot: ON';
+    btn.className='chip-btn active';
+    btn.style.margin='6px';
+    btn.style.border='1px solid #c9a86a';
+    btn.addEventListener('click',()=>{
+      this.vsBot=!this.vsBot;
+      btn.textContent=this.vsBot?'🤖 Play with Bot: ON':'👤 Play Solo';
+      btn.classList.toggle('active',this.vsBot);
+      try{this.log(this.vsBot?'🤖 Bot enabled — bot will auto-play!':'👤 Solo mode','#4361ee')}catch{}
+      if(this.vsBot) this._triggerBot();
+    });
+    const container=this.root.querySelector('.sudoku-controls')||this.root.querySelector('.sudoku-card')||this.root.querySelector('.panel-block')||this.root;
+    container.appendChild(btn);
+  };
+  setTimeout(_createBotToggle, 80);
+  this._triggerBot = () => {
+    if(!this.vsBot) return;
+    clearTimeout(this._botTimer);
+    this._botTimer = setTimeout(()=>{
+      try{
+        if(typeof this.botMove==='function'){ this.botMove(); }
+        else if(typeof this.botPlay==='function'){ this.botPlay(); }
+        else {
+          // Generic bot: find a clickable element and click it
+          const candidates = Array.from(this.root.querySelectorAll('button, [data-idx], .sudoku-cell, .memory-tile, .wordmatch-cell, .tictactoe-cell, .dotsboxes-cell, .crossword-cell, .cricket-btn, .football-btn'));
+          const avail = candidates.filter(el=> !el.disabled && !el.classList.contains('matched') && el.offsetParent!==null);
+          // Filter to not include the bot toggle itself
+          const filtered = avail.filter(el=> el.id!== 'sudokuBotToggle' && !el.textContent.includes('Play with Bot'));
+          if(filtered.length){
+            const pick = filtered[Math.floor(Math.random()*filtered.length)];
+            pick.click();
+            try{this.log('🤖 Bot played','#4361ee')}catch{}
+          }
+        }
+      }catch(e){ console.log('bot error',e)}
+    }, 800);
+  };
+  // Hook to auto-trigger bot after player actions: wrap log or call _triggerBot after moves
+  const _origLog = this.log?.bind(this);
+
   this.boardEl=this.root.querySelector('#sudoBoard');this.padEl=this.root.querySelector('#sudoPad');this.statusEl=this.root.querySelector('#sudoStatus');this.logEl=this.root.querySelector('#sudoLog');
   this.root.querySelector('#sudoNew').addEventListener('click',()=>this.newPuzzle());
   this.root.querySelector('#sudoCheck').addEventListener('click',()=>this.check());

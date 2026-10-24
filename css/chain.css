@@ -1,0 +1,9 @@
+/* chain.css — Chain Chain — famous in India */
+#chainGame{contain:layout}
+.chain-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.chain-layout{grid-template-columns:minmax(0,620px)}}
+.chain-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.chain-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#6c757d,#343a40);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px;text-align:center}
+.chain-board{width:100%;min-height:260px;background:#f6efdc;border-radius:12px;border:4px solid #8d5a2b;padding:12px;position:relative}
+.chain-controls{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.chain-cell{cursor:pointer;transition:all .14s}

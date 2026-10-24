@@ -78,7 +78,7 @@ function bootLudo({ audio, dice, tokens, hud, toasts, effects, modals }) {
     const names={ludo:"Ludo", snake:"Moksha Patam", carrom:"Carrom • कैरम", chess:"Bharat Chess", tiger:"Aadu Puli Attam", mancala:"Pallanguzhi", tambola:"Tambola", chowka:"Chowka Bhara",
       checkers:"Checkers", reversi:"Reversi", tictactoe:"Tic Tac Toe", connect4:"Connect Four", sudoku:"Sudoku", minesweeper:"Minesweeper", memory:"Memory Match", puzzle2048:"2048", wordmatch:"Word Match 7×5", backgammon:"Backgammon", battleship:"Battleship", blackjack:"Blackjack 21", poker:"Texas Hold'em", solitaire:"Solitaire", hangman:"Hangman", wordle:"Wordle", bingo75:"Bingo 75", monopoly:"Monopoly", scrabble:"Scrabble Mini", go:"Go 9×9", yahtzee:"Yahtzee", tetris:"Tetris"};
     document.getElementById("rulesGameName").textContent = names[cur] || "Ludo";
-    ["Ludo","Snake","Carrom","Chess","Tiger","Mancala","Tambola","Chowka","Checkers","Reversi","Tictactoe","Connect4","Sudoku","Minesweeper","Memory","Puzzle2048","Wordmatch","Backgammon","Battleship","Blackjack","Poker","Solitaire","Hangman","Wordle","Bingo75","Monopoly","Scrabble","Go","Yahtzee","Tetris"].forEach(name=>{
+    ["Ludo","Snake","Carrom","Chess","Tiger","Mancala","Tambola","Chowka","Checkers","Reversi","Tictactoe","Connect4","Sudoku","Minesweeper","Memory","Puzzle2048","Wordmatch","Backgammon","Battleship","Blackjack","Poker","Solitaire","Hangman","Wordle","Bingo75","Monopoly","Scrabble","Go","Yahtzee","Tetris","Teenpatti","Rummy","Andarbahar","Jhandimunda","Callbreak","Bluff","Uno","Flames","Dotsboxes","Crossword","Wordsearch","Indiagk","Antakshari","Dumbcharades","Lagori","Khokho","Kabaddi","Gillidanda","Kancha","Kite","Lattu","Chorpolice","Rajamantri","Hideandseek","Stapu","Business","Sequence","Candycrush","Snakegame","Cricket","Football","Rubik","Fifteen","Mathquiz","Chain","Colorjump","Lucky7","Pachisi","Musicalchairs","Cointoss"].forEach(name=>{
       const el=document.getElementById(`rulesBody${name}`);
       if(el) el.style.display = name.toLowerCase()===cur ? "block" : "none";
     });
@@ -244,7 +244,47 @@ function boot(){
       scrabble: $("#scrabbleGame"),
       go: $("#goGame"),
       yahtzee: $("#yahtzeeGame"),
-      tetris: $("#tetrisGame")
+      tetris: $("#tetrisGame"),
+      teenpatti: $("#teenpattiGame"),
+      rummy: $("#rummyGame"),
+      andarbahar: $("#andarbaharGame"),
+      jhandimunda: $("#jhandimundaGame"),
+      callbreak: $("#callbreakGame"),
+      bluff: $("#bluffGame"),
+      uno: $("#unoGame"),
+      flames: $("#flamesGame"),
+      dotsboxes: $("#dotsboxesGame"),
+      crossword: $("#crosswordGame"),
+      wordsearch: $("#wordsearchGame"),
+      indiagk: $("#indiagkGame"),
+      antakshari: $("#antakshariGame"),
+      dumbcharades: $("#dumbcharadesGame"),
+      lagori: $("#lagoriGame"),
+      khokho: $("#khokhoGame"),
+      kabaddi: $("#kabaddiGame"),
+      gillidanda: $("#gillidandaGame"),
+      kancha: $("#kanchaGame"),
+      kite: $("#kiteGame"),
+      lattu: $("#lattuGame"),
+      chorpolice: $("#chorpoliceGame"),
+      rajamantri: $("#rajamantriGame"),
+      hideandseek: $("#hideandseekGame"),
+      stapu: $("#stapuGame"),
+      business: $("#businessGame"),
+      sequence: $("#sequenceGame"),
+      candycrush: $("#candycrushGame"),
+      snakegame: $("#snakegameGame"),
+      cricket: $("#cricketGame"),
+      football: $("#footballGame"),
+      rubik: $("#rubikGame"),
+      fifteen: $("#fifteenGame"),
+      mathquiz: $("#mathquizGame"),
+      chain: $("#chainGame"),
+      colorjump: $("#colorjumpGame"),
+      lucky7: $("#lucky7Game"),
+      pachisi: $("#pachisiGame"),
+      musicalchairs: $("#musicalchairsGame"),
+      cointoss: $("#cointossGame")
     },
     triggerBtn: $("#hubBtn")
   });

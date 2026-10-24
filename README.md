@@ -1,155 +1,78 @@
-# 🎮 Global & Bharat Games — 30 Classics 🌍🇮🇳
+# 🎮 Global & Bharat Games — 70 Classics 🌍🇮🇳
 
-**Festival arcade of 30:** 8 Bharat classics + 22 global famous-in-India hits + no-country word puzzles — all styled, modular, and playable in the browser. No build, no deps: just `python3 -m http.server 8000` and play.
+**Festival arcade of 70:** 8 Bharat classics + 22 global famous-in-India + 40 *too much famous in India* street/card/puzzle hits + no-country word puzzles — all styled, modular, and playable in the browser. No build, no deps: just `python3 -m http.server 8000` and play.
 
-## ✨ 30 Games
+## ✨ 70 Games
 
 ### 🎲 Indian / Bharat — 8
+**Ludo Legend — लूडो लेजेंड** — 2-4 players, safe ⭐, captures ⚔️. **Moksha Patam — Snake & Ladder** — 1→100 Nagas 🐍 & ladders 🪜. **Carrom — कैरम** — very famous global style in India, wooden teak physics. **Bharat Chess — Chaturanga** — Raja/Mantri/Hathi. **Aadu Puli Attam** — 3 🐯 vs 15 🐐 23-pt. **Pallanguzhi** — Tamil Mancala 7 pits. **Tambola 90** — Housie 1-90. **Chowka Bhara** — 5×5 cowries.
 
-**Ludo Legend — लूडो लेजेंड** — 2-4 players (human + bots), 6 to leave, safe ⭐, captures ⚔️, exact home, hint (H) & undo (Z).
+### 🌍 Global Famous in India — 14
+**Checkers** 8×8, **Reversi** Othello, **Tic Tac Toe** 3×3, **Connect Four** 7×6, **Sudoku** 9×9, **Minesweeper** 9×9, **Memory** 4×4, **2048** 4×4, **Backgammon** 24pt, **Battleship** 10×10, **Blackjack 21**, **Texas Hold'em Poker**, **Solitaire** Klondike, **Bingo 75**, **Monopoly**, **Scrabble Mini 7×7**, **Go 9×9**, **Yahtzee**, **Tetris** — all viral in India.
 
-**Moksha Patam — Snake & Ladder** — 10×10 boustrophedon 1→100, Nagas 🐍 & bamboo ladders 🪜, exact 100 Moksha.
+### 🔤 No-Country Word Puzzles — 4
+**Hangman — Guess the Word**, **Wordle — Find the Word (5×6 web hit)**, **Word Match 7×5** — *always rectangle 7×5 (35 letters) Boggle — bigger than Tic Tac Toe*, **Scrabble** (also). No country — pure letters.
 
-**Carrom — कैरम** — Very famous global style game in India — wooden teak, 9+9+queen, striker flick with physics (friction 0.985).
+### 🇮🇳 Too Much Famous in India — 40 NEW
+*Street, gully, family & Diwali famous — played in every Indian home/school:*
 
-**Bharat Chess — Chaturanga** — 8×8 teak & ivory, Raja/Mantri/Hathi/Oont/Ghoda/Pyada, check/mate, Human/Bot.
+**Card & Casino famous:** **Teen Patti** 🃏 3 cards (India's #1), **Indian Rummy** ♠️ 13 cards melds, **Andar Bahar** ♦️ Andar vs Bahar, **Jhandi Munda** 🎲 6 dice symbols (NE India), **Call Break** ♣️ trick, **Bluff** 🤥 cheat, **UNO** 🌈 color match — youth craze, **Business** 💼 Indian Monopoly, **Sequence** 🔢 5 in row — plus **Pachisi** 🎲 ancient Ludo.
 
-**Aadu Puli Attam — Tiger & Goat** — 23-pt forest, 3 🐯 vs 15 🐐, place 15 goats vs jump-capture tigers.
+**Street & Gully:** **Lagori (7 Stones)** 🪨, **Kho-Kho** 🏃, **Kabaddi** 🤼, **Gilli Danda** 🏏, **Kancha (Marbles)** 🔵, **Patang (Kite Flying)** 🪁 Sankranti, **Lattu (Spinning Top)** 🌀, **Chor Police** 👮, **Raja Mantri Chor Sipahi** 👑, **Hide & Seek (Chuppan Chupai)** 🙈, **Stapu (Hopscotch)** 🦶, **Chain Chain** ⛓️, **Musical Chairs** 🪑, **Gilli** already, **Pachisi**.
 
-**Pallanguzhi — Mancala** — Tamil 7 pits + store, 6 seeds, sow clockwise, extra on store, capture.
+**Word & School famous:** **FLAMES** ❤️ love paper game — every Indian school, **Dots & Boxes** ⬜, **Crossword** 📝 newspaper, **Word Search** 🔍, **India GK Quiz** 🇮🇳, **Antakshari** 🎤 family singing, **Dumb Charades** 🎭.
 
-**Tambola — Housie (90-ball)** — 1-90 caller, 3×9 ticket (5/row, col ranges), You vs 3 bots, Early 5 / lines / Full House.
+**Arcade & Puzzle famous:** **Candy Crush** 🍬 match-3 — India mobile #1, **Snake Nokia** 🐍, **Gully Cricket** 🏏 — India #1 sport, **Football Penalty** ⚽, **Rubik's Cube** 🧩, **15 Puzzle** 🔢 sliding, **Math Quiz** 🧮, **Color Jump (Chidiya Udd)** 🐦, **Lucky 7** 🎰, **Spin to Win** 🎡, **Head & Tail (Coin Toss)** 🪙 — gully toss.
 
-**Chowka Bhara — Ashta Chamma** — 5×5 cross, 4 cowries (0 up=8), need 1/8 to enter, safe ⭐, exact centre home.
+> All 40 are *too much famous in India* — played in streets, homes, schools, festivals, Diwali & gullies!
 
-### 🌍 Global Famous in India — 18
+Shared: 🇮🇳 festival + 🌍 Vegas/neon/wood themes, 4 themes via 🎨, synthesized WebAudio, confetti, responsive 📱.
 
-**Checkers — Draughts** — 8×8 red/black, must capture, King crowns at last row, Bot.
+## ⚠️ Responsible Gaming Disclosure
+**English (top):** Gambling is dangerous. This app contains *simulated* gambling (Teen Patti, Poker, Blackjack, Andar Bahar, Jhandi Munda, Rummy, Call Break, Bingo/Tambola, Lucky 7, etc.) for entertainment only — no real money. Gambling can be addictive, cause serious financial loss, debt and harm. Play responsibly, set limits, take breaks, never chase losses. You must be **18+**.
 
-**Reversi — Othello** — 8×8, outflank to flip all bracketed lines, most discs wins.
+**Your language (below, auto-detected via JavaScript):** When you press **🚪 Exit**, a full-screen warning appears with the same text translated into your country's language (detected via `navigator.language` + `Intl`). First time you must wait **30 seconds** to dismiss (to ensure you read it) and confirm *“I understand, I am 18+”*; later exits require **3 seconds**. The warning shows English on top and your detected language below.
 
-**Tic Tac Toe** — 3×3, bot win/block/center, classic beyond country.
-
-**Connect Four** — 7×6, drop to connect 4 (h/v/d), globally famous in India.
-
-**Sudoku** — 9×9 puzzle, 1-9 per row/col/box, generates solved then removes 40, check/solve.
-
-**Minesweeper** — 9×9, 10 mines, numbers = adjacent, flag 🚩, auto-reveal.
-
-**Memory Match — Concentration** — 4×4 flip two, find 8 pairs, no-country memory game.
-
-**2048** — 4×4 slide merge (⬆⬇⬅➡), pastel tiles, reach 2048, very viral in India.
-
-**Backgammon** — 24 points, 2 dice, hit blot → bar, bear off, simplified Vs Bot.
-
-**Battleship** — 10×10, 5 ships (5,4,3,3,2), fire on enemy waters, Navy style.
-
-**Blackjack 21** — Vegas green felt, A=1/11, hit/stand, dealer hits <17, Diwali famous.
-
-**Texas Hold'em Poker** — 2 hole +5 community = best 5-card hand, hand ranks, vs 2 bots.
-
-**Solitaire — Klondike** — 52 cards, stock→waste→tableau/foundation, Auto Play, Windows famous in India.
-
-**Bingo 75 — B-I-N-G-O** — Western 75-ball, B 1-15 ... O 61-75, 5×5 free centre, line Bingo, club famous.
-
-**Monopoly — Deal** — 40 spaces, roll 2 dice, buy/rent, pass GO +$200, India famous board game.
-
-**Scrabble Mini** — 7×7 crossword, rack 7, TW/DW/TL/DL bonuses, ★ centre start, dictionary check.
-
-**Go 9×9** — Black vs White, surround to capture, suicide illegal, pass twice = end.
-
-**Yahtzee** — 5 dice, 3 rolls/hold, 13 categories, upper bonus 35 if ≥63, dice poker.
-
-**Tetris** — 10×20 well, 7 tetrominoes (I,O,T,S,Z,J,L), rotate/move/drop, line clear, arcade famous worldwide.
-
-### 🔤 No-Country Word Puzzles — 4 (requested)
-
-**Hangman — Guess the Word** — Guess letters, 6 lives, random Bharat/global words, no country — pure letters.
-
-**Wordle — Find the Word from Web** — Guess 5-letter word in 6 tries, 🟩/🟨/⬜, globally viral web game, no country.
-
-**Word Match 7×5 — Boggle on Tic Tac Toe map but bigger** — *Always rectangle* 7 columns ×5 rows (35 letters), tap adjacent (8-dir, no reuse) to form words 3+ letters, dictionary check, score = length², ⏱ 90s per grid — bigger than Tic Tac Toe, rectangle always!
-
-**Scrabble Mini** also counts as no-country word play, plus **Hangman/Wordle** above.
-
-Shared: 🇮🇳 festival + 🌍 Vegas/neon/wood themes, 4 themes (Festival/Midnight/Ocean/Sunset) via 🎨, synthesized WebAudio, confetti, responsive 📱.
+**How it works:** `js/ui/GamblingWarning.js` + `css/gambling.css` + `#exitBtn` / `#quitBtn` / `beforeunload` / back-button hooks. Delay stored in `localStorage` (`gambling_warning_seen`). Translations for hi, bn, ta, te, mr, gu, ur, pa, ml, kn, es, fr, de, pt, ru, ar, zh, ja, ko, it, tr, nl, id, pl, th, vi, etc.
 
 ## 🚀 Run it
-
-Any static server (ES modules need http):
-
 ```bash
 python3 -m http.server 8000
-# then open http://localhost:8000  → hub shows 30 cards, G to toggle hub
+# then open http://localhost:8000  → hub shows 70 cards, G to toggle hub
 ```
 
 ## 🧩 Modular architecture
-
 ```
-index.html                  # hub shell: header, 30-tab hub nav/overlay, 30 game sections
+index.html                  # hub shell: header, 70-tab hub nav/overlay, 70 game sections
 css/
   variables.css  themes.css  base.css  board.css  dice.css  panels.css
-  modals.css  effects.css  enhancements.css  hub.css
+  modals.css  effects.css  enhancements.css  hub.css  gambling.css
   snake.css  carrom.css  chess.css  tiger.css  mancala.css  tambola.css  chowka.css
   checkers.css  reversi.css  tictactoe.css  connect4.css  sudoku.css  minesweeper.css
   memory.css  puzzle2048.css  wordmatch.css  backgammon.css  battleship.css
   blackjack.css  poker.css  solitaire.css  hangman.css  wordle.css  bingo75.css
   monopoly.css  scrabble.css  go.css  yahtzee.css  tetris.css
+  teenpatti.css  rummy.css  andarbahar.css  jhandimunda.css  callbreak.css  bluff.css  uno.css
+  flames.css  dotsboxes.css  crossword.css  wordsearch.css  indiagk.css  antakshari.css  dumbcharades.css
+  lagori.css  khokho.css  kabaddi.css  gillidanda.css  kancha.css  kite.css  lattu.css
+  chorpolice.css  rajamantri.css  hideandseek.css  stapu.css  business.css  sequence.css
+  candycrush.css  snakegame.css  cricket.css  football.css  rubik.css  fifteen.css  mathquiz.css
+  chain.css  colorjump.css  lucky7.css  pachisi.css  musicalchairs.css  cointoss.css
   responsive.css
 js/
-  main.js                   # hub boot + Ludo wiring + 30-game hub
-  hub/GameHub.js            # lazy game switching, 30 games (GAME_MAP)
-  config/constants.js       # colors, rules, difficulty, themes
-  core/  GameState.js  Rules.js  TurnManager.js  perf.js  utils.js
-  board/ BoardData.js  BoardRenderer.js  TokenRenderer.js
+  main.js                   # hub boot + Ludo + 70-game hub + GamblingWarning
+  hub/GameHub.js            # lazy switching, 70 games (GAME_MAP)
+  ui/GamblingWarning.js     # 30s first / 3s later, English + detected local via navigator.language
+  ...
   games/
-    snake/   SnakeBoard.js  SnakeGame.js
-    carrom/  CarromGame.js
-    chess/   ChessGame.js
-    tiger/   TigerGame.js        # 23-pt Aadu Puli Attam
-    mancala/ MancalaGame.js      # Pallanguzhi 7 pits
-    tambola/ TambolaGame.js      # Housie 1-90
-    chowka/  ChowkaGame.js       # 5×5 Chowka Bhara
-    checkers/ CheckersGame.js    # 8×8 draughts
-    reversi/  ReversiGame.js     # Othello
-    tictactoe/ TicTacToeGame.js  # 3×3
-    connect4/ Connect4Game.js    # 7×6
-    sudoku/   SudokuGame.js      # 9×9
-    minesweeper/ MinesweeperGame.js
-    memory/   MemoryGame.js      # 4×4
-    puzzle2048/ Puzzle2048Game.js
-    wordmatch/ WordMatchGame.js  # 7×5 rectangle Boggle
-    backgammon/ BackgammonGame.js
-    battleship/ BattleshipGame.js
-    blackjack/ BlackjackGame.js
-    poker/    PokerGame.js       # Texas Hold'em
-    solitaire/ SolitaireGame.js  # Klondike
-    hangman/  HangmanGame.js     # Guess the word
-    wordle/   WordleGame.js      # Find the word (5×6 web hit)
-    bingo75/  Bingo75Game.js     # 75-ball B-I-N-G-O
-    monopoly/ MonopolyGame.js    # 40 spaces
-    scrabble/ ScrabbleGame.js    # 7×7 crossword
-    go/       GoGame.js          # 9×9
-    yahtzee/  YahtzeeGame.js     # 5 dice
-    tetris/   TetrisGame.js      # 10×20
-  features/ Dice.js  AI.js  AudioFX.js  Storage.js  Theme.js  Stats.js  Hints.js
-  ui/ SetupScreen.js  HUD.js  Modals.js  Toasts.js  Effects.js
-assets/favicon.svg
+    snake/  carrom/ chess/ tiger/ mancala/ tambola/ chowka/
+    checkers/ reversi/ tictactoe/ connect4/ sudoku/ minesweeper/ memory/ puzzle2048/ wordmatch/ backgammon/ battleship/ blackjack/ poker/ solitaire/ hangman/ wordle/ bingo75/ monopoly/ scrabble/ go/ yahtzee/ tetris/
+    teenpatti/ rummy/ andarbahar/ jhandimunda/ callbreak/ bluff/ uno/ flames/ dotsboxes/ crossword/ wordsearch/ indiagk/ antakshari/ dumbcharades/ lagori/ khokho/ kabaddi/ gillidanda/ kancha/ kite/ lattu/ chorpolice/ rajamantri/ hideandseek/ stapu/ business/ sequence/ candycrush/ snakegame/ cricket/ football/ rubik/ fifteen/ mathquiz/ chain/ colorjump/ lucky7/ pachisi/ musicalchairs/ cointoss/
 ```
-
-**Principles:** ES modules, one responsibility each · pure rules separate from rendering · lazy-loaded games via dynamic `import()` · GPU-friendly (transform/opacity, will-change, contain, RAF) · no framework/bundler.
-
-## ⚠️ Responsible Gaming Disclosure
-
-**English (top):** Gambling is dangerous. This app contains *simulated* gambling (Poker, Blackjack, Yahtzee, Monopoly, Bingo/Tambola, etc.) for entertainment only — no real money. Gambling can be addictive, cause serious financial loss, debt and harm. Play responsibly, set limits, take breaks, never chase losses. You must be **18+**. If you or someone you know has a gambling problem, please contact a local helpline/support service.
-
-**Your language (below, auto-detected via JavaScript):** When you press **🚪 Exit**, a full-screen warning appears with the same text translated into your country's language (detected via `navigator.language` + `Intl`). First time you must wait **30 seconds** to dismiss (to ensure you read it) and confirm *“I understand, I am 18+”*; later exits require **3 seconds**. The warning shows English on top and your detected language below.
-
-**How it works:** `js/ui/GamblingWarning.js` + `css/gambling.css` + `#exitBtn` / `#quitBtn` / `beforeunload` / back-button hooks. Delay stored in `localStorage` (`gambling_warning_seen`). Translations included for hi, bn, ta, te, mr, gu, ur, pa, ml, kn, es, fr, de, pt, ru, ar, zh, ja, ko, it, tr, nl, id, pl, th, vi, etc. via `navigator.language`.
+**Principles:** ES modules, lazy `import()`, GPU-friendly, no bundler.
 
 ## 🎮 Controls
-
-**Hub:** 🎮 30 Games / 30 tabs, G to toggle. **Ludo:** Space roll, H hint, Z undo, 1-4 pick, T theme. **Moksha/Carrom/Chess/Tiger/Pallanguzhi/Tambola/Chowka:** see Rules (📖) per game. **Checkers/Reversi/TicTac/Connect4/Sudoku/Mines/Memory/2048/Backgammon/Battleship/Blackjack/Poker/Solitaire/Monopoly/Go/Yahtzee/Tetris:** tap/click + specific (dice roll, hit/stand, etc.). **Word games:** Hangman tap letters; Wordle type 5 letters + Enter; **Word Match 7×5:** tap adjacent letters in 7×5 rectangle → Submit if dictionary word (3+) — score length², 90s timer; Scrabble click rack → board → Place. **Exit:** Press 🚪 Exit (or Quit) → responsible gaming warning (30s first, 3s later) with English + your language.
+**Hub:** 🎮 70 Games / 70 tabs, G to toggle. **Ludo:** Space/H/Z etc. **All others:** see 📖 Rules per game. **Word Match 7×5:** 7×5 rectangle → adjacent → Submit. **Exit:** 🚪 Exit → responsible gaming warning (30s first, 3s later) English + your language.
 
 ---
-Made with ❤️ in India — Rangoli + Vegas + global 🌍✨ — 30 games in one arcade!
+Made with ❤️ in India — 70 games — Bharat + Global + too much famous in India 🌍🇮🇳✨

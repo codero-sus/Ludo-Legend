@@ -139,9 +139,17 @@ assets/favicon.svg
 
 **Principles:** ES modules, one responsibility each · pure rules separate from rendering · lazy-loaded games via dynamic `import()` · GPU-friendly (transform/opacity, will-change, contain, RAF) · no framework/bundler.
 
+## ⚠️ Responsible Gaming Disclosure
+
+**English (top):** Gambling is dangerous. This app contains *simulated* gambling (Poker, Blackjack, Yahtzee, Monopoly, Bingo/Tambola, etc.) for entertainment only — no real money. Gambling can be addictive, cause serious financial loss, debt and harm. Play responsibly, set limits, take breaks, never chase losses. You must be **18+**. If you or someone you know has a gambling problem, please contact a local helpline/support service.
+
+**Your language (below, auto-detected via JavaScript):** When you press **🚪 Exit**, a full-screen warning appears with the same text translated into your country's language (detected via `navigator.language` + `Intl`). First time you must wait **30 seconds** to dismiss (to ensure you read it) and confirm *“I understand, I am 18+”*; later exits require **3 seconds**. The warning shows English on top and your detected language below.
+
+**How it works:** `js/ui/GamblingWarning.js` + `css/gambling.css` + `#exitBtn` / `#quitBtn` / `beforeunload` / back-button hooks. Delay stored in `localStorage` (`gambling_warning_seen`). Translations included for hi, bn, ta, te, mr, gu, ur, pa, ml, kn, es, fr, de, pt, ru, ar, zh, ja, ko, it, tr, nl, id, pl, th, vi, etc. via `navigator.language`.
+
 ## 🎮 Controls
 
-**Hub:** 🎮 30 Games / 30 tabs, G to toggle. **Ludo:** Space roll, H hint, Z undo, 1-4 pick, T theme. **Moksha/Carrom/Chess/Tiger/Pallanguzhi/Tambola/Chowka:** see Rules (📖) per game. **Checkers/Reversi/TicTac/Connect4/Sudoku/Mines/Memory/2048/Backgammon/Battleship/Blackjack/Poker/Solitaire/Monopoly/Go/Yahtzee/Tetris:** tap/click + specific (dice roll, hit/stand, etc.). **Word games:** Hangman tap letters; Wordle type 5 letters + Enter; **Word Match 7×5:** tap adjacent letters in 7×5 rectangle → Submit if dictionary word (3+) — score length², 90s timer; Scrabble click rack → board → Place.
+**Hub:** 🎮 30 Games / 30 tabs, G to toggle. **Ludo:** Space roll, H hint, Z undo, 1-4 pick, T theme. **Moksha/Carrom/Chess/Tiger/Pallanguzhi/Tambola/Chowka:** see Rules (📖) per game. **Checkers/Reversi/TicTac/Connect4/Sudoku/Mines/Memory/2048/Backgammon/Battleship/Blackjack/Poker/Solitaire/Monopoly/Go/Yahtzee/Tetris:** tap/click + specific (dice roll, hit/stand, etc.). **Word games:** Hangman tap letters; Wordle type 5 letters + Enter; **Word Match 7×5:** tap adjacent letters in 7×5 rectangle → Submit if dictionary word (3+) — score length², 90s timer; Scrabble click rack → board → Place. **Exit:** Press 🚪 Exit (or Quit) → responsible gaming warning (30s first, 3s later) with English + your language.
 
 ---
 Made with ❤️ in India — Rangoli + Vegas + global 🌍✨ — 30 games in one arcade!

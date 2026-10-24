@@ -17,6 +17,7 @@ import { theme } from "./features/Theme.js";
 import { stats } from "./features/Stats.js";
 import { THEMES } from "./config/constants.js";
 import { GameHub } from "./hub/GameHub.js";
+import { GamblingWarning } from "./ui/GamblingWarning.js";
 import { $ } from "./core/utils.js";
 import { onIdle, prefersReducedMotion } from "./core/perf.js";
 
@@ -249,6 +250,21 @@ function boot(){
   });
   window._hub = hub;
   window._ludo = ludo;
+
+  // Responsible Gaming Disclosure — 30s first, 3s later, English top + detected local below
+  const gambling = new GamblingWarning();
+  gambling.init();
+  window._gambling = gambling;
+  gambling.onExitCallback = (reason)=>{
+    if(reason==="quit"){
+      audio.click(); ludo.game.stop(); window._ludo?.boardRenderer?.render?.();
+      $("#winnerOverlay")?.classList.remove("show");
+      setTimeout(()=>{ ludo.setup.show(); toasts.show("👋 Play responsibly — take a break!", "gold", 2200); }, 350);
+    } else if(reason==="exit"){
+      toasts.show("👋 Thanks for playing responsibly! Stay safe.", "gold", 2600);
+      setTimeout(()=>{ try{ window.close(); }catch{} hub.openHub(); }, 400);
+    }
+  };
 
   // Global hub shortcut: G to open hub
   window.addEventListener("keydown",(e)=>{

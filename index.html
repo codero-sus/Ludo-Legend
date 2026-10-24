@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="css/memory.css" />
   <link rel="stylesheet" href="css/puzzle2048.css" />
   <link rel="stylesheet" href="css/wordmatch.css" />
+  <link rel="stylesheet" href="css/gambling.css" />
   <link rel="stylesheet" href="css/backgammon.css" />
   <link rel="stylesheet" href="css/battleship.css" />
   <link rel="stylesheet" href="css/blackjack.css" />
@@ -70,6 +71,7 @@
       <button id="themeBtn" class="icon-btn" title="Change theme (T)">🎨</button>
       <button id="soundBtn" class="icon-btn" title="Sound (M)">🔊</button>
       <button id="rulesBtn" class="ghost-btn" title="How to play (R)">📖 Rules</button>
+      <button id="exitBtn" class="ghost-btn danger" title="Exit — responsible gaming warning (30s first, 3s later)">🚪 Exit</button>
       <button id="newGameBtn" class="gold-btn" title="New game (N)">✨ New Game</button>
     </nav>
   </header>
@@ -259,6 +261,7 @@
 
   <div id="winnerOverlay" class="overlay" role="dialog" aria-modal="true"><div class="dialog winner-dialog"><div class="trophy">🏆</div><h2 id="winnerTitle">Player wins!</h2><p id="winnerSub"></p><div id="standingsList"></div><div class="dialog-actions"><button id="continueBtn" class="ghost-btn">▶ Continue</button><button id="winnerNewBtn" class="gold-btn big">✨ New Game</button></div></div></div>
 
+  <div id="gamblingOverlay" style="display:none"></div>
   <div id="toastBox" aria-live="polite"></div><canvas id="confettiCanvas"></canvas><div id="fxDomLayer" aria-hidden="true"></div>
   <script type="module" src="js/main.js"></script>
 </body>

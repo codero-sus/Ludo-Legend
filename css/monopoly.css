@@ -1,0 +1,11 @@
+/* monopoly.css — Western Monopoly Deal — board track 40, deeds */
+#monopolyGame{contain:layout}
+.monopoly-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.monopoly-layout{grid-template-columns:minmax(0,620px)}}
+.monopoly-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.monopoly-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#b22222,#7a0a0a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.monopoly-board{width:100%;aspect-ratio:1/1;background:#f6efdc;border:6px solid #5a3200;border-radius:12px;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:0;overflow:hidden}
+.monopoly-cell{border:1px solid #c9b48a;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;text-align:center;padding:2px;position:relative}
+.monopoly-cell.corner{background:#b22222;color:#fff;font-size:.7rem}
+.monopoly-cell.owned::after{content:"●";position:absolute;top:2px;right:4px;color:var(--gold)}
+.monopoly-token{position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;transform:translate(-50%,-50%)}

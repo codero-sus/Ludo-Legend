@@ -1,0 +1,12 @@
+/* yahtzee.css — Western Yahtzee — 5 dice, score card */
+#yahtzeeGame{contain:layout}
+.yahtzee-layout{display:grid;grid-template-columns:minmax(0,560px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.yahtzee-layout{grid-template-columns:minmax(0,560px)}}
+.yahtzee-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.yahtzee-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#4361ee,#1a2e9a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.yahtzee-dice{display:flex;gap:10px;justify-content:center;margin:12px 0}
+.yahtzee-die{width:62px;height:62px;background:#fff;border:3px solid #5a3200;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15);transition:all .14s}
+.yahtzee-die.held{border-color:var(--gold);background:#fff7d6;transform:translateY(-4px);box-shadow:0 0 12px var(--gold)}
+.yahtzee-score{display:grid;grid-template-columns:1fr auto;gap:4px;background:#f6efdc;border-radius:10px;padding:10px}
+.yahtzee-score button{padding:6px 10px;border-radius:8px;border:2px solid #c9b48a;background:#fff;font-weight:700;cursor:pointer}
+.yahtzee-score button:disabled{opacity:.4}

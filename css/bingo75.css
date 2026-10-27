@@ -1,0 +1,15 @@
+/* bingo75.css — Western 75-ball Bingo — B I N G O columns */
+#bingo75Game{contain:layout}
+.bingo75-layout{display:grid;grid-template-columns:minmax(0,640px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.bingo75-layout{grid-template-columns:minmax(0,640px)}}
+.bingo75-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.bingo75-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#b22222,#7a0a0a);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px}
+.bingo75-caller{display:flex;align-items:center;gap:12px;justify-content:center;background:linear-gradient(180deg,#faf3e0,#f3e7c8);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.bingo75-ball{width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#ffe29a 60%,#ffb703);border:4px solid #fff;outline:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.6rem;color:#5a3200}
+.bingo75-board{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:12px}
+.bingo75-num{aspect-ratio:1;border-radius:8px;background:#fff;border:2px solid #c9b48a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#5a3200}
+.bingo75-num.called{background:#b22222;color:#fff;border-color:#7a0a0a}
+.bingo75-card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:#5a3200;border-radius:10px;padding:6px}
+.bingo75-cell{aspect-ratio:1;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.bingo75-cell.marked{background:var(--gold);color:#5a3200;box-shadow:inset 0 0 0 2px var(--gold-deep)}
+.bingo75-cell.free{background:#d3f2dc;color:#0a4d2a}

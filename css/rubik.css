@@ -1,0 +1,9 @@
+/* rubik.css — Rubik's Cube — famous in India */
+#rubikGame{contain:layout}
+.rubik-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.rubik-layout{grid-template-columns:minmax(0,620px)}}
+.rubik-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.rubik-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#ffbe0b,#4361ee);color:#fff;border-radius:12px;padding:10px;margin-bottom:12px;text-align:center}
+.rubik-board{width:100%;min-height:260px;background:#f6efdc;border-radius:12px;border:4px solid #8d5a2b;padding:12px;position:relative}
+.rubik-controls{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.rubik-cell{cursor:pointer;transition:all .14s}

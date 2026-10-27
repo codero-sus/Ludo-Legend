@@ -1,0 +1,14 @@
+/* reversi.css — Othello — 8x8 green, flipping discs */
+#reversiGame{contain:layout}
+.reversi-layout{display:grid;grid-template-columns:minmax(0,620px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.reversi-layout{grid-template-columns:minmax(0,620px)}}
+.reversi-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.reversi-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#0a4d2a,#062e1a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.reversi-board{width:100%;aspect-ratio:1/1;background:#1a7a3a;border-radius:12px;overflow:hidden;border:6px solid #8d5a2b;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);gap:2px;padding:6px;box-shadow:var(--shadow-md)}
+.reversi-sq{background:#13632f;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+.reversi-sq.legal::after{content:"";width:18%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.35);box-shadow:0 0 6px rgba(255,255,255,.5)}
+.reversi-disc{width:78%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.8);box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .18s}
+.reversi-disc.black{background:radial-gradient(circle at 30% 30%,#555,#111)}
+.reversi-disc.white{background:radial-gradient(circle at 30% 30%,#fff,#c9c9c9)}
+.reversi-disc.flip{animation:revFlip .28s}
+@keyframes revFlip{0%{transform:scaleY(1)}50%{transform:scaleY(.1)}100%{transform:scaleY(1)}}

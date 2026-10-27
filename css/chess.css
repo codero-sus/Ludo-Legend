@@ -1,0 +1,72 @@
+/* ═════════════════════════════════════════════════════════════
+   chess.css — Bharat Chess / Chaturanga — Indian royal theme
+   Teak wood board, ivory & ebony, gold inlay, rangoli corners
+   ═════════════════════════════════════════════════════════════ */
+#chessGame { contain: layout; }
+.chess-layout{
+  display:grid; grid-template-columns: minmax(0, 620px) 360px;
+  gap:18px; justify-content:center; align-items:start;
+}
+@media (max-width:960px){ .chess-layout{grid-template-columns: minmax(0,620px);} }
+.chess-card{
+  background: var(--card); border-radius:var(--radius);
+  border:3px solid rgba(255,209,102,.7); box-shadow:var(--shadow-lg);
+  padding:14px; contain:layout paint;
+}
+.chess-banner{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--font-display); font-weight:700;
+  background: linear-gradient(180deg, #2c1810, #1a0f0a);
+  color: var(--gold); border-radius:12px; padding:10px; margin-bottom:12px;
+  border:1px solid rgba(255,209,102,.25);
+}
+.chess-board-wrap{
+  position:relative; width:100%; aspect-ratio:1/1;
+  background:#f0d9b5; border-radius:14px; overflow:hidden;
+  box-shadow: var(--shadow-md);
+  contain: strict;
+  border:6px solid #8d5a2b;
+}
+#chessBoard{
+  position:absolute; inset:0; width:100%; height:100%;
+  display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(8,1fr);
+}
+.chess-square{
+  display:flex; align-items:center; justify-content:center;
+  font-size: clamp(22px, 4.2vw, 38px);
+  cursor:pointer; position:relative;
+  transition: background .12s, filter .12s;
+  user-select:none;
+}
+.chess-square.light{ background:#f0d9b5; }
+.chess-square.dark{ background:#b58863; }
+.chess-square.selected{ background:#f6e58d !important; box-shadow: inset 0 0 0 3px var(--gold); }
+.chess-square.legal::after{
+  content:""; position:absolute; width:22%; aspect-ratio:1; border-radius:50%;
+  background: rgba(45,198,83,.55); box-shadow: 0 0 8px rgba(45,198,83,.7);
+  pointer-events:none;
+}
+.chess-square.capture::after{
+  content:""; position:absolute; inset:4px; border:3px solid rgba(239,35,60,.75); border-radius:6px;
+  pointer-events:none; box-shadow: 0 0 10px rgba(239,35,60,.45);
+}
+.chess-square.last-move{ background: #c8e6c9 !important; }
+.chess-square.in-check{ background: #ff8a80 !important; animation: checkPulse .9s ease-in-out infinite alternate; }
+@keyframes checkPulse{ from{ filter:brightness(1)} to{ filter:brightness(1.15)} }
+
+.chess-piece{
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.35));
+  transition: transform .16s var(--ease-spring);
+}
+.chess-piece.white{ color:#fff; text-shadow: 0 1px 2px rgba(0,0,0,.6), 0 0 0 #000; }
+.chess-piece.black{ color:#1a1a1a; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+.chess-square:active .chess-piece{ transform:scale(.94); }
+
+.chess-controls{
+  display:flex; gap:10px; align-items:center; margin-top:12px;
+  background: linear-gradient(180deg, #faf3e0, #f3e7c8);
+  border:1px solid var(--line); border-radius:12px; padding:10px 14px;
+}
+.chess-panel .history{ max-height:220px; overflow:auto; font-size:.82rem; }
+.chess-panel .history li{ padding:6px 8px; border-left:3px solid var(--gold); background: rgba(255,255,255,.06); border-radius:8px; margin-bottom:6px; }

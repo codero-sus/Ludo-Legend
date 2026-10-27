@@ -1,0 +1,10 @@
+/* tetris.css — Western Tetris — 10x20 well, neon tetrominoes */
+#tetrisGame{contain:layout}
+.tetris-layout{display:grid;grid-template-columns:minmax(0,400px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.tetris-layout{grid-template-columns:minmax(0,400px)}}
+.tetris-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.tetris-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#7209b7,#1a0a3a);color:var(--gold);border-radius:12px;padding:10px;margin-bottom:12px}
+.tetris-well{width:100%;aspect-ratio:10/20;background:#0f0f1a;border-radius:10px;border:4px solid #4361ee;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(20,1fr);gap:1px;padding:4px;overflow:hidden}
+.tetris-cell{border-radius:3px;background:rgba(255,255,255,.06);transition:background .08s}
+.tetris-cell.filled{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2), 0 1px 3px rgba(0,0,0,.3)}
+.tetris-preview{width:80px;height:80px;background:#1a1a2a;border-radius:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:6px}

@@ -1,0 +1,14 @@
+/* go.css — Western/Asian Go 9x9 — wooden goban, black/white stones */
+#goGame{contain:layout}
+.go-layout{display:grid;grid-template-columns:minmax(0,560px) 360px;gap:18px;justify-content:center}
+@media(max-width:960px){.go-layout{grid-template-columns:minmax(0,560px)}}
+.go-card{background:var(--card);border-radius:var(--radius);border:3px solid rgba(255,209,102,.7);box-shadow:var(--shadow-lg);padding:14px}
+.go-banner{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-display);font-weight:700;background:linear-gradient(180deg,#d4a373,#8d5a2b);color:#3a2410;border-radius:12px;padding:10px;margin-bottom:12px}
+.go-board{width:100%;aspect-ratio:1/1;background:#e8c99a;border-radius:8px;border:6px solid #8d5a2b;position:relative;display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(9,1fr);padding:18px;gap:0}
+.go-lineH{position:absolute;left:18px;right:18px;height:1px;background:#5a3200;opacity:.6}
+.go-lineV{position:absolute;top:18px;bottom:18px;width:1px;background:#5a3200;opacity:.6}
+.go-point{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.go-stone{width:84%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(0,0,0,.15);box-shadow:0 2px 6px rgba(0,0,0,.3);animation:goPop .18s var(--ease-spring)}
+@keyframes goPop{from{transform:scale(.5)}to{transform:scale(1)}}
+.go-stone.black{background:radial-gradient(circle at 30% 30%,#555,#111)}
+.go-stone.white{background:radial-gradient(circle at 30% 30%,#fff,#ddd)}
